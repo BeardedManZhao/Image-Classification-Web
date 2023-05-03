@@ -10,9 +10,13 @@ public final class Conf {
 
     public final static String WEN_COOKIE = "Image-Classification-Web";
 
+    public final static String HOMR = "/IMW";
+
     public final static String TRAIN_SERVLET = "TrainServlet";
 
     public final static String TRAIN_UP_SERVLET = "TrainUpServlet";
+
+    public final static String TRAIN_RM_SERVLET = "TrainRmServlet";
 
     public final static String TRAIN_UP_HTML = "TrainUp.html";
 
@@ -25,12 +29,12 @@ public final class Conf {
     /**
      * python训练脚本文件的路径
      */
-    public final static String TRAIN_PYTHON_PATH = "E:/MyProject/Python_Project/pythonProject1/train.py";
+    public final static String TRAIN_PYTHON_PATH = "D:\\MyGitHub\\Image-Classification-Web\\pyLib\\train.py";
 
     /**
      * python使用脚本文件的路径
      */
-    public final static String USING_PYTHON_PATH = "E:/MyProject/Python_Project/pythonProject1/use.py";
+    public final static String USING_PYTHON_PATH = "D:\\MyGitHub\\Image-Classification-Web\\pyLib\\use.py";
 
     /**
      * 训练数据集存储目录
@@ -41,4 +45,9 @@ public final class Conf {
      * 训练数据模型存储目录
      */
     public final static String MODEL_DIR = "F:/modelDir";
+
+    /**
+     * 模型使用时的图像暂存文件目录。
+     */
+    public final static String IMAGE_USE_DIR = "F:\\IMW_IMAGE\\USE\\";
 }

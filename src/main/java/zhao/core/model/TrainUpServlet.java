@@ -54,7 +54,7 @@ public class TrainUpServlet extends HttpServlet {
         final PrintWriter writer = response.getWriter();
         final BufferedWriter bufferedWriter = new BufferedWriter(
                 new OutputStreamWriter(
-                        new FileOutputStream(Conf.MODEL_DIR + '/' + userName + "/classList.txt"), "GBK"
+                        new FileOutputStream(Conf.MODEL_DIR + '/' + userName + "/tempClassList.txt"), "GBK"
                 )
         );
         final int size = hashMap.size();

@@ -30,6 +30,7 @@ public class TrainServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("GBK");
         response.setCharacterEncoding("GBK");
+        // 将临时的类别文件保存到新文件中
         final PrintWriter writer = response.getWriter();
         writer.write("<!DOCTYPE html>");
         writer.write(" <html lang=\"zh\">");
@@ -42,11 +43,18 @@ public class TrainServlet extends HttpServlet {
         writer.write("<pre>");
         // 调用demo.py中的method1方法
         final String s = Conf.TRAIN_DIR + '/' + name + " " + Conf.MODEL_DIR + '/' + name + "/Model ";
-        final InputStream inputStream = ExeUtils.exePy(Conf.TRAIN_PYTHON_PATH, s + Conf.MODEL_DIR + '/' + name + "/classList.txt");
-        IOUtils.copy(inputStream, response.getWriter(), "GBK");
+        final String s1 = Conf.MODEL_DIR + '/' + name;
+        final InputStream inputStream = ExeUtils.exePy(
+                Conf.TRAIN_PYTHON_PATH,
+                s +
+                        s1 + "/tempClassList.txt" + ' ' +
+                        s1 + "/classList.txt"
+        );
+        IOUtils.copy(inputStream, writer, "GBK");
         writer.write("</pre>");
-        writer.write("<br>\n");
-        writer.println("模型已经保存至您的个人目录中，您可以随时进行模型的使用。");
-        writer.write(s);
+        writer.write("<hr>\n");
+        writer.println("<p>模型已经保存至您的个人目录中，您可以随时进行模型的使用。</p>");
+        writer.println("<a href = " + Conf.USE_MODEL_HTML + "> 点击使用模型 </a><br>");
+        writer.println("<a href = " + Conf.HOMR + "> 点击回到主页 </a><br>");
     }
 }

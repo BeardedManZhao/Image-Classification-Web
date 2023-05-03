@@ -24,11 +24,31 @@
     <title>开始训练</title>
 </head>
 <body>
-<form action="<%=Conf.TRAIN_SERVLET%>">
+<form action="<%=Conf.TRAIN_SERVLET%>" onsubmit="return check()">
     <p>训练数据上传完成。</p>
     <p>当前训练目录：<%=path%>
     </p>
     <button>开始训练</button>
 </form>
+
+<a href="index.jsp">回到主页</a>
 </body>
 </html>
+
+<script>
+    let status = 1;
+
+    /**
+     * 检查是否已经点击过了提交
+     */
+    function check() {
+        if (status === 0) {
+            alert("请您稍等，训练正在进行中.....");
+            return false;
+        } else {
+            status = 0;
+            alert("即将开始训练!!!!")
+            return true;
+        }
+    }
+</script>
