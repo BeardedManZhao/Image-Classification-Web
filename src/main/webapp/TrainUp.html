@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="GBK">
+    <title>训练数据上传</title>
+</head>
+<body>
+<form action="TrainUpServlet" enctype="multipart/form-data" id="sub" method="post" onsubmit="return checkSubmit()">
+
+    <button type="submit">点击提交训练数据集</button>
+</form>
+
+<label>
+    <input id="addCBButton" title="点击添加类别" type="text" value="">
+    <button onclick="{
+        const elementById = document.getElementById('addCBButton');
+        addCB(elementById.value)
+        elementById.value = ''
+    }">点击添加类别图像输入框
+    </button>
+</label>
+</body>
+</html>
+
+
+<script>
+    // 获取到表单框的对象
+    const submit = document.getElementById("sub")
+
+    /**
+     * 定义一个函数，用于向表单框中添加类别框
+     * @param typeName 需要被添加的类别名称
+     */
+    function addCB(typeName) {
+        if (typeName.length === 0) {
+            alert("请输入类别名称!!!!")
+            return
+        }
+        // 判断是否存在 指定类别
+        if (document.getElementById(typeName) == null) {
+            // 创建出一个 input
+            const divOBJ = document.createElement('input')
+            // 设置class与类别
+            divOBJ.setAttribute("class", 'CategoryBox')
+            divOBJ.setAttribute('id', typeName)
+            // 设置其它参数
+            divOBJ.setAttribute('multiple', 'multiple')
+            divOBJ.setAttribute('type', 'file')
+            divOBJ.setAttribute('name', typeName)
+            divOBJ.setAttribute('title', "请上传类别：" + typeName)
+            divOBJ.setAttribute('Content-Type', 'multipart/form-data;boundary=${bound}')
+            divOBJ.setAttribute('alt', '上传需要被训练的图像数据。类别 = ' + typeName)
+            // 添加到表单
+            submit.appendChild(document.createElement('hr'))
+            submit.appendChild(divOBJ)
+            const p = document.createElement('p')
+            $(p).text(typeName)
+            submit.appendChild(p)
+        } else {
+            alert("类别已经存在，您无法重复添加。")
+        }
+    }
+
+    function checkSubmit() {
+        if (checkCbGreater('sub', 1)) {
+            return true;
+        } else {
+            alert("请添加一些类别!!!")
+            return false;
+        }
+    }
+
+    /**
+     * 检查元素的子元素数量是否大于指定数值
+     * @param id 需要被检查的元素
+     * @param len 大于的数值阈值
+     * @returns {boolean} 为空返回false并提示错误。
+     */
+    function checkCbGreater(id, len) {
+        return document.getElementById(id).children.length > len;
+    }
+</script>
