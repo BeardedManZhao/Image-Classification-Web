@@ -2,6 +2,9 @@ package zhao.core.model;
 
 import org.apache.commons.io.IOUtils;
 import zhao.Conf;
+import zhao.core.user.OrdinaryUser;
+import zhao.core.user.User;
+import zhao.task.ToLogin;
 import zhao.utils.ExeUtils;
 
 import javax.servlet.ServletException;
@@ -18,8 +21,6 @@ import java.io.*;
 @WebServlet(name = "UseModelServlet", value = "/UseModelServlet")
 public class UseModelServlet extends HttpServlet {
 
-    private final static String name = "zhao";
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
@@ -29,8 +30,14 @@ public class UseModelServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("GBK");
         response.setCharacterEncoding("GBK");
+        final User user = User.checkCookieUser(request, response, ToLogin.TO_LOGIN);
+        if (user.equals(OrdinaryUser.DEFAULT_USER)) {
+            // 若是 def 代表当前用户没有登录 直接结束
+            return;
+        }
         final Part image = request.getParts().iterator().next();
         // 获取到指定的文件存储目录
+        final String name = user.name();
         String path = Conf.IMAGE_USE_DIR + name;
         // 将文件保存
         final BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(new FileOutputStream(path));

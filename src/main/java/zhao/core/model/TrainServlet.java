@@ -2,6 +2,9 @@ package zhao.core.model;
 
 import org.apache.commons.io.IOUtils;
 import zhao.Conf;
+import zhao.core.user.OrdinaryUser;
+import zhao.core.user.User;
+import zhao.task.ToLogin;
 import zhao.utils.ExeUtils;
 
 import javax.servlet.ServletException;
@@ -19,8 +22,6 @@ import java.io.PrintWriter;
 @WebServlet(name = "TrainServlet", value = "/TrainServlet")
 public class TrainServlet extends HttpServlet {
 
-    private final static String name = "zhao";
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
@@ -30,6 +31,11 @@ public class TrainServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("GBK");
         response.setCharacterEncoding("GBK");
+        final User user = User.checkCookieUser(request, response, ToLogin.TO_LOGIN);
+        if (user.equals(OrdinaryUser.DEFAULT_USER)) {
+            // 若是 def 代表当前用户没有登录 直接结束
+            return;
+        }
         // 将临时的类别文件保存到新文件中
         final PrintWriter writer = response.getWriter();
         writer.write("<!DOCTYPE html>");
@@ -42,8 +48,8 @@ public class TrainServlet extends HttpServlet {
         writer.write("<hr>\n");
         writer.write("<pre>");
         // 调用demo.py中的method1方法
-        final String s = Conf.TRAIN_DIR + '/' + name + " " + Conf.MODEL_DIR + '/' + name + "/Model ";
-        final String s1 = Conf.MODEL_DIR + '/' + name;
+        final String s = user.getTrainDir() + " " + user.getModelDir() + "/Model ";
+        final String s1 = user.getModelDir();
         final InputStream inputStream = ExeUtils.exePy(
                 Conf.TRAIN_PYTHON_PATH,
                 s +
@@ -55,6 +61,6 @@ public class TrainServlet extends HttpServlet {
         writer.write("<hr>\n");
         writer.println("<p>模型已经保存至您的个人目录中，您可以随时进行模型的使用。</p>");
         writer.println("<a href = " + Conf.USE_MODEL_HTML + "> 点击使用模型 </a><br>");
-        writer.println("<a href = " + Conf.HOMR + "> 点击回到主页 </a><br>");
+        writer.println("<a href = " + Conf.HOME + "> 点击回到主页 </a><br>");
     }
 }

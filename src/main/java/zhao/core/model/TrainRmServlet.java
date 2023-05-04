@@ -1,6 +1,8 @@
 package zhao.core.model;
 
-import zhao.Conf;
+import zhao.core.user.OrdinaryUser;
+import zhao.core.user.User;
+import zhao.task.ToLogin;
 import zhao.utils.FSUtils;
 
 import javax.servlet.ServletException;
@@ -18,8 +20,6 @@ import java.io.PrintWriter;
 @WebServlet(name = "TrainRmServlet", value = "/TrainRmServlet")
 public class TrainRmServlet extends HttpServlet {
 
-    private final String name = "zhao";
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
@@ -27,9 +27,15 @@ public class TrainRmServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setCharacterEncoding("GBK");
         response.setCharacterEncoding("GBK");
+        final User user = User.checkCookieUser(request, response, ToLogin.TO_LOGIN);
+        if (user.equals(OrdinaryUser.DEFAULT_USER)) {
+            // 若是 def 代表当前用户没有登录 直接结束
+            return;
+        }
         // 获取到当前用户空间列表
-        final File file = new File(Conf.TRAIN_DIR + '/' + name);
+        final File file = new File(user.getTrainDir());
         final PrintWriter writer = response.getWriter();
         // 开始删除
         if (FSUtils.deleteDir(file)) {

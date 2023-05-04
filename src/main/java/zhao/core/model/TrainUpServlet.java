@@ -2,6 +2,9 @@ package zhao.core.model;
 
 import org.apache.commons.io.IOUtils;
 import zhao.Conf;
+import zhao.core.user.OrdinaryUser;
+import zhao.core.user.User;
+import zhao.task.ToLogin;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,8 +23,6 @@ import java.util.Map;
 @WebServlet(name = "TrainUpServlet", value = "/TrainUpServlet")
 public class TrainUpServlet extends HttpServlet {
 
-    private final String userName = "zhao";
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
@@ -31,7 +32,12 @@ public class TrainUpServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("GBK");
         response.setCharacterEncoding("GBK");
-        final File file1 = new File(Conf.MODEL_DIR + '/' + userName);
+        final User user = User.checkCookieUser(request, response, ToLogin.TO_LOGIN);
+        if (user.equals(OrdinaryUser.DEFAULT_USER)) {
+            // 若是 def 代表当前用户没有登录 直接结束
+            return;
+        }
+        final File file1 = new File(user.getModelDir());
         if (!file1.exists()) {
             if (!file1.mkdirs()) {
                 throw new IOException("个人文件目录无法成功创建：" + file1.getAbsolutePath());
@@ -54,7 +60,7 @@ public class TrainUpServlet extends HttpServlet {
         final PrintWriter writer = response.getWriter();
         final BufferedWriter bufferedWriter = new BufferedWriter(
                 new OutputStreamWriter(
-                        new FileOutputStream(Conf.MODEL_DIR + '/' + userName + "/tempClassList.txt"), "GBK"
+                        new FileOutputStream(user.getModelDir() + "/tempClassList.txt"), "GBK"
                 )
         );
         final int size = hashMap.size();
@@ -62,7 +68,7 @@ public class TrainUpServlet extends HttpServlet {
         for (Map.Entry<String, ArrayList<Part>> entry : hashMap.entrySet()) {
             final String key = entry.getKey();
             // 获取到当前文件类别对应的文件夹名称
-            String path = Conf.TRAIN_DIR + '/' + userName + '/' + key;
+            String path = user.getTrainDir() + '/' + key;
             File file = new File(path);
             if (!file.exists()) {
                 boolean mkdirs = file.mkdirs();

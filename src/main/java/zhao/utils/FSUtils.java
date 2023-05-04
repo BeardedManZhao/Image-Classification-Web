@@ -12,20 +12,6 @@ import java.io.IOException;
  * @author zhao
  */
 public final class FSUtils {
-//
-//    /**
-//     * 检查当前用户是否已经登录，如果登录就返回 cookie 对象
-//     * @param httpServletRequest 需要被检查的请求
-//     * @return 如果当前用于已登录，则返回 cookie 反之返回null
-//     */
-//    public static Cookie checkUserIsLogin(HttpServletRequest httpServletRequest){
-//        for (Cookie cookie : httpServletRequest.getCookies()) {
-//            if (Conf.WEN_COOKIE.equals(cookie.getName())){
-//                return cookie;
-//            }
-//        }
-//        return null;
-//    }
 
     /**
      * 检查 1 级别目录中是否包含 2 级别目录

@@ -1,7 +1,10 @@
 <%@ page import="zhao.Conf" %>
 <%@ page import="java.io.File" %>
 <%@ page import="zhao.utils.HTMLUtils" %>
-<%@ page import="zhao.utils.FSUtils" %><%--
+<%@ page import="zhao.utils.FSUtils" %>
+<%@ page import="zhao.core.user.User" %>
+<%@ page import="zhao.core.user.OrdinaryUser" %>
+<%@ page import="zhao.task.ToLogin" %><%--
   Created by IntelliJ IDEA.
   User: zhao
   Date: 2023/5/2
@@ -9,13 +12,19 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%!
-    final String name = "zhao";
-%>
 
 <%
+    // 首先获取到当前用户的信息，如果没有登录就直接跳转到登录页面
+    // 检查当前用户是否已经登录，没有登录就跳转到登录页面
+    final User user = User.checkCookieUser(request, response, ToLogin.TO_LOGIN);
+    if (user.equals(OrdinaryUser.DEFAULT_USER)) {
+        // 若是 def 代表当前用户没有登录 直接结束
+        return;
+    }
+    // 获取到当前用户的 name
+    final String name = user.name();
     // 计算出当前用户的个人空间目录是否具有文件数据
-    final File file = new File(Conf.TRAIN_DIR + '/' + name);
+    final File file = new File(user.getTrainDir());
     // 将目录中的所有类别数据直接展示出来
     StringBuilder stringBuilder = new StringBuilder(128);
     boolean isHaveFile;
@@ -40,7 +49,7 @@
     }
 
     // 判断当前用户空间是否有模型
-    final String s = Conf.MODEL_DIR + '/' + name;
+    final String s = user.getModelDir();
     final File file1 = new File(s + "/Model");
     boolean isHaveModel = file1.exists() && file1.isDirectory();
     // 计算出当前用户的模型支持类别
@@ -99,7 +108,7 @@
         </tr>
         <tr>
             <td>
-                <%=file1.getAbsolutePath()%>
+                <%=file1.getPath()%>
             </td>
             <td>
                 <%=file1.length()%>
@@ -114,15 +123,18 @@
     </table>
 </div>
 <hr>
-<a href="<%=Conf.TRAIN_UP_HTML%>">上传训练数据集</a>
-<a href='<%=Conf.TRAIN_RM_SERVLET%>'>清理个人数据集</a>
-<form action="<%=Conf.TRAIN_SERVLET%>" onsubmit="return checkTrain()">
+<a href="<%=Conf.TRAIN_UP_HTML%>" target='_blank'>上传训练数据集</a>
+<%=
+isHaveFile ? "<a href='" + Conf.TRAIN_RM_SERVLET + "'>清理个人数据集</a>\n" +
+        "<a href='" + Conf.IMAGE_TRAIN_DIR + '/' + name + "'>前往个人空间目录</a>" : '\n'
+%>
+<form action="<%=Conf.TRAIN_SERVLET%>" target="_blank" onsubmit="return checkTrain()">
     <%=
     isHaveFile ? "<button>开始训练模型</button>" :
             "<a disabled=\"disabled\">请您先进行数据的上传</a>"
     %>
 </form>
-<form action="<%=Conf.USE_MODEL_HTML%>">
+<form action="<%=Conf.USE_MODEL_HTML%>" target="_blank">
     <%=
     isHaveModel ? "<button>使用训练好的模型</button>" :
             "<a disabled=\"disabled\">请您先进行模型的训练</a>"

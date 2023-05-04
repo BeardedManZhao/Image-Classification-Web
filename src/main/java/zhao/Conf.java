@@ -10,7 +10,11 @@ public final class Conf {
 
     public final static String WEN_COOKIE = "Image-Classification-Web";
 
-    public final static String HOMR = "/IMW";
+    public final static String HOME = "/IMW";
+
+    public final static String LOGIN = "LogIn.jsp";
+
+    public final static String LOGIN_SERVLET = "LoginServlet";
 
     public final static String TRAIN_SERVLET = "TrainServlet";
 
@@ -50,4 +54,14 @@ public final class Conf {
      * 模型使用时的图像暂存文件目录。
      */
     public final static String IMAGE_USE_DIR = "F:\\IMW_IMAGE\\USE\\";
+
+    /**
+     * 模型训练时的个人空间目录路径地址
+     */
+    public final static String IMAGE_TRAIN_DIR = "/IMW/trainDir/";
+
+    /**
+     * 最大用户同时在线数量
+     */
+    public final static int USER_MAX_COUNT = 5;
 }
