@@ -18,6 +18,8 @@ public final class Conf {
 
     public final static String TRAIN_SERVLET = "TrainServlet";
 
+    public final static String C10_TRAIN_SERVLET = "C10TrainServlet";
+
     public final static String TRAIN_UP_SERVLET = "TrainUpServlet";
 
     public final static String TRAIN_RM_SERVLET = "TrainRmServlet";
@@ -34,6 +36,11 @@ public final class Conf {
      * python训练脚本文件的路径
      */
     public final static String TRAIN_PYTHON_PATH = "D:\\MyGitHub\\Image-Classification-Web\\pyLib\\train.py";
+
+    /**
+     * python cifar10_train.py 训练脚本文件的路径
+     */
+    public final static String C10_TRAIN_PYTHON_PATH = "D:\\MyGitHub\\Image-Classification-Web\\pyLib\\cifar10_train.py";
 
     /**
      * python使用脚本文件的路径

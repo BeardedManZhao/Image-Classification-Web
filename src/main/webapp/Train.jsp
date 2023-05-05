@@ -20,22 +20,37 @@
     }
     String name = user.name(), path = user.getTrainDir();
     // 检查训练数据集目录中是否包含指定的目录
-    final boolean checkDirConDir = new File(path).exists();
-    if (!checkDirConDir) {
-        response.setStatus(response.SC_MOVED_TEMPORARILY);
-        response.sendRedirect(Conf.TRAIN_UP_HTML);
-    }
+    final File file = new File(path);
+    final String[] list = file.list();
+    final boolean checkDirConDir = file.exists() && list != null && list.length != 0;
 %>
+
+<style>
+    form {
+        background-color: rgba(255, 228, 196, 0.19);
+    }
+</style>
+
 <html lang="zh">
 <head>
     <meta charset="GBK">
     <title>开始训练</title>
 </head>
 <body>
-<form action="<%=Conf.TRAIN_SERVLET%>" onsubmit="return check()">
-    <p>您好<%=name%>，训练数据上传完成。</p>
-    <p>当前训练目录：<%=path%>
-    </p>
+
+<%=
+checkDirConDir ? "<form action=\"" + Conf.TRAIN_SERVLET + "\" onsubmit=\"return check()\">\n" +
+        " <p>您好" + name + "，训练数据上传完成。</p>\n" +
+        " <p>当前训练目录：" + path + " +</p>\n<button>开始训练</button>\n</form>" : " "
+%>
+
+<form action="<%=Conf.C10_TRAIN_SERVLET%>" onsubmit="return checkTrain_epochs('train_epochs_id') && check()">
+    <p>您好<%=name%>，CIFAR-10内置数据集准备完成。</p>
+    <p>当前训练目录：cifar10</p>
+    <label>
+        模型训练次数：
+        <input id="train_epochs_id" name="train_epochs" type="number" title="训练次数" alt="训练次数">
+    </label>
     <button>开始训练</button>
 </form>
 
@@ -57,6 +72,19 @@
             status = 0;
             alert("即将开始训练!!!!")
             return true;
+        }
+    }
+
+    /**
+     *
+     * @returns {boolean} 当指定id对应控件中的 value 属性大于 0 的时候返回 true
+     */
+    function checkTrain_epochs(id) {
+        if (document.getElementById(id).value > 0) {
+            return true
+        } else {
+            alert('请确保您的训练次数 大于 0。')
+            return false;
         }
     }
 </script>

@@ -1,7 +1,8 @@
 <%@ page import="zhao.core.user.User" %>
 <%@ page import="zhao.task.VoidTask" %>
 <%@ page import="zhao.core.user.OrdinaryUser" %>
-<%@ page import="zhao.Conf" %><%--
+<%@ page import="zhao.Conf" %>
+<%@ page import="zhao.task.ToHome" %><%--
   Created by IntelliJ IDEA.
   User: zhao
   Date: 2023/5/4
@@ -15,6 +16,7 @@
     final User user = User.checkCookieUser(request, response, VoidTask.VOID_TASK);
     if (!(user == OrdinaryUser.DEFAULT_USER)) {
         // 非 def 代表当前用户已经登录
+        ToHome.TO_HOME.run(request, response);
         return;
     }
     // 如果没有跳转就代表当前用户没有登录，在这里对当前页面中的所有数据进行处理

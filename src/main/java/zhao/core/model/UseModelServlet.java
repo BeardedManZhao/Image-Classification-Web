@@ -35,7 +35,7 @@ public class UseModelServlet extends HttpServlet {
             // 若是 def 代表当前用户没有登录 直接结束
             return;
         }
-        final Part image = request.getParts().iterator().next();
+        final Part image = request.getPart("image");
         // 获取到指定的文件存储目录
         final String name = user.name();
         String path = Conf.IMAGE_USE_DIR + name;
@@ -64,14 +64,21 @@ public class UseModelServlet extends HttpServlet {
                 Conf.USING_PYTHON_PATH,
                 s + "/Model " +
                         path + ' ' +
-                        s + "/classList.txt");
+                        s + "/classList.txt" + ' ' +
+                        request.getParameter("w") + ' ' +
+                        request.getParameter("h") + ' ' +
+                        request.getParameter("c") + ' '
+        );
         IOUtils.copy(inputStream, writer, "GBK");
         writer.write("</pre>");
         writer.write("<hr>");
-        writer.write("<form action=\"UseModelServlet\" enctype=\"multipart/form-data\" method=\"post\">\n" +
-                "    <input Content-Type=\"image/*\" accept=\"image/*\" name=\"image\" title=\"上传需要被识别的图像\" type=\"file\">\n" +
-                "    <button>开始识别</button>\n" +
-                "</form>");
+        writer.println("<form action='" + Conf.USE_MODEL_SERVLET + "' enctype='multipart/form-data' onsubmit='checkNumber()' method='post'>\n");
+        writer.println("    模型支持的图像宽度：<input id='w' name='w' title='输入模型支持图像宽度' type='number'><br>");
+        writer.println("    模型支持的图像高度：<input id='h' name='h' title='输入模型支持图像高度' type='number'><br>");
+        writer.println("    模型支持的通道数量：<input id='c' name='c' title='输入模型支持的图像颜色通道数量' type='number'><br>");
+        writer.println("要被识别的图像文件：<input id='i'  Content-Type='image/*' accept='image/*' name='image' title='上传需要被识别的图像' type='file'><br>");
+        writer.println("    <button>开始识别</button>");
+        writer.println("</form>");
         inputStream.close();
     }
 }

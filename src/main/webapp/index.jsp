@@ -128,11 +128,8 @@
 isHaveFile ? "<a href='" + Conf.TRAIN_RM_SERVLET + "'>清理个人数据集</a>\n" +
         "<a href='" + Conf.IMAGE_TRAIN_DIR + '/' + name + "'>前往个人空间目录</a>" : '\n'
 %>
-<form action="<%=Conf.TRAIN_SERVLET%>" target="_blank" onsubmit="return checkTrain()">
-    <%=
-    isHaveFile ? "<button>开始训练模型</button>" :
-            "<a disabled=\"disabled\">请您先进行数据的上传</a>"
-    %>
+<form action="<%=Conf.TRAIN_JSP%>" target="_blank">
+    <button>开始训练模型</button>
 </form>
 <form action="<%=Conf.USE_MODEL_HTML%>" target="_blank">
     <%=
@@ -142,22 +139,3 @@ isHaveFile ? "<a href='" + Conf.TRAIN_RM_SERVLET + "'>清理个人数据集</a>\
 </form>
 </body>
 </html>
-
-
-<script>
-    let status = 1;
-
-    /**
-     * 检查是否已经点击过了训练提交
-     */
-    function checkTrain() {
-        if (status === 0) {
-            alert("请您稍等，训练正在进行中.....");
-            return false;
-        } else {
-            status = 0;
-            alert("即将开始训练!!!!")
-            return true;
-        }
-    }
-</script>

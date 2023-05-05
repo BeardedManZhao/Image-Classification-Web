@@ -1,13 +1,43 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang='zh'>
+
+<style>
+    form {
+        background-color: rgba(250, 235, 215, 0.14);
+    }
+</style>
+
 <head>
-    <meta charset="UTF-8">
+    <meta charset='UTF-8'>
     <title>使用模型</title>
 </head>
 <body>
-<form action="UseModelServlet" enctype="multipart/form-data" method="post">
-    <input Content-Type="image/*" accept="image/*" name="image" title="上传需要被识别的图像" type="file">
+
+<form action='UseModelServlet' enctype='multipart/form-data' method='post' onsubmit='return checkNumber()'>
+    模型支持的图像宽度：<input id='w' name='w' title='输入模型支持图像宽度' type='number'>
+    <br>
+    模型支持的图像高度：<input id='h' name='h' title='输入模型支持图像高度' type='number'>
+    <br>
+    模型支持的通道数量：<input id='c' name='c' title='输入模型支持的图像颜色通道数量' type='number'>
+    <br>
+    要被识别的图像文件：<input Content-Type='image/*' accept='image/*' id='i' name='image' title='上传需要被识别的图像' type='file'>
+    <br>
     <button>开始识别</button>
 </form>
 </body>
 </html>
+
+<script>
+    function checkNumber() {
+        if (document.getElementById('w').value > 0 && document.getElementById('h').value > 0 && document.getElementById('c').value > 0) {
+            if (document.getElementById('i').value != null) {
+                return true;
+            } else {
+                alert('请上传需要被处理的图像数据。')
+            }
+        } else {
+            alert('图像的宽高以及颜色通道数值必须要大于 0 ')
+        }
+        return false;
+    }
+</script>

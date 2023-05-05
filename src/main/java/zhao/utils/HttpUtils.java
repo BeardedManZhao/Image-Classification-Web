@@ -1,9 +1,13 @@
 package zhao.utils;
 
 import zhao.Conf;
+import zhao.core.user.User;
+import zhao.task.ToLogin;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.UnsupportedEncodingException;
 
 /**
  * Http 协议处理工具类
@@ -27,5 +31,19 @@ public final class HttpUtils {
             }
         }
         return null;
+    }
+
+    /**
+     * 转换编码 同时检查登录情况
+     *
+     * @param request  请求对象
+     * @param response 回复对象
+     * @return 检查到的用户或 default 用户
+     * @throws UnsupportedEncodingException 不支持编码转换错误
+     */
+    public static User intiCheck(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+        response.setCharacterEncoding("GBK");
+        request.setCharacterEncoding("GBK");
+        return User.checkCookieUser(request, response, ToLogin.TO_LOGIN);
     }
 }
