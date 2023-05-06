@@ -54,4 +54,7 @@ def fun(model_path, data_path, class_path_str, image_w, image_h, color_channel):
 
 
 if __name__ == '__main__':
-    print(f"当前被识别的图像为 ===> {fun(sys.argv[1], sys.argv[2], sys.argv[3], int(sys.argv[4]), int(sys.argv[5]), int(sys.argv[6]))}")
+    print(
+        "当前被识别的图像为 ===> "
+        f"{fun(sys.argv[1], sys.argv[2], sys.argv[3], int(sys.argv[4]), int(sys.argv[5]), int(sys.argv[6]))}"
+    )

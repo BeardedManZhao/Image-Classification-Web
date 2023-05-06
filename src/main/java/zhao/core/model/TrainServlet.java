@@ -7,6 +7,7 @@ import zhao.core.user.OrdinaryUser;
 import zhao.core.user.User;
 import zhao.utils.ExeUtils;
 import zhao.utils.HttpUtils;
+import zhao.utils.StrUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -23,24 +24,6 @@ import java.io.PrintWriter;
 @WebServlet(name = "TrainServlet", value = "/TrainServlet")
 public class TrainServlet extends HttpServlet {
 
-    /**
-     * 用户自定义训练目录 的 训练函数实现对象，该对象将会按照用户的数据集进行训练操作。
-     */
-    public final static Transformation<User, InputStream> TRAIN_UD_DATA = user -> {
-        final String s = user.getTrainDir() + " " + user.getModelDir() + "/Model ";
-        final String s1 = user.getModelDir();
-        try {
-            return ExeUtils.exePy(
-                    Conf.TRAIN_PYTHON_PATH,
-                    s +
-                            s1 + "/tempClassList.txt" + ' ' +
-                            s1 + "/classList.txt"
-            );
-        } catch (IOException e) {
-            return null;
-        }
-    };
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
@@ -55,7 +38,43 @@ public class TrainServlet extends HttpServlet {
         }
         // 将临时的类别文件保存到新文件中
         final PrintWriter writer = response.getWriter();
-        trainReturn(user, writer, TRAIN_UD_DATA);
+        trainReturn(user, writer,
+                user1 -> {
+                    final String s = user1.getTrainDir() + " " + user1.getModelDir() + "/Model ";
+                    final String s1 = user1.getModelDir();
+                    final String train_epochs;
+                    final String image_w = StrUtils.ifNull(request.getParameter("image_w"), "100");
+                    final String image_h = StrUtils.ifNull(request.getParameter("image_h"), "100");
+                    final String convolutional_count = StrUtils.ifNull(request.getParameter("convolutional_count"), "2");
+                    final String filters = StrUtils.ifNull(request.getParameter("filters"), "32");
+                    final String filtersB = StrUtils.ifNull(request.getParameter("filtersB"), "2");
+                    {
+                        final String train_epochs1 = request.getParameter("train_epochs");
+
+                        if (train_epochs1 == null) {
+                            train_epochs = "3";
+                        } else train_epochs = train_epochs1;
+                    }
+                    try {
+                        return ExeUtils.exePy(
+                                Conf.TRAIN_PYTHON_PATH,
+                                s +
+                                        s1 + "/tempClassList.txt " +
+                                        s1 + "/classList.txt " +
+                                        train_epochs + ' ' +
+                                        image_w + ' ' + image_h +
+                                        (
+                                                StrUtils.ifNull(request.getParameter("model_selection"), "performance").equals("performance") ?
+                                                        " True " : " False "
+                                        ) +
+                                        convolutional_count + ' ' +
+                                        filters + ' ' + filtersB
+                        );
+                    } catch (IOException e) {
+                        return null;
+                    }
+                }
+        );
     }
 
     /**

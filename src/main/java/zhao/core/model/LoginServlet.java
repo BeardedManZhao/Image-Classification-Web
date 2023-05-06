@@ -3,6 +3,7 @@ package zhao.core.model;
 import zhao.Conf;
 import zhao.core.user.OrdinaryUser;
 import zhao.core.user.User;
+import zhao.task.ToLogin;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,7 +21,7 @@ import java.io.PrintWriter;
 public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.getWriter().println("<script>history.back()</script>");
+        ToLogin.TO_LOGIN.run(request, response);
     }
 
     @Override

@@ -13,6 +13,7 @@
     final User user = User.checkCookieUser(request, response, VoidTask.VOID_TASK);
     final boolean isLogIn = user != OrdinaryUser.DEFAULT_USER;
 %>
+<link rel="stylesheet" type="text/css" href="css/backTheme.css">
 
 <html>
 <head>

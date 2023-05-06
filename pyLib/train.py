@@ -7,18 +7,31 @@
 import sys
 
 import tensorflow as tf
-from keras import Sequential
 from keras.integration_test.preprocessing_test_utils import BATCH_SIZE
-from keras.layers import Convolution2D, Activation, MaxPooling2D, Flatten, Dense
-from keras.optimizers import Adam
 from keras.utils import np_utils
 
+import cnn
 
-def fun(train_dir, save_path, class_temp_str, class_path_str):
+
+def fun(train_dir,
+        save_path,
+        class_temp_str,
+        class_path_str,
+        train_epochs=16,
+        image_w=100, image_h=100,
+        use_performance=True,
+        convolutional_count=2,
+        init_filters=32, filters_b=2):
     print(f"train_dir = {train_dir}")
     print(f"save_path = {save_path}")
     print(f"class_temp_str = {class_temp_str}")
     print(f"class_path_str = {class_path_str}")
+    print(f"train_epochs = {train_epochs}")
+    print(f"image_w = {image_w}")
+    print(f"image_w = {image_h}")
+    print(f"convolutional_count = {convolutional_count}")
+    print(f"init_filters = {init_filters}")
+    print(f"filters_b = {filters_b}")
 
     # 获取到list
     class_list = []
@@ -42,7 +55,7 @@ def fun(train_dir, save_path, class_temp_str, class_path_str):
         # 是否进行随机排序
         shuffle=True,
         # 生成图像的尺寸
-        target_size=(87, 87),
+        target_size=(image_w, image_h),
         color_mode='grayscale',
         classes=class_list
     )
@@ -56,66 +69,31 @@ def fun(train_dir, save_path, class_temp_str, class_path_str):
     y1 = np_utils.to_categorical(y1, cn)
     print(f"==================================\n类别独热矩阵\n{y1}", end='\n==================================\n')
     # 获取到模型对象
-    model = Sequential()
-    # 添加第一层神经元 这里第一层是卷积
-    model.add(
-        Convolution2D(
-            # 指定 32 个滤波器（卷积核）
-            filters=32,
-            # 指定卷积核大小
-            kernel_size=5,
-            # 指定生成规则 设成same会自动加padding，保证输出是同样的大小。
-            padding='same',
-            # 设置卷积层第一次的输入数据维度
-            batch_input_shape=(len(y1), 87, 87, 1),
+    if use_performance:
+        model = cnn.performance_cnn(
+            cn=cn, convolutional_count=convolutional_count, init_filters=init_filters, filters_b=filters_b
         )
-    )
-    # 添加一层激活函数
-    model.add(Activation('relu'))
-    # 添加一层池化层
-    model.add(
-        MaxPooling2D(
-            # 指定池化层核的尺寸 这里是 2x2
-            pool_size=2,
-            # 指定步长 2x2
-            strides=2,
-            # 指定池化层生成规则
-            padding='same'
+    else:
+        model = cnn.precise(
+            cn=cn, convolutional_count=convolutional_count, init_filters=init_filters, filters_b=filters_b
         )
-    )
-    # 添加一层卷积
-    model.add(Convolution2D(filters=64, kernel_size=5, padding='same'))
-    # 添加一层激活函数
-    model.add(Activation("relu"))
-    # 添加一层池化
-    model.add(MaxPooling2D(pool_size=2, padding='same'))
-    # 将矩阵扁平化准备全连接
-    model.add(Flatten())
-    # 正式进入全连接神经网络，添加全连接神经元(具有1024个神经元的层)
-    model.add(Dense(1024))
-    # 添加激活函数
-    model.add(Activation("relu"))
-    # 再一次添加一层 8 个神经元的网络层(每个神经元代表一个类别)
-    model.add(Dense(cn))
-    # 添加激活函数 softmax 用于计算概率得分
-    model.add(Activation("softmax"))
-
-    # 准备模型构建，在这里指定学习率
-    opt = Adam(learning_rate=1e-4)
-    # 开始构建模型
-    model.compile(
-        optimizer=opt,
-        loss='categorical_crossentropy',
-        # 指定计算损失的同时还计算一下精度
-        metrics=['accuracy']
-    )
-
     # 开始训练 传递 x y 以及训练次数
-    model.fit(x=x1, validation_data=y1.all(), epochs=16)
+    model.fit(x=x1, validation_data=y1.all(), epochs=train_epochs)
     model.save(save_path)
     print(class_list)
     return True
 
 
 if __name__ == '__main__':
-    fun(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4])
+    fun(
+        sys.argv[1],
+        sys.argv[2],
+        sys.argv[3],
+        sys.argv[4],
+        int(sys.argv[5]),
+        int(sys.argv[6]), int(sys.argv[7]),
+        bool(sys.argv[8]),
+        int(sys.argv[9]),
+        int(sys.argv[10]),
+        int(sys.argv[11])
+    )

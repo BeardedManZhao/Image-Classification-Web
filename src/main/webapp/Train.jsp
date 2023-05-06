@@ -30,6 +30,7 @@
         background-color: rgba(255, 228, 196, 0.19);
     }
 </style>
+<link rel="stylesheet" type="text/css" href="css/backTheme.css">
 
 <html lang="zh">
 <head>
@@ -41,7 +42,33 @@
 <%=
 checkDirConDir ? "<form action=\"" + Conf.TRAIN_SERVLET + "\" onsubmit=\"return check()\">\n" +
         " <p>您好" + name + "，训练数据上传完成。</p>\n" +
-        " <p>当前训练目录：" + path + " +</p>\n<button>开始训练</button>\n</form>" : " "
+        " <p>当前训练目录：" + path + " </p>\n" +
+        "    <label>\n" +
+        "        模型训练次数：\n" +
+        "        <input id='train_epochs_id' name='train_epochs' type='number' title='训练次数' alt='训练次数' required='required'>\n" +
+        "    </label><br>\n" +
+        "    <label>\n" +
+        "        输入图像尺寸：\n" +
+        "        <input id='width' name='image_w' type='number' title='宽度' alt='宽度' placeholder='宽度' required='required'>\n" +
+        "        <input id='height' name='image_h' type='number' title='高度' alt='高度' placeholder='高度' required='required'>\n" +
+        "    </label><br>\n" +
+        "    <label>\n" +
+        "        模型卷积层数：\n" +
+        "        <input id='convolutional_count' name='convolutional_count' type='number' title='卷积层数' alt='卷积层数' required='required'>\n" +
+        "    </label><br>\n" +
+        "    <label>\n" +
+        "        初始卷积核数：\n" +
+        "        <input id='filters' name='filters' type=\"number\" placeholder=\"第一卷积层中的卷积核数\" alt='卷积核数' required='required'>\n" +
+        "    </label><br>\n" +
+        "    <label>\n" +
+        "        每层核数等比：\n" +
+        "        <input id='filtersB' name='filtersB' type='number' placeholder='卷积核数量数值生成等比' alt='卷积核数等比' required='required'>\n" +
+        "    </label><br>" +
+        "    <label>\n" +
+        "        神经网络类型：性能优先模型<input id='ms_performance' value='performance' name='model_selection' type='radio' checked>\n" +
+        "        精度优先模型<input id='ms_accurate' value='accurate' name='model_selection' type='radio'>\n" +
+        "    </label><br>" +
+        "<button>开始训练</button>\n</form>" : " "
 %>
 
 <form action="<%=Conf.C10_TRAIN_SERVLET%>" onsubmit="return checkTrain_epochs('train_epochs_id') && check()">
@@ -49,7 +76,7 @@ checkDirConDir ? "<form action=\"" + Conf.TRAIN_SERVLET + "\" onsubmit=\"return 
     <p>当前训练目录：cifar10</p>
     <label>
         模型训练次数：
-        <input id="train_epochs_id" name="train_epochs" type="number" title="训练次数" alt="训练次数">
+        <input id='train_epochs_id' name='train_epochs' type='number' title='训练次数' alt='训练次数' required='required'>
     </label>
     <button>开始训练</button>
 </form>

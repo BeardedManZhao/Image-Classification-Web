@@ -22,6 +22,13 @@
     // 如果没有跳转就代表当前用户没有登录，在这里对当前页面中的所有数据进行处理
 %>
 
+<style>
+    form {
+        align-content: center;
+    }
+</style>
+<link rel="stylesheet" type="text/css" href="css/backTheme.css">
+
 <html>
 <head>
     <title>初始化或进入您的空间</title>

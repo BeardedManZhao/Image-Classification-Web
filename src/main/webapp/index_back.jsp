@@ -11,27 +11,27 @@
   Time: 14:18
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=GBK" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 
 <%
-    // Ê×ÏÈ»ñÈ¡µ½µ±Ç°ÓÃ»§µÄĞÅÏ¢£¬Èç¹ûÃ»ÓĞµÇÂ¼¾ÍÖ±½ÓÌø×ªµ½µÇÂ¼Ò³Ãæ
-    // ¼ì²éµ±Ç°ÓÃ»§ÊÇ·ñÒÑ¾­µÇÂ¼£¬Ã»ÓĞµÇÂ¼¾ÍÌø×ªµ½µÇÂ¼Ò³Ãæ
+    // é¦–å…ˆè·å–åˆ°å½“å‰ç”¨æˆ·çš„ä¿¡æ¯ï¼Œå¦‚æœæ²¡æœ‰ç™»å½•å°±ç›´æ¥è·³è½¬åˆ°ç™»å½•é¡µé¢
+    // æ£€æŸ¥å½“å‰ç”¨æˆ·æ˜¯å¦å·²ç»ç™»å½•ï¼Œæ²¡æœ‰ç™»å½•å°±è·³è½¬åˆ°ç™»å½•é¡µé¢
     final User user = User.checkCookieUser(request, response, ToLogin.TO_LOGIN);
     if (user.equals(OrdinaryUser.DEFAULT_USER)) {
-        // ÈôÊÇ def ´ú±íµ±Ç°ÓÃ»§Ã»ÓĞµÇÂ¼ Ö±½Ó½áÊø
+        // è‹¥æ˜¯ def ä»£è¡¨å½“å‰ç”¨æˆ·æ²¡æœ‰ç™»å½• ç›´æ¥ç»“æŸ
         return;
     }
-    // »ñÈ¡µ½µ±Ç°ÓÃ»§µÄ name
+    // è·å–åˆ°å½“å‰ç”¨æˆ·çš„ name
     final String name = user.name();
-    // ¼ÆËã³öµ±Ç°ÓÃ»§µÄ¸öÈË¿Õ¼äÄ¿Â¼ÊÇ·ñ¾ßÓĞÎÄ¼şÊı¾İ
+    // è®¡ç®—å‡ºå½“å‰ç”¨æˆ·çš„ä¸ªäººç©ºé—´ç›®å½•æ˜¯å¦å…·æœ‰æ–‡ä»¶æ•°æ®
     final File file = new File(user.getTrainDir());
-    // ½«Ä¿Â¼ÖĞµÄËùÓĞÀà±ğÊı¾İÖ±½ÓÕ¹Ê¾³öÀ´
+    // å°†ç›®å½•ä¸­çš„æ‰€æœ‰ç±»åˆ«æ•°æ®ç›´æ¥å±•ç¤ºå‡ºæ¥
     StringBuilder stringBuilder = new StringBuilder(128);
     boolean isHaveFile;
     if (file.exists()) {
         final File[] files = file.listFiles();
         if (files != null && files.length != 0) {
-            // Èç¹ûÎÄ¼ş´æÔÚ¾Í¿ªÊ¼½«ÎÄ¼şÏÂµÄËùÓĞµÄÊı¾İĞ´³ö±í¸ñ
+            // å¦‚æœæ–‡ä»¶å­˜åœ¨å°±å¼€å§‹å°†æ–‡ä»¶ä¸‹çš„æ‰€æœ‰çš„æ•°æ®å†™å‡ºè¡¨æ ¼
             stringBuilder.append("<table id='dir'>");
             HTMLUtils.appRowToTable(stringBuilder, "Name", "type", "size");
             for (File file1 : files) {
@@ -41,21 +41,21 @@
             isHaveFile = true;
         } else {
             isHaveFile = false;
-            stringBuilder.append("<p>Ã»ÓĞÔÚÄúµÄ¸öÈË¿Õ¼äÖĞÕÒµ½ÎÄ¼şÊı¾İ£¬Äú¿ÉÒÔÏÈ½øĞĞÑµÁ·Êı¾İµÄÉÏ´«¡£</p>");
+            stringBuilder.append("<p>æ²¡æœ‰åœ¨æ‚¨çš„ä¸ªäººç©ºé—´ä¸­æ‰¾åˆ°æ–‡ä»¶æ•°æ®ï¼Œæ‚¨å¯ä»¥å…ˆè¿›è¡Œè®­ç»ƒæ•°æ®çš„ä¸Šä¼ ã€‚</p>");
         }
     } else {
         isHaveFile = false;
-        stringBuilder.append("<p>ÄúµÄ¸öÈË¿Õ¼äÃ»ÓĞÊı¾İ£¬ÇëÉÏ´«ÑµÁ·Êı¾İ¡£</p>");
+        stringBuilder.append("<p>æ‚¨çš„ä¸ªäººç©ºé—´æ²¡æœ‰æ•°æ®ï¼Œè¯·ä¸Šä¼ è®­ç»ƒæ•°æ®ã€‚</p>");
     }
 
-    // ÅĞ¶Ïµ±Ç°ÓÃ»§¿Õ¼äÊÇ·ñÓĞÄ£ĞÍ
+    // åˆ¤æ–­å½“å‰ç”¨æˆ·ç©ºé—´æ˜¯å¦æœ‰æ¨¡å‹
     final String s = user.getModelDir();
     final File file1 = new File(s + "/Model");
     boolean isHaveModel = file1.exists() && file1.isDirectory();
-    // ¼ÆËã³öµ±Ç°ÓÃ»§µÄÄ£ĞÍÖ§³ÖÀà±ğ
+    // è®¡ç®—å‡ºå½“å‰ç”¨æˆ·çš„æ¨¡å‹æ”¯æŒç±»åˆ«
     final File file2 = new File(s + "/classList.txt");
     StringBuilder classStr = new StringBuilder();
-    // ¼ÆËã³öµ±Ç°ÓÃ»§µÄÑµÁ·Êı¾İ°üº¬Àà±ğ
+    // è®¡ç®—å‡ºå½“å‰ç”¨æˆ·çš„è®­ç»ƒæ•°æ®åŒ…å«ç±»åˆ«
     final File file3 = new File(s + "/tempClassList.txt");
     StringBuilder tempClassStr = new StringBuilder();
     FSUtils.extractedData(file2, classStr.append('['));
@@ -65,6 +65,40 @@
 %>
 
 <style>
+    html {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    body {
+        width: 100%;
+        height: 100%;
+        font-family: 'Open Sans', sans-serif;
+        margin: 0;
+        background-color: #4A374A;
+    }
+
+    h1 {
+        font-size: 2em;
+        margin: 0.67em 0;
+    }
+
+    button {
+        width: 145px;
+        min-height: 20px;
+        display: block;
+        background-color: #4a78d4a1;
+        border: 1px solid #3762bc;
+        color: #fff;
+        padding: 9px 14px;
+        font-size: 15px;
+        line-height: normal;
+        border-radius: 5px;
+        margin: 0;
+        position: absolute;
+        right: -1px;
+    }
 
     table {
         text-align: center;
@@ -76,16 +110,17 @@
         background-color: #eedcc5;
     }
 </style>
-
 <link rel="stylesheet" type="text/css" href="css/backTheme.css">
+
+
 <html>
 <head>
-    <title>Í¼Ïñ·ÖÀàÏµÍ³</title>
+    <title>å›¾åƒåˆ†ç±»ç³»ç»Ÿ</title>
 </head>
 <body>
-<h2>ÄãºÃ <%=name%> »¶Ó­Ê¹ÓÃÍ¼Ïñ·ÖÀàÏµÍ³</h2>
+<h2>ä½ å¥½ <%=name%> æ¬¢è¿ä½¿ç”¨å›¾åƒåˆ†ç±»ç³»ç»Ÿ</h2>
 <hr>
-<h3>ÄúµÄ¸öÈË¿Õ¼äÄ¿Â¼</h3>
+<h3>æ‚¨çš„ä¸ªäººç©ºé—´ç›®å½•</h3>
 <div id="dir">
     <%=stringBuilder.toString()%>
 </div>
@@ -96,16 +131,16 @@
     <table id="model">
         <tr>
             <td>
-                Ä£ĞÍÂ·¾¶
+                æ¨¡å‹è·¯å¾„
             </td>
             <td>
-                Ä£ĞÍ´óĞ¡
+                æ¨¡å‹å¤§å°
             </td>
             <td>
-                Ä£ĞÍÀà±ğĞÅÏ¢
+                æ¨¡å‹ç±»åˆ«ä¿¡æ¯
             </td>
             <td>
-                ÑµÁ·Àà±ğĞÅÏ¢
+                è®­ç»ƒç±»åˆ«ä¿¡æ¯
             </td>
         </tr>
         <tr>
@@ -125,18 +160,18 @@
     </table>
 </div>
 <hr>
-<a href="<%=Conf.TRAIN_UP_HTML%>" target='_blank'>ÉÏ´«ÑµÁ·Êı¾İ¼¯</a>
+<a href="<%=Conf.TRAIN_UP_HTML%>" target='_blank'>ä¸Šä¼ è®­ç»ƒæ•°æ®é›†</a>
 <%=
-isHaveFile ? "<a href='" + Conf.TRAIN_RM_SERVLET + "'>ÇåÀí¸öÈËÊı¾İ¼¯</a>\n" +
-        "<a href='" + Conf.IMAGE_TRAIN_DIR + '/' + name + "'>Ç°Íù¸öÈË¿Õ¼äÄ¿Â¼</a>" : '\n'
+isHaveFile ? "<a href='" + Conf.TRAIN_RM_SERVLET + "'>æ¸…ç†ä¸ªäººæ•°æ®é›†</a>\n" +
+        "<a href='" + Conf.IMAGE_TRAIN_DIR + '/' + name + "'>å‰å¾€ä¸ªäººç©ºé—´ç›®å½•</a>" : '\n'
 %>
 <form action="<%=Conf.TRAIN_JSP%>" target="_blank">
-    <button>¿ªÊ¼ÑµÁ·Ä£ĞÍ</button>
+    <button>å¼€å§‹è®­ç»ƒæ¨¡å‹</button>
 </form>
 <form action="<%=Conf.USE_MODEL_HTML%>" target="_blank">
     <%=
-    isHaveModel ? "<button>Ê¹ÓÃÑµÁ·ºÃµÄÄ£ĞÍ</button>" :
-            "<a disabled=\"disabled\">ÇëÄúÏÈ½øĞĞÄ£ĞÍµÄÑµÁ·</a>"
+    isHaveModel ? "<button>ä½¿ç”¨è®­ç»ƒå¥½çš„æ¨¡å‹</button>" :
+            "<a disabled=\"disabled\">è¯·æ‚¨å…ˆè¿›è¡Œæ¨¡å‹çš„è®­ç»ƒ</a>"
     %>
 </form>
 </body>
