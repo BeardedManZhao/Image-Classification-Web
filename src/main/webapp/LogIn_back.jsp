@@ -26,6 +26,8 @@
 <html lang="en">
 
 <head>
+    <link href='image/Logo.svg' rel='SHORTCUT ICON'/>
+    <link rel="stylesheet" type="text/css" href="css/Theme.css">
     <meta charset="UTF-8">
     <title>初始化或进入您的空间</title>
     <style>
@@ -113,7 +115,6 @@
         }
     </style>
 </head>
-<link rel="stylesheet" type="text/css" href="css/backTheme.css">
 
 <body>
 <div id="login">

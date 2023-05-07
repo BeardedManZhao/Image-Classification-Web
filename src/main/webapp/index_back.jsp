@@ -110,11 +110,11 @@
         background-color: #eedcc5;
     }
 </style>
-<link rel="stylesheet" type="text/css" href="css/backTheme.css">
-
 
 <html>
 <head>
+    <link href='image/Logo.svg' rel='SHORTCUT ICON'/>
+    <link rel="stylesheet" type="text/css" href="css/Theme.css">
     <title>图像分类系统</title>
 </head>
 <body>

@@ -77,52 +77,58 @@
     }
 </style>
 
-<link rel="stylesheet" type="text/css" href="css/backTheme.css">
 <html>
 <head>
+    <link href='image/Logo.svg' rel='SHORTCUT ICON'/>
+    <link rel="stylesheet" type="text/css" href="css/Theme.css">
     <title>图像分类系统</title>
 </head>
 <body>
-<h2>你好 <%=name%> 欢迎使用图像分类系统</h2>
-<hr>
-<h3>您的个人空间目录</h3>
-<div id="dir">
-    <%=stringBuilder.toString()%>
+<div class="logo_title">
+    <img id="logo" width="120" height="90" src="image/Logo.svg" alt="Image-Classification-Web">
+    <h2 id="web-title">你好 <%=name%> 欢迎使用图像分类系统</h2>
 </div>
-
-<br>
-
+<hr>
 <div>
-    <table id="model">
-        <tr>
-            <td>
-                模型路径
-            </td>
-            <td>
-                模型大小
-            </td>
-            <td>
-                模型类别信息
-            </td>
-            <td>
-                训练类别信息
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <%=file1.getPath()%>
-            </td>
-            <td>
-                <%=file1.length()%>
-            </td>
-            <td>
-                <%=classStr.toString()%>
-            </td>
-            <td>
-                <%=tempClassStr.toString()%>
-            </td>
-        </tr>
-    </table>
+    <h3>您的个人空间目录</h3>
+    <div id="dir">
+        <%=stringBuilder.toString()%>
+    </div>
+
+    <br>
+
+    <div>
+        <table id="model">
+            <tr>
+                <td>
+                    模型路径
+                </td>
+                <td>
+                    模型大小
+                </td>
+                <td>
+                    模型类别信息
+                </td>
+                <td>
+                    训练类别信息
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <%=file1.getPath()%>
+                </td>
+                <td>
+                    <%=file1.length()%>
+                </td>
+                <td>
+                    <%=classStr.toString()%>
+                </td>
+                <td>
+                    <%=tempClassStr.toString()%>
+                </td>
+            </tr>
+        </table>
+    </div>
 </div>
 <hr>
 <a href="<%=Conf.TRAIN_UP_HTML%>" target='_blank'>上传训练数据集</a>

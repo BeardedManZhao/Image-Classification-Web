@@ -10,7 +10,7 @@ from keras.layers import Convolution2D, Activation, MaxPooling2D, Flatten, Dense
 from keras.optimizers import Adam
 
 
-def performance_cnn(cn, convolutional_count, init_filters=32, filters_b=2, image_w=100, image_h=100,):
+def performance_cnn(cn, convolutional_count, init_filters=32, filters_b=2, image_w=100, image_h=100, ):
     """
     性能优先的方式构建出一个神经网络模型，并将构建好的神经网络模型返回出去。
     :param image_h: 输入数据样本难度宽度。
@@ -83,6 +83,8 @@ def performance_cnn(cn, convolutional_count, init_filters=32, filters_b=2, image
 
     # 准备模型构建，在这里指定学习率
     opt = Adam(learning_rate=1e-4)
+
+    model.summary()
     # 开始构建模型
     model.compile(
         optimizer=opt,

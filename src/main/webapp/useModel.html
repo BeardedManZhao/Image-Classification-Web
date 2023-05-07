@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang='zh'>
-<link href="css/backTheme.css" rel="stylesheet" type="text/css">
 
 <style>
     form {
@@ -9,12 +8,15 @@
 </style>
 
 <head>
+    <link href='image/Logo.svg' rel='SHORTCUT ICON'/>
+    <link href="css/Theme.css" rel="stylesheet" type="text/css">
     <meta charset='UTF-8'>
     <title>使用模型</title>
 </head>
 <body>
 <div>
-    <h3>使用训练好的模型</h3>
+    <img alt="Image-Classification-Web" id="logo" src="image/Logo.svg">
+    <h3 id="web-title">使用训练好的模型</h3>
     <form action='UseModelServlet' enctype='multipart/form-data' method='post' onsubmit='return checkNumber()'>
         模型支持的图像宽度：<input id='w' name='w' title='输入模型支持图像宽度' type='number'>
         <br>

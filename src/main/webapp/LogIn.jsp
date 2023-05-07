@@ -27,10 +27,11 @@
         align-content: center;
     }
 </style>
-<link rel="stylesheet" type="text/css" href="css/backTheme.css">
 
 <html>
 <head>
+    <link href='image/Logo.svg' rel='SHORTCUT ICON'/>
+    <link rel="stylesheet" type="text/css" href="css/Theme.css">
     <title>初始化或进入您的空间</title>
 </head>
 <body>

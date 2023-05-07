@@ -30,10 +30,11 @@
         background-color: rgba(255, 228, 196, 0.19);
     }
 </style>
-<link rel="stylesheet" type="text/css" href="css/backTheme.css">
 
 <html lang="zh">
 <head>
+    <link href='image/Logo.svg' rel='SHORTCUT ICON'/>
+    <link rel="stylesheet" type="text/css" href="css/Theme.css">
     <meta charset="GBK">
     <title>开始训练</title>
 </head>
