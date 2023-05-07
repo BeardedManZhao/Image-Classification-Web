@@ -10,7 +10,7 @@ from keras.layers import Convolution2D, Activation, MaxPooling2D, Flatten, Dense
 from keras.optimizers import Adam
 
 
-def performance_cnn(cn, convolutional_count, init_filters=32, filters_b=2, image_w=100, image_h=100, ):
+def performance_cnn(cn, convolutional_count, init_filters=32, filters_b=2, image_w=100, image_h=100):
     """
     性能优先的方式构建出一个神经网络模型，并将构建好的神经网络模型返回出去。
     :param image_h: 输入数据样本难度宽度。
@@ -95,9 +95,9 @@ def performance_cnn(cn, convolutional_count, init_filters=32, filters_b=2, image
     return model
 
 
-def precise(cn, convolutional_count, init_filters=32, filters_b=2, image_w=100, image_h=100):
+def precise_cnn(cn, convolutional_count, init_filters=32, filters_b=2, image_w=100, image_h=100):
     """
-    性能优先的方式构建出一个神经网络模型，并将构建好的神经网络模型返回出去。
+    精确度优先的方式构建出一个神经网络模型，并将构建好的神经网络模型返回出去，该模型相较于性能优先训练模型进行了一个优化操作，其进行了神经元失活等操作有效的处理了过拟合问题。
     :param image_h: 输入数据样本难度宽度。
     :param image_w: 输入数据样本难度高度。
     :param cn: 输出层神经元数量，此参数通常代表的就是数据输出结果的描述数值。

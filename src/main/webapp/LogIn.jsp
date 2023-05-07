@@ -20,6 +20,7 @@
         return;
     }
     // 如果没有跳转就代表当前用户没有登录，在这里对当前页面中的所有数据进行处理
+    final String loginS =  Conf.LOGIN_SERVLET;
 %>
 
 <style>
@@ -35,7 +36,11 @@
     <title>初始化或进入您的空间</title>
 </head>
 <body>
-<form onsubmit="return checkData()" method="post" action="<%=Conf.LOGIN_SERVLET%>">
+<div class="logo_title">
+    <img id="logo" width="120" height="90" src="image/Logo.svg" alt="Image-Classification-Web">
+    <h2 id="web-title">进入您的空间</h2>
+</div>
+<form onsubmit="return checkData()" method="post" action="<%=loginS%>">
     <label>
         请输入用户昵称：
         <input id="username" name="userName" type="text" alt="输入用户昵称"/>

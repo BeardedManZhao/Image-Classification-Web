@@ -27,7 +27,7 @@ if __name__ == '__main__':
     cn = len(class_list)
 
     # 构建模型开始训练
-    model = cnn.precise(64, 1, 64)
+    model = cnn.precise_cnn(64, 1, 64, 2, 32, 32)
 
     # 开始训练 传递 x y 以及训练次数
     history = model.fit(x=train_image, y=train_label, epochs=train_epochs, verbose=2)

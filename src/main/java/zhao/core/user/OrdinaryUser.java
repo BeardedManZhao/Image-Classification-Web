@@ -16,13 +16,14 @@ public class OrdinaryUser implements User {
      * 默认用户对象
      */
     public final static OrdinaryUser DEFAULT_USER = new OrdinaryUser("default", "default");
+
     /**
      * 用户信息映射表
      */
-    private final static HashMap<String, User> USER_HASH_MAP = new HashMap<>();
+    public final static HashMap<String, User> USER_HASH_MAP = new HashMap<>();
     private final String name, password, trainDir, modelDir;
 
-    private OrdinaryUser(String name, String password) {
+    protected OrdinaryUser(String name, String password) {
         this.name = name;
         this.password = password;
         this.trainDir = Conf.TRAIN_DIR + '/' + name;

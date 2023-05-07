@@ -7,6 +7,7 @@ import zhao.task.ToLogin;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 
 /**
@@ -46,4 +47,18 @@ public final class HttpUtils {
         request.setCharacterEncoding("GBK");
         return User.checkCookieUser(request, response, ToLogin.TO_LOGIN);
     }
+
+    /**
+     * 弹出提示框并且直接返回到上一级中。
+     *
+     * @param printWriter 回复数据流
+     * @param alertStr    提示框中的数据
+     */
+    public static void alertBack(PrintWriter printWriter, String alertStr) {
+        printWriter.println("<script>");
+        printWriter.println("alert('" + alertStr + "');");
+        printWriter.println("window.history.back()");
+        printWriter.println("</script>");
+    }
+
 }

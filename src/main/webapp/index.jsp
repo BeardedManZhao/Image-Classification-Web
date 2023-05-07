@@ -86,7 +86,7 @@
 <body>
 <div class="logo_title">
     <img id="logo" width="120" height="90" src="image/Logo.svg" alt="Image-Classification-Web">
-    <h2 id="web-title">你好 <%=name%> 欢迎使用图像分类系统</h2>
+    <h2 id="web-title"><%=user.isManager() ? "管理者 " : "你好 "%> <%=name%> 欢迎使用图像分类系统</h2>
 </div>
 <hr>
 <div>
@@ -135,6 +135,9 @@
 <%=
 isHaveFile ? "<a href='" + Conf.TRAIN_RM_SERVLET + "'>清理个人数据集</a>\n" +
         "<a href='" + Conf.IMAGE_TRAIN_DIR + '/' + name + "'>前往个人空间目录</a>" : '\n'
+%>
+<%=
+user.isManager() ? "<a href='" + Conf.WEB_CONFIG_JSP + "'>进行网站系统配置</a>" : '\n'
 %>
 <form action="<%=Conf.TRAIN_JSP%>" target="_blank">
     <button>开始训练模型</button>

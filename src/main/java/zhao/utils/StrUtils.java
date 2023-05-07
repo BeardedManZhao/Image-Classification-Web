@@ -1,6 +1,8 @@
 package zhao.utils;
 
 /**
+ * 字符串操作工具类
+ *
  * @author zhao
  */
 public class StrUtils {

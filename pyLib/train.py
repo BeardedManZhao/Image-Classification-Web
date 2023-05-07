@@ -74,7 +74,7 @@ def fun(train_dir,
             cn=cn, convolutional_count=convolutional_count, init_filters=init_filters, filters_b=filters_b
         )
     else:
-        model = cnn.precise(
+        model = cnn.precise_cnn(
             cn=cn, convolutional_count=convolutional_count, init_filters=init_filters, filters_b=filters_b
         )
     # 开始训练 传递 x y 以及训练次数
