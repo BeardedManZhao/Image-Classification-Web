@@ -20,7 +20,7 @@
         return;
     }
     // 如果没有跳转就代表当前用户没有登录，在这里对当前页面中的所有数据进行处理
-    final String loginS =  Conf.LOGIN_SERVLET;
+    final String loginS = Conf.LOGIN_SERVLET;
 %>
 
 <style>

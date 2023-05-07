@@ -15,7 +15,6 @@ public final class Conf {
 
     public final static String WEN_COOKIE = "Image-Classification-Web";
     public final static String HOME = "/IMW";
-    public static String LOGIN = "LogIn.jsp";
     public final static String LOGIN_SERVLET = "LoginServlet";
     public final static String TRAIN_SERVLET = "TrainServlet";
     public final static String C10_TRAIN_SERVLET = "C10TrainServlet";
@@ -53,12 +52,10 @@ public final class Conf {
      * 模型训练时的个人空间目录路径地址
      */
     public final static String IMAGE_TRAIN_DIR = "/IMW/trainDir/";
-
     /**
      * 网站系统配置页面路径
      */
     public final static String WEB_CONFIG_JSP = "WebConf.jsp";
-
     /**
      * 网站系统配置数据更新服务
      */
@@ -71,6 +68,7 @@ public final class Conf {
      * 服务器的软件路径
      */
     public final static String TOMCAT_PATH = "E:\\RunTime\\Apache-tomcat-9.0.56\\bin";
+    public static String LOGIN = "LogIn.jsp";
     /**
      * 网站运行时系统类型。
      */
