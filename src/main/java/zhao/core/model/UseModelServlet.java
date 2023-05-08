@@ -8,6 +8,7 @@ import zhao.task.ToLogin;
 import zhao.utils.ExeUtils;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +20,7 @@ import java.io.*;
  * 使用模型跳转页面
  */
 @WebServlet(name = "UseModelServlet", value = "/UseModelServlet")
+@MultipartConfig
 public class UseModelServlet extends HttpServlet {
 
     @Override
@@ -51,7 +53,7 @@ public class UseModelServlet extends HttpServlet {
         writer.write(" <html lang=\"zh\">");
         writer.write(" <head>");
         writer.write(" <meta charset=\"GBK\">");
-        writer.write(" <title>训练结果</title>");
+        writer.write(" <title>识别结果</title>");
         writer.write(" </head>");
         writer.write("<h2>被识别的图像</h2><hr>");
         writer.write("<img src='" + "/IMW/IMW_IMAGE/use/" + name + "' alt=\"被识别的图像\">");

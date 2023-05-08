@@ -7,6 +7,7 @@ import zhao.core.user.User;
 import zhao.task.ToLogin;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +22,7 @@ import java.util.Map;
  * 训练数据上传服务类
  */
 @WebServlet(name = "TrainUpServlet", value = "/TrainUpServlet")
+@MultipartConfig
 public class TrainUpServlet extends HttpServlet {
 
     @Override

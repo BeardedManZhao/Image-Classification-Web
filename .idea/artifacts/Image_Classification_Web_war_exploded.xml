@@ -1,0 +1,13 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="Image-Classification-Web:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/Image_Classification_Web_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="Image-Classification-Web/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="Image-Classification-Web" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

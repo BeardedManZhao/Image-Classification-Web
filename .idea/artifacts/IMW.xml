@@ -1,0 +1,17 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="IMW">
+    <output-path>$PROJECT_DIR$/out/artifacts/IMW</output-path>
+    <root id="archive" name="IMW.war">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="Image-Classification-Web" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: commons-io:commons-io:1.3.2" />
+          <element id="library" level="project" name="Maven: javax.servlet:servlet-api:2.5" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="Image-Classification-Web/web/Web" />
+    </root>
+  </artifact>
+</component>

@@ -69,6 +69,7 @@ checkDirConDir ? "<form action=\"" + Conf.TRAIN_SERVLET + "\" onsubmit=\"return 
         "        神经网络类型：性能优先模型<input id='ms_performance' value='performance' name='model_selection' type='radio' checked>\n" +
         "        精度优先模型<input id='ms_accurate' value='accurate' name='model_selection' type='radio'>\n" +
         "    </label><br>" +
+        "请注意：卷积层较多的情况下，图像尺寸要保证足够大，否则可能导致模型构建不成功。<br>" +
         "<button>开始训练</button>\n</form>" : " "
 %>
 
@@ -77,10 +78,21 @@ checkDirConDir ? "<form action=\"" + Conf.TRAIN_SERVLET + "\" onsubmit=\"return 
     <p>当前训练目录：cifar10</p>
     <label>
         模型训练次数：
-        <input id='train_epochs_id' name='train_epochs' type='number' title='训练次数' alt='训练次数' required='required'>
+        <input id='c10_train_epochs_id' name='train_epochs' type='number' title='训练次数' alt='训练次数' required='required'>
     </label>
     <button>开始训练</button>
 </form>
+
+<form action="<%=Conf.MNIST_TRAIN_SERVLET%>" onsubmit="return checkTrain_epochs('train_epochs_id') && check()">
+    <p>您好<%=name%>，MNIST 内置数据集准备完成。</p>
+    <p>当前训练目录：MNIST</p>
+    <label>
+        模型训练次数：
+        <input id='mnist_train_epochs_id' name='train_epochs' type='number' title='训练次数' alt='训练次数' required='required'>
+    </label>
+    <button>开始训练</button>
+</form>
+
 
 <a href="index.jsp">回到主页</a>
 </body>

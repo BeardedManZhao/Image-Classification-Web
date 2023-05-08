@@ -33,7 +33,7 @@ def performance_cnn(cn, convolutional_count, init_filters=32, filters_b=2, image
             # 指定生成规则 设成same会自动加padding，保证输出是同样的大小。
             padding='same',
             # 设置卷积层第一次的输入数据维度
-            batch_input_shape=(cn, image_w, image_h, 1),
+            batch_input_shape=(None, image_w, image_h, 1),
         )
     )
     # 添加一层激活函数
@@ -95,9 +95,10 @@ def performance_cnn(cn, convolutional_count, init_filters=32, filters_b=2, image
     return model
 
 
-def precise_cnn(cn, convolutional_count, init_filters=32, filters_b=2, image_w=100, image_h=100):
+def precise_cnn(cn, convolutional_count, init_filters=32, filters_b=2, image_w=100, image_h=100, cc=3):
     """
     精确度优先的方式构建出一个神经网络模型，并将构建好的神经网络模型返回出去，该模型相较于性能优先训练模型进行了一个优化操作，其进行了神经元失活等操作有效的处理了过拟合问题。
+    :param cc: 模型能够支持的颜色通道数值
     :param image_h: 输入数据样本难度宽度。
     :param image_w: 输入数据样本难度高度。
     :param cn: 输出层神经元数量，此参数通常代表的就是数据输出结果的描述数值。
@@ -109,7 +110,10 @@ def precise_cnn(cn, convolutional_count, init_filters=32, filters_b=2, image_w=1
     """
     model = Sequential()
     # 卷积
-    model.add(layers.Conv2D(init_filters, (3, 3), activation='relu', input_shape=(image_w, image_h, 3)))
+    if cc == 3:
+        model.add(layers.Conv2D(init_filters, (3, 3), activation='relu', input_shape=(image_w, image_h, 3)))
+    else:
+        model.add(layers.Conv2D(init_filters, (3, 3), activation='relu', input_shape=(image_w, image_h, 1)))
     # 卷积
     model.add(layers.Conv2D(init_filters, (3, 3), activation='relu'))
     # 标准化

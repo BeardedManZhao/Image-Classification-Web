@@ -65,11 +65,11 @@ def fun(train_dir,
     # 将每一个图像对应的类别向量获取到，需要注意的是，当前的类别向量是一维度的扁平化向量，需要进行独热编码矩阵转换
     y1 = x1.classes
     print(f"类别数据向量 = {y1}")
-    # 将向量中的类别编号转换成独热编码矩阵，表示类别 在这里共有 cn 个类别
-    y1 = np_utils.to_categorical(y1, cn)
-    print(f"==================================\n类别独热矩阵\n{y1}", end='\n==================================\n')
     # 获取到模型对象
     if use_performance:
+        # 将向量中的类别编号转换成独热编码矩阵，表示类别 在这里共有 cn 个类别
+        y1 = np_utils.to_categorical(y1, cn)
+        print(f"==================================\n类别独热矩阵\n{y1}", end='\n==================================\n')
         model = cnn.performance_cnn(
             cn=cn, convolutional_count=convolutional_count, init_filters=init_filters, filters_b=filters_b
         )
@@ -78,7 +78,7 @@ def fun(train_dir,
             cn=cn, convolutional_count=convolutional_count, init_filters=init_filters, filters_b=filters_b
         )
     # 开始训练 传递 x y 以及训练次数
-    model.fit(x=x1, validation_data=y1.all(), epochs=train_epochs)
+    model.fit(x=x1, validation_data=y1.all(), epochs=train_epochs, verbose=2)
     model.save(save_path)
     print(class_list)
     return True

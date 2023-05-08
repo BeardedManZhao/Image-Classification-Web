@@ -31,7 +31,7 @@ if __name__ == '__main__':
 
     # 开始训练 传递 x y 以及训练次数
     history = model.fit(x=train_image, y=train_label, epochs=train_epochs, verbose=2)
-    print("===== 开始进行模型准确度评估 =====")
+    print("===== 开始进行 CIFAR-10 模型准确度评估 =====")
     model.evaluate(test_image, test_label)
     model.evaluate(test_image, test_label)
     model.save(save_path)
