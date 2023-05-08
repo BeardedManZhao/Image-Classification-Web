@@ -28,7 +28,8 @@ def fun(train_dir,
     print(f"class_path_str = {class_path_str}")
     print(f"train_epochs = {train_epochs}")
     print(f"image_w = {image_w}")
-    print(f"image_w = {image_h}")
+    print(f"image_h = {image_h}")
+    print(f"use_performance = {use_performance}")
     print(f"convolutional_count = {convolutional_count}")
     print(f"init_filters = {init_filters}")
     print(f"filters_b = {filters_b}")
@@ -65,17 +66,20 @@ def fun(train_dir,
     # 将每一个图像对应的类别向量获取到，需要注意的是，当前的类别向量是一维度的扁平化向量，需要进行独热编码矩阵转换
     y1 = x1.classes
     print(f"类别数据向量 = {y1}")
+    # 将向量中的类别编号转换成独热编码矩阵，表示类别 在这里共有 cn 个类别
+    y1 = np_utils.to_categorical(y1, cn)
+    print(f"==================================\n类别独热矩阵\n{y1}", end='\n==================================\n')
     # 获取到模型对象
     if use_performance:
-        # 将向量中的类别编号转换成独热编码矩阵，表示类别 在这里共有 cn 个类别
-        y1 = np_utils.to_categorical(y1, cn)
-        print(f"==================================\n类别独热矩阵\n{y1}", end='\n==================================\n')
         model = cnn.performance_cnn(
-            cn=cn, convolutional_count=convolutional_count, init_filters=init_filters, filters_b=filters_b
+            cn=cn, convolutional_count=convolutional_count, init_filters=init_filters, filters_b=filters_b,
+            image_h=image_h, image_w=image_w,
         )
     else:
         model = cnn.precise_cnn(
-            cn=cn, convolutional_count=convolutional_count, init_filters=init_filters, filters_b=filters_b
+            cn=cn, convolutional_count=convolutional_count, init_filters=init_filters, filters_b=filters_b,
+            image_h=image_h, image_w=image_w,
+            cc=1, loss='categorical_crossentropy'
         )
     # 开始训练 传递 x y 以及训练次数
     model.fit(x=x1, validation_data=y1.all(), epochs=train_epochs, verbose=2)
@@ -92,7 +96,7 @@ if __name__ == '__main__':
         sys.argv[4],
         int(sys.argv[5]),
         int(sys.argv[6]), int(sys.argv[7]),
-        bool(sys.argv[8]),
+        sys.argv[8] == 'True',
         int(sys.argv[9]),
         int(sys.argv[10]),
         int(sys.argv[11])

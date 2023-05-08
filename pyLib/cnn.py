@@ -95,9 +95,11 @@ def performance_cnn(cn, convolutional_count, init_filters=32, filters_b=2, image
     return model
 
 
-def precise_cnn(cn, convolutional_count, init_filters=32, filters_b=2, image_w=100, image_h=100, cc=3):
+def precise_cnn(cn, convolutional_count, init_filters=32, filters_b=2, image_w=100, image_h=100, cc=3,
+                loss='sparse_categorical_crossentropy'):
     """
     精确度优先的方式构建出一个神经网络模型，并将构建好的神经网络模型返回出去，该模型相较于性能优先训练模型进行了一个优化操作，其进行了神经元失活等操作有效的处理了过拟合问题。
+    :param loss: 构建的模型使用的损失函数计算方式，默认为 sparse_categorical_crossentropy
     :param cc: 模型能够支持的颜色通道数值
     :param image_h: 输入数据样本难度宽度。
     :param image_w: 输入数据样本难度高度。
@@ -158,7 +160,7 @@ def precise_cnn(cn, convolutional_count, init_filters=32, filters_b=2, image_w=1
     model.add(layers.Dense(cn, activation='softmax'))
     model.summary()
     model.compile(optimizer='adam',
-                  loss='sparse_categorical_crossentropy',
+                  loss=loss,
                   metrics=['acc']
                   )
     return model

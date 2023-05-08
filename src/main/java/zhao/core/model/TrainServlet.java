@@ -48,6 +48,8 @@ public class TrainServlet extends HttpServlet {
                     final String convolutional_count = StrUtils.ifNull(request.getParameter("convolutional_count"), "2");
                     final String filters = StrUtils.ifNull(request.getParameter("filters"), "32");
                     final String filtersB = StrUtils.ifNull(request.getParameter("filtersB"), "2");
+                    final String model_selection = request.getParameter("model_selection");
+                    Conf.LOGGER.info(model_selection);
                     {
                         final String train_epochs1 = request.getParameter("train_epochs");
 
@@ -64,7 +66,7 @@ public class TrainServlet extends HttpServlet {
                                         train_epochs + ' ' +
                                         image_w + ' ' + image_h +
                                         (
-                                                StrUtils.ifNull(request.getParameter("model_selection"), "performance").equals("performance") ?
+                                                "performance".equals(model_selection) ?
                                                         " True " : " False "
                                         ) +
                                         convolutional_count + ' ' +

@@ -66,8 +66,8 @@ checkDirConDir ? "<form action=\"" + Conf.TRAIN_SERVLET + "\" onsubmit=\"return 
         "        <input id='filtersB' name='filtersB' type='number' placeholder='卷积核数量数值生成等比' alt='卷积核数等比' required='required'>\n" +
         "    </label><br>" +
         "    <label>\n" +
-        "        神经网络类型：性能优先模型<input id='ms_performance' value='performance' name='model_selection' type='radio' checked>\n" +
-        "        精度优先模型<input id='ms_accurate' value='accurate' name='model_selection' type='radio'>\n" +
+        "        神经网络类型：性能优先模型<input id='ms_performance' value='performance' name='model_selection' type='radio' alt='此模型的训练速度较快，但更容易过拟合。' checked>\n" +
+        "        精度优先模型<input id='ms_accurate' value='accurate' name='model_selection' type='radio' alt='此模型较为稳定，但是训练过程，计算量较大。'>\n" +
         "    </label><br>" +
         "请注意：卷积层较多的情况下，图像尺寸要保证足够大，否则可能导致模型构建不成功。<br>" +
         "<button>开始训练</button>\n</form>" : " "

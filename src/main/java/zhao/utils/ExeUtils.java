@@ -23,6 +23,7 @@ public final class ExeUtils {
      * @throws IOException error
      */
     public static InputStream exePy(String pythonPath, String args) throws IOException {
+        Conf.LOGGER.info(args);
         final Process process = runtime.exec("python " + pythonPath + " " + args);
         return new SequenceInputStream(process.getInputStream(), process.getErrorStream());
     }
