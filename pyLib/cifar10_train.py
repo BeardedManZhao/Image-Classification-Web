@@ -5,6 +5,14 @@ import tensorflow as tf
 import cnn
 
 if __name__ == '__main__':
+    if len(sys.argv) < 3:
+        print("""
+        请安装下面的顺序输入参数：
+            1  =  内置数据模型训练的轮数
+            2  =  训练出的模型保存的目录
+            3  =  训练模型的类别文件存储目录
+        """)
+        exit()
     # 训练轮数
     train_epochs = int(sys.argv[1])
     # 模型保存目录

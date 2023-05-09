@@ -10,6 +10,7 @@
 <head>
     <link href='image/Logo.svg' rel='SHORTCUT ICON'/>
     <link href="css/Theme.css" rel="stylesheet" type="text/css">
+    <link href="css/terminal.css" rel="stylesheet" type="text/css">
     <meta charset='UTF-8'>
     <title>使用模型</title>
 </head>
@@ -17,7 +18,8 @@
 <div>
     <img alt="Image-Classification-Web" id="logo" src="image/Logo.svg">
     <h3 id="web-title">使用训练好的模型</h3>
-    <form action='UseModelServlet' enctype='multipart/form-data' method='post' onsubmit='return checkNumber()'>
+    <form action='UseModelServlet' enctype='multipart/form-data' method='post'
+          onsubmit='return checkNumber() && check("图像识别开始。", "请稍等，正在识别中......")'>
         模型支持的图像宽度：<input id='w' name='w' title='输入模型支持图像宽度' type='number'>
         <br>
         模型支持的图像高度：<input id='h' name='h' title='输入模型支持图像高度' type='number'>
@@ -34,7 +36,9 @@
 </body>
 </html>
 
+<script src="js/checkStatic.js" type="text/javascript"></script>
 <script>
+
     function checkNumber() {
         if (document.getElementById('w').value > 0 && document.getElementById('h').value > 0 && document.getElementById('c').value > 0) {
             if (document.getElementById('i').value != null) {

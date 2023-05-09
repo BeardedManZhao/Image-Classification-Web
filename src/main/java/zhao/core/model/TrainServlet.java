@@ -92,11 +92,12 @@ public class TrainServlet extends HttpServlet {
         writer.write(" <html lang=\"zh\">");
         writer.write(" <head>");
         writer.write(" <meta charset=\"GBK\">");
-        writer.write(" <title>训练结果</title>");
+        writer.write(" <title>训练结果</title>\n");
+        writer.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"css/terminal.css\">");
         writer.write(" </head>");
         writer.write("<h2>训练日志展示</h2>\n");
         writer.write("<hr>\n");
-        writer.write("<pre>");
+        writer.write("<pre class=\"terminal\">");
         // 调用demo.py中的method1方法
         InputStream inputStream = transformation.function(user);
         if (inputStream != null) {

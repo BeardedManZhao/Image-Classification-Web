@@ -67,19 +67,19 @@ public final class Conf {
     /**
      * python训练脚本文件的路径
      */
-    public final static String TRAIN_PYTHON_PATH = "D:\\MyGithub\\Image-Classification-Web\\pyLib\\train.py";
+    public final static String TRAIN_PYTHON_PATH = "D:\\MyGithub\\Image-Classification-Web\\pyLib\\exe\\train.cpython-39.pyc";
     /**
      * python cifar10_train.py 训练脚本文件的路径
      */
-    public final static String C10_TRAIN_PYTHON_PATH = "D:\\MyGithub\\Image-Classification-Web\\pyLib\\cifar10_train.py";
+    public final static String C10_TRAIN_PYTHON_PATH = "D:\\MyGithub\\Image-Classification-Web\\pyLib\\exe\\cifar10_train.cpython-39.pyc";
     /**
      * python mnist_train.py 训练脚本文件的路径
      */
-    public final static String MNIST_PYTHON_PATH = "D:\\MyGithub\\Image-Classification-Web\\pyLib\\mnist_train.py";
+    public final static String MNIST_PYTHON_PATH = "D:\\MyGithub\\Image-Classification-Web\\pyLib\\exe\\mnist_train.cpython-39.pyc";
     /**
      * python使用脚本文件的路径
      */
-    public final static String USING_PYTHON_PATH = "D:\\MyGithub\\Image-Classification-Web\\pyLib\\use.py";
+    public final static String USING_PYTHON_PATH = "D:\\MyGithub\\Image-Classification-Web\\pyLib\\exe\\use.cpython-39.pyc";
     /**
      * 训练数据集存储目录
      */

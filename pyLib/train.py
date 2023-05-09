@@ -6,8 +6,8 @@
 # @Project : main2.py
 import sys
 
-import tensorflow as tf
 from keras.integration_test.preprocessing_test_utils import BATCH_SIZE
+from keras.preprocessing.image import ImageDataGenerator
 from keras.utils import np_utils
 
 import cnn
@@ -45,7 +45,11 @@ def fun(train_dir,
     out_class.close()
 
     # 实例化出图像数据生成器，其中的 rescale 参数会被乘到被读取的图像矩阵中，能够将所有的图像颜色设置规整到[0,255]
-    image_generator = tf.keras.preprocessing.image.ImageDataGenerator(rescale=1. / 255)
+    # 指定被训练图像目录的生成器对象
+    image_generator = ImageDataGenerator(
+        # 重缩放因子 会被乘到每一个图像矩阵中
+        rescale=1 / 255
+    )
 
     # 获取到图像数据集，并将训练数据与测试数据准备好
     x1 = image_generator.flow_from_directory(
@@ -89,6 +93,22 @@ def fun(train_dir,
 
 
 if __name__ == '__main__':
+    if len(sys.argv) < 11:
+        print(f"""
+        请安装下面的顺序输入参数：
+            1  =  被训练文件所在目录，需要保证其二级目录是类别目录。
+            2  =  训练模型保存路径，需要保证其存在与文件系统中。
+            3  =  被训练数据所包含的类别描述文件路径。
+            4  =  被训练模型所包含的类别描述文件输出路径。
+            5  =  训练模型的时候，要进行的训练批次。
+            6  =  被训练的学习样本的图像尺寸 - 宽。
+            7  =  被训练的学习样本的图像尺寸 - 高。
+            8  =  是否使用性能优先模型进行训练。
+            9  =  模型在训练的时候需要使用的卷积层数。
+            10 =  初始卷积层对应的卷积核的数量。
+            11 =  从初始卷积层开始，每一层卷积核数量的公比数值。
+        """)
+        exit()
     fun(
         sys.argv[1],
         sys.argv[2],

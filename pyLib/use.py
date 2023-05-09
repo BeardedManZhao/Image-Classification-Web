@@ -54,6 +54,19 @@ def fun(model_path, data_path, class_path_str, image_w, image_h, color_channel):
 
 
 if __name__ == '__main__':
+    if len(sys.argv) < 6:
+        print(
+            """
+            请安装下面的顺序输入参数：
+                1  =  计算时需要使用的模型
+                2  =  需要被计算的数据路径
+                3  =  计算时需要指定的类别文件
+                4  =  被识别的图像宽度
+                5  =  被识别的图像高度
+                6  =  被识别的图像颜色通道数量
+            """
+        )
+        exit()
     print(
         "当前被识别的图像为 ===> "
         f"{fun(sys.argv[1], sys.argv[2], sys.argv[3], int(sys.argv[4]), int(sys.argv[5]), int(sys.argv[6]))}"

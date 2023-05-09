@@ -53,13 +53,15 @@ public class UseModelServlet extends HttpServlet {
         writer.write(" <html lang=\"zh\">");
         writer.write(" <head>");
         writer.write(" <meta charset=\"GBK\">");
-        writer.write(" <title>识别结果</title>");
+        writer.write(" <title>识别结果</title>\n");
+        writer.println("    <link href=\"css/Theme.css\" rel=\"stylesheet\" type=\"text/css\">");
+        writer.println("    <link href=\"css/terminal.css\" rel=\"stylesheet\" type=\"text/css\">");
         writer.write(" </head>");
         writer.write("<h2>被识别的图像</h2><hr>");
         writer.write("<img src='" + "/IMW/IMW_IMAGE/use/" + name + "' alt=\"被识别的图像\">");
         writer.write("<hr><h2>识别结果展示</h2>\n");
         writer.write("<hr>\n");
-        writer.write("<pre>");
+        writer.write("<pre class='terminal'>");
         // 开始使用脚本
         final String s = Conf.MODEL_DIR + '/' + name;
         final InputStream inputStream = ExeUtils.exePy(
@@ -74,13 +76,14 @@ public class UseModelServlet extends HttpServlet {
         IOUtils.copy(inputStream, writer, "GBK");
         writer.write("</pre>");
         writer.write("<hr>");
-        writer.println("<form action='" + Conf.USE_MODEL_SERVLET + "' enctype='multipart/form-data' onsubmit='checkNumber()' method='post'>\n");
+        writer.println("<form action='" + Conf.USE_MODEL_SERVLET + "' enctype='multipart/form-data' onsubmit='return check(\"图像识别开始。\", \"请稍等，正在识别中......\")' method='post'>\n");
         writer.println("    模型支持的图像宽度：<input id='w' name='w' title='输入模型支持图像宽度' type='number'><br>");
         writer.println("    模型支持的图像高度：<input id='h' name='h' title='输入模型支持图像高度' type='number'><br>");
         writer.println("    模型支持的通道数量：<input id='c' name='c' title='输入模型支持的图像颜色通道数量' type='number'><br>");
         writer.println("要被识别的图像文件：<input id='i'  Content-Type='image/*' accept='image/*' name='image' title='上传需要被识别的图像' type='file'><br>");
         writer.println("    <button>开始识别</button>");
         writer.println("</form>");
+        writer.println("<script type=\"text/javascript\" src=\"js/checkStatic.js\"></script>");
         inputStream.close();
     }
 }

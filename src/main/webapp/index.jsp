@@ -32,7 +32,7 @@
         final File[] files = file.listFiles();
         if (files != null && files.length != 0) {
             // 如果文件存在就开始将文件下的所有的数据写出表格
-            stringBuilder.append("<table id='dir'>");
+            stringBuilder.append("<table id='dir_table'>");
             HTMLUtils.appRowToTable(stringBuilder, "Name", "type", "size");
             for (File file1 : files) {
                 HTMLUtils.appRowToTable(stringBuilder, file1.getName(), file1.isDirectory() ? "dir" : "file", file1.length() + " Byte");

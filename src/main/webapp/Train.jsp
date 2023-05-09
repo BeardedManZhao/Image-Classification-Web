@@ -55,7 +55,7 @@ checkDirConDir ? "<form action=\"" + Conf.TRAIN_SERVLET + "\" onsubmit=\"return 
         "    </label><br>\n" +
         "    <label>\n" +
         "        模型卷积层数：\n" +
-        "        <input id='convolutional_count' name='convolutional_count' type='number' title='卷积层数' alt='卷积层数' required='required'>\n" +
+        "        <input id='convolutional_count' name='convolutional_count' type='number' placeholder=\"在基础模型之上额外新增的层数量。\" title='卷积层数' alt='卷积层数' required='required'>\n" +
         "    </label><br>\n" +
         "    <label>\n" +
         "        初始卷积核数：\n" +
@@ -73,24 +73,24 @@ checkDirConDir ? "<form action=\"" + Conf.TRAIN_SERVLET + "\" onsubmit=\"return 
         "<button>开始训练</button>\n</form>" : " "
 %>
 
-<form action="<%=Conf.C10_TRAIN_SERVLET%>" onsubmit="return checkTrain_epochs('train_epochs_id') && check()">
+<form action="<%=Conf.C10_TRAIN_SERVLET%>" onsubmit="return checkTrain_epochs('c10_train_epochs_id') && check()">
     <p>您好<%=name%>，CIFAR-10内置数据集准备完成。</p>
     <p>当前训练目录：cifar10</p>
     <label>
         模型训练次数：
         <input id='c10_train_epochs_id' name='train_epochs' type='number' title='训练次数' alt='训练次数' required='required'>
     </label>
-    <button>开始训练</button>
+    <button type="submit">开始训练</button>
 </form>
 
-<form action="<%=Conf.MNIST_TRAIN_SERVLET%>" onsubmit="return checkTrain_epochs('train_epochs_id') && check()">
+<form action="<%=Conf.MNIST_TRAIN_SERVLET%>" onsubmit="return checkTrain_epochs('mnist_train_epochs_id') && check()">
     <p>您好<%=name%>，MNIST 内置数据集准备完成。</p>
     <p>当前训练目录：MNIST</p>
     <label>
         模型训练次数：
         <input id='mnist_train_epochs_id' name='train_epochs' type='number' title='训练次数' alt='训练次数' required='required'>
     </label>
-    <button>开始训练</button>
+    <button type="submit">开始训练</button>
 </form>
 
 
