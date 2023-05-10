@@ -53,3 +53,4 @@
   <Context docBase="[TRAIN_DIR 对应的数值]" path="[IMAGE_TRAIN_DIR] 对应的数值" reloadable="true"/>
 </Host>
 ```
+6. 点击脚本文件 compile.bat 进行神经网络系统的覆写。

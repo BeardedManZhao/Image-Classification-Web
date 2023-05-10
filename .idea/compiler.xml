@@ -6,11 +6,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="ModelInit" />
         <module name="Image-Classification-Web" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="Image-Classification-Web" target="8" />
+      <module name="ModelInit" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>

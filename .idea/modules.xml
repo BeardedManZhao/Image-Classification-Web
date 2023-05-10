@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Image-Classification-Web.iml" filepath="$PROJECT_DIR$/.idea/Image-Classification-Web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ModelInit/ModelInit.iml" filepath="$PROJECT_DIR$/ModelInit/ModelInit.iml" />
     </modules>
   </component>
 </project>

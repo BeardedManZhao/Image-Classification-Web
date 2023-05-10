@@ -4,6 +4,7 @@ package zhao;
 import zhao.core.user.ManagerUser;
 import zhao.core.user.OrdinaryUser;
 
+import java.io.File;
 import java.util.logging.Logger;
 
 /**
@@ -64,22 +65,28 @@ public final class Conf {
      * 服务器的软件路径
      */
     public final static String TOMCAT_PATH = "D:\\Runtime\\TomCat_Server\\Apache-tomcat-9.0.56\\bin";
+
+    /**
+     * 神经网络程序存储目录
+     */
+    public final static String NN_PATH = "D:\\MyGithub\\Image-Classification-Web\\pyLib\\exe";
+
     /**
      * python训练脚本文件的路径
      */
-    public final static String TRAIN_PYTHON_PATH = "D:\\MyGithub\\Image-Classification-Web\\pyLib\\exe\\train.cpython-39.pyc";
+    public final static String TRAIN_PYTHON_PATH = NN_PATH + "\\train.pyc";
     /**
      * python cifar10_train.py 训练脚本文件的路径
      */
-    public final static String C10_TRAIN_PYTHON_PATH = "D:\\MyGithub\\Image-Classification-Web\\pyLib\\exe\\cifar10_train.cpython-39.pyc";
+    public final static String C10_TRAIN_PYTHON_PATH = NN_PATH + "\\cifar10_train.pyc";
     /**
      * python mnist_train.py 训练脚本文件的路径
      */
-    public final static String MNIST_PYTHON_PATH = "D:\\MyGithub\\Image-Classification-Web\\pyLib\\exe\\mnist_train.cpython-39.pyc";
+    public final static String MNIST_PYTHON_PATH = NN_PATH + "\\mnist_train.pyc";
     /**
      * python使用脚本文件的路径
      */
-    public final static String USING_PYTHON_PATH = "D:\\MyGithub\\Image-Classification-Web\\pyLib\\exe\\use.cpython-39.pyc";
+    public final static String USING_PYTHON_PATH = NN_PATH + "\\use.pyc";
     /**
      * 训练数据集存储目录
      */
@@ -110,6 +117,10 @@ public final class Conf {
      */
     public final static Logger LOGGER = Logger.getLogger("IMC-Z");
     /**
+     * web中需要的神经网络模型构建是否成功
+     */
+    public final static boolean modelIsOk;
+    /**
      * 初始化或进入个人空间的资源名称
      */
     public static String LOGIN = "LogIn.jsp";
@@ -126,5 +137,14 @@ public final class Conf {
         // 初始化管理者
         OrdinaryUser.USER_HASH_MAP.put("root", new ManagerUser("root", "zhao-123123123"));
         LOGGER.info("管理者初始化成功 = " + OrdinaryUser.USER_HASH_MAP.get("root"));
+        // 检查神经网络系统是否覆写完毕
+        File file = new File(NN_PATH);
+        File[] files = file.listFiles();
+        modelIsOk = file.exists() && file.isDirectory() && files != null && files.length > 0;
+        if (modelIsOk) {
+            LOGGER.info("读取到神经网络系统文件，并装载到WEB服务。");
+        } else {
+            LOGGER.warning("神经网络系统文件不存在，需要覆写，请调用网站自带脚本文件进行覆写系统。");
+        }
     }
 }

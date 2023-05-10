@@ -14,6 +14,10 @@
 <%@ page contentType="text/html;charset=GBK" %>
 
 <%
+    if (!Conf.modelIsOk){
+        response.getWriter().println("神经网络系统模块未覆写，请调用脚本覆写然后重启服务器。");
+        return;
+    }
     // 首先获取到当前用户的信息，如果没有登录就直接跳转到登录页面
     // 检查当前用户是否已经登录，没有登录就跳转到登录页面
     final User user = User.checkCookieUser(request, response, ToLogin.TO_LOGIN);
