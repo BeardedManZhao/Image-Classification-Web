@@ -26,40 +26,6 @@ public final class Conf {
     public final static String TRAIN_JSP = "Train.jsp";
     public final static String USE_MODEL_SERVLET = "UseModelServlet";
     public final static String USE_MODEL_HTML = "useModel.html";
-/*
-    /**
-     * 服务器的软件路径
-     * /
-    public final static String TOMCAT_PATH = "E:\\RunTime\\Apache-tomcat-9.0.56\\bin";
-    /**
-     * python训练脚本文件的路径
-     * /
-    public final static String TRAIN_PYTHON_PATH = "D:\\MyGitHub\\Image-Classification-Web\\pyLib\\train.py";
-    /**
-     * python cifar10_train.py 训练脚本文件的路径
-     * /
-    public final static String C10_TRAIN_PYTHON_PATH = "D:\\MyGitHub\\Image-Classification-Web\\pyLib\\cifar10_train.py";
-    /**
-     * python cifar10_train.py 训练脚本文件的路径
-     * /
-    public final static String MNIST_PYTHON_PATH = "D:\\MyGitHub\\Image-Classification-Web\\pyLib\\mnist_train.py";
-    /**
-     * python使用脚本文件的路径
-     * /
-    public final static String USING_PYTHON_PATH = "D:\\MyGitHub\\Image-Classification-Web\\pyLib\\use.py";
-    /**
-     * 训练数据集存储目录
-     * /
-    public final static String TRAIN_DIR = "F:/trainDir";
-    /**
-     * 训练数据模型存储目录
-     * /
-    public final static String MODEL_DIR = "F:/modelDir";
-    /**
-     * 模型使用时的图像暂存文件目录。
-     * /
-    public final static String IMAGE_USE_DIR = "F:\\IMW_IMAGE\\USE\\";
-*/
 
     /**
      * 服务器的软件路径
@@ -70,6 +36,11 @@ public final class Conf {
      * 神经网络程序存储目录
      */
     public final static String NN_PATH = "D:\\MyGithub\\Image-Classification-Web\\pyLib\\exe";
+
+    /**
+     * 网站核心运行目录，该目录将会作为系统重的运行核心数据存储目录
+     */
+    public final static String WORK_DIR = "D:/IMC-Z";
 
     /**
      * python训练脚本文件的路径
@@ -90,15 +61,15 @@ public final class Conf {
     /**
      * 训练数据集存储目录
      */
-    public final static String TRAIN_DIR = "D:/IMC-Z/trainDir";
+    public final static String TRAIN_DIR = WORK_DIR + "/trainDir";
     /**
      * 训练数据模型存储目录
      */
-    public final static String MODEL_DIR = "D:/IMC-Z/modelDir";
+    public final static String MODEL_DIR = WORK_DIR + "/modelDir";
     /**
      * 模型使用时的图像暂存文件目录。
      */
-    public final static String IMAGE_USE_DIR = "D:/IMC-Z/IMW_IMAGE/USE/";
+    public final static String IMAGE_USE_DIR = WORK_DIR + "/IMW_IMAGE/USE/";
 
     /**
      * 模型训练时的个人空间目录路径地址

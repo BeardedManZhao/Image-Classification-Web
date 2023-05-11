@@ -33,7 +33,7 @@ def fun(train_dir,
     print(f"convolutional_count = {convolutional_count}")
     print(f"init_filters = {init_filters}")
     print(f"filters_b = {filters_b}")
-
+    print("Prepare for the IMW-ZLY image recognition task.")
     # 获取到list
     class_list = []
     out_class = open(class_path_str, encoding='GBK', mode='wt')
