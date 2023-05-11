@@ -26,6 +26,15 @@
     }
 %>
 
+<style>
+    #user_space_table {
+        background-color: rgba(13, 54, 53, 0.51);
+    }
+    #user_space_id td {
+        background-color: rgba(212, 220, 217, 0.3);
+    }
+</style>
+
 <html>
 <head>
     <link href='image/Logo.svg' rel='SHORTCUT ICON'/>
@@ -38,25 +47,29 @@
     <h2 id="web-title">你好 <%=user.name()%> 在这里进行WEB页面的配置</h2>
 </div>
 <br>
-<table id="user_space_table">
-    <tr>
-        <td>
-            用户名称
-        </td>
-        <td>
-            训练数据目录
-        </td>
-        <td>
-            模型存储目录
-        </td>
-        <td>
-            具有管理权限
-        </td>
-    </tr>
-    <%=stringBuilder.toString()%>
-</table>
+<div id="user_space_id">
+    <h3>当前正在使用的用户空间</h3>
+    <table id="user_space_table">
+        <tr>
+            <td>
+                用户名称
+            </td>
+            <td>
+                训练数据目录
+            </td>
+            <td>
+                模型存储目录
+            </td>
+            <td>
+                具有管理权限
+            </td>
+        </tr>
+        <%=stringBuilder.toString()%>
+    </table>
+</div>
 <br>
 <div id="data">
+    <h3>配置模块</h3>
     <form action="<%=Conf.CONF_UPDATE_SERVLET%>" method="post">
         <label>
             允许的最大空间数量：
