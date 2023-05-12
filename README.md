@@ -44,6 +44,7 @@
 3. 配置Web资源文件目录 是项目中名称为 webapp 的目录文件夹。
 4. 修改 Conf 类中的基础配置，所有从根目录开始的目录都需要重新配置，按照自己的服务器配置。
 5. 配置服务器图像数据的读取目录，用于读取用户使用模型时上传的文件，便于前端的图像回调。
+
 ```xml
 <!-- 在 server.xml 中的 Host 节点添加下面的配置 -->
 <Host>
@@ -53,4 +54,5 @@
   <Context docBase="[TRAIN_DIR 对应的数值]" path="[IMAGE_TRAIN_DIR] 对应的数值" reloadable="true"/>
 </Host>
 ```
+
 6. 点击脚本文件 compile.bat 进行神经网络系统的覆写。

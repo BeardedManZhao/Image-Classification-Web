@@ -28,17 +28,17 @@ public final class Conf {
     public final static String USE_MODEL_HTML = "useModel.html";
 
     /**
-     * 服务器的软件路径
+     * 服务器的软件路径 TODO 配置的时候需要修改
      */
     public final static String TOMCAT_PATH = "D:\\Runtime\\TomCat_Server\\Apache-tomcat-9.0.56\\bin";
 
     /**
-     * 神经网络程序存储目录
+     * 神经网络程序存储目录 TODO 配置的时候需要修改
      */
     public final static String NN_PATH = "D:\\MyGithub\\Image-Classification-Web\\pyLib\\exe";
 
     /**
-     * 网站核心运行目录，该目录将会作为系统重的运行核心数据存储目录
+     * 网站核心运行目录，该目录将会作为系统重的运行核心数据存储目录 TODO 配置的时候需要修改
      */
     public final static String WORK_DIR = "D:/IMC-Z";
 

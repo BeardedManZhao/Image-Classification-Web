@@ -14,7 +14,7 @@
 <%@ page contentType="text/html;charset=GBK" %>
 
 <%
-    if (!Conf.modelIsOk){
+    if (!Conf.modelIsOk) {
         response.getWriter().println("神经网络系统模块未覆写，请调用脚本覆写然后重启服务器。");
         return;
     }

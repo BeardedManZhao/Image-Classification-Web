@@ -30,6 +30,7 @@
     #user_space_table {
         background-color: rgba(13, 54, 53, 0.51);
     }
+
     #user_space_id td {
         background-color: rgba(212, 220, 217, 0.3);
     }
