@@ -21,7 +21,7 @@ import java.io.IOException;
 public class ConfUpdateServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        response.setStatus(HttpServletResponse.SC_NOT_FOUND);
     }
 
     @Override

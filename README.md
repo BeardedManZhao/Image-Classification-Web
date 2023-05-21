@@ -12,8 +12,11 @@
 
 ```shell
 .\venv\Scripts\pip.exe install keras
-.\venv\Scripts\pip.exe install tensorflow -i https://pypi.tuna.tsinghua.edu.cn/simple
 .\venv\Scripts\pip.exe install opencv-python
+# 如果接入CPU就使用下面的命令
+.\venv\Scripts\pip.exe install tensorflow -i https://pypi.tuna.tsinghua.edu.cn/simple
+# 如果接入GPU就使用下面的命令
+.\venv\Scripts\pip.exe install tensorflow-gpu -i https://pypi.tuna.tsinghua.edu.cn/simple
 ```
 
 - WEB环境配置 TomCat中需要进行一些配置才可进行正常的使用，接下来就是所有需要被配置的东西
@@ -48,11 +51,11 @@
 ```xml
 <!-- 在 server.xml 中的 Host 节点添加下面的配置 -->
 <Host>
-  <!-- 使用模型进行识别之后会返回性训练结果，其中有一个被识别图像展示，需要使用到这个虚拟路径 -->
-  <Context docBase="[IMAGE_USE_DIR对应的数值]" path="/IMW/IMW_IMAGE/use/" reloadable="true"/>
-  <!--    用户个人空间目录的虚拟路径配置     -->
-  <Context docBase="[TRAIN_DIR 对应的数值]" path="[IMAGE_TRAIN_DIR] 对应的数值" reloadable="true"/>
+    <!-- 使用模型进行识别之后会返回性训练结果，其中有一个被识别图像展示，需要使用到这个虚拟路径 -->
+    <Context docBase="[IMAGE_USE_DIR对应的数值]" path="/IMW/IMW_IMAGE/use/" reloadable="true" />
+    <!--    用户个人空间目录的虚拟路径配置     -->
+    <Context docBase="[TRAIN_DIR 对应的数值]" path="[IMAGE_TRAIN_DIR] 对应的数值" reloadable="true" />
 </Host>
 ```
 
-6. 点击脚本文件 compile.bat 进行神经网络系统的覆写。
+6. 点击脚本文件 compile.bat 或者 sh覆写引导文件 进行神经网络系统的覆写。
