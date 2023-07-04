@@ -27,5 +27,7 @@
     <hr>
     <p>您好 <%=isLogIn ? user.name() : "图像分类系统的访问者"%>, 此处没有找到相关的资源!!!!!</p>
 </div>
+
+<a class="button" href="index.jsp">返回主页</a>
 </body>
 </html>

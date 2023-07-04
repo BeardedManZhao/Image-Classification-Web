@@ -24,35 +24,64 @@
 %>
 
 <style>
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
     form {
         align-content: center;
+    }
+
+    #b_div {
+        width: 50%;
+        height: 50%;
+        margin: 0 auto;
+        text-align: center;
+        color: #3a3838;
+    }
+
+    #b_div div {
+        line-height: 50%;
+        margin: 5%;
     }
 </style>
 
 <html>
 <head>
     <link href='image/Logo.svg' rel='SHORTCUT ICON'/>
+    <link rel="stylesheet" type="text/css" href="css/terminal.css">
     <link rel="stylesheet" type="text/css" href="css/Theme.css">
+    <style>
+        div {
+            color: #BFDDE0;
+        }
+    </style>
     <title>初始化或进入您的空间</title>
 </head>
 <body>
-<div class="logo_title">
-    <img id="logo" width="120" height="90" src="image/Logo.svg" alt="Image-Classification-Web">
-    <h2 id="web-title">进入您的空间</h2>
+<div id="b_div" class="terminal">
+    <div class="logo_title">
+        <img id="logo" width="120" height="90" src="image/Logo.svg" alt="Image-Classification-Web">
+        <h2 id="web-title">进入您的空间</h2>
+    </div>
+    <div>
+        <form onsubmit="return checkData()" method="post" action="<%=loginS%>">
+            <label>
+                请输入用户昵称：
+                <input id="username" name="userName" type="text" alt="输入用户昵称"/>
+            </label>
+            <br>
+            <label>
+                请输入用户密码：
+                <input id="password" name="password" type="password" alt="输入用户密码">
+            </label>
+            <br>
+            <button>进入空间</button>
+        </form>
+    </div>
 </div>
-<form onsubmit="return checkData()" method="post" action="<%=loginS%>">
-    <label>
-        请输入用户昵称：
-        <input id="username" name="userName" type="text" alt="输入用户昵称"/>
-    </label>
-    <br>
-    <label>
-        请输入用户密码：
-        <input id="password" name="password" type="password" alt="输入用户密码">
-    </label>
-    <br>
-    <button>进入空间</button>
-</form>
 </body>
 </html>
 

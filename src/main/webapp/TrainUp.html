@@ -6,8 +6,18 @@
     <link href="css/Theme.css" rel="stylesheet" type="text/css">
     <meta charset="GBK">
     <title>训练数据上传</title>
+    <style>
+        .CategoryBox {
+            background-color: rgba(106, 145, 140, 0.56);
+            text-align: center;
+            border: #2D2D3F 2px solid;
+            padding: 10px;
+        }
+    </style>
 </head>
 <body>
+<h2>上传您要训练的数据</h2>
+<hr>
 <form action="TrainUpServlet" enctype="multipart/form-data" id="sub" method="post" onsubmit="return checkSubmit()">
 
     <button type="submit">点击提交训练数据集</button>
@@ -43,8 +53,7 @@
         if (document.getElementById(typeName) == null) {
             // 创建出一个 input
             const divOBJ = document.createElement('input')
-            // 设置class与类别
-            divOBJ.setAttribute("class", 'CategoryBox')
+            // 设置类别
             divOBJ.setAttribute('id', typeName)
             // 设置其它参数
             divOBJ.setAttribute('multiple', 'multiple')
@@ -53,12 +62,20 @@
             divOBJ.setAttribute('title', "请上传类别：" + typeName)
             divOBJ.setAttribute('Content-Type', 'multipart/form-data;boundary=${bound}')
             divOBJ.setAttribute('alt', '上传需要被训练的图像数据。类别 = ' + typeName)
+            const p = document.createElement('p')
+            p.setAttribute('value', typeName)
+            p.innerText = typeName
+            // 为 div 设置 类别
+            const div = document.createElement('div')
+            div.setAttribute("class", 'CategoryBox w_h')
+            const label = document.createElement('label')
+            label.appendChild(p)
+            label.appendChild(divOBJ)
+            div.appendChild(label)
             // 添加到表单
             submit.appendChild(document.createElement('hr'))
-            submit.appendChild(divOBJ)
-            const p = document.createElement('p')
-            $(p).text(typeName)
-            submit.appendChild(p)
+            // submit.appendChild(divOBJ)
+            submit.appendChild(div)
         } else {
             alert("类别已经存在，您无法重复添加。")
         }

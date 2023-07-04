@@ -2,8 +2,11 @@ body {
     background-color: #6f8185;
 }
 
-.terminal {
-    background-color: #000000;
+.terminal, #terminal {
+    background-color: #3a3838;
     color: #00FE44;
     line-height: 22px;
+    border: #3A7734 2px solid;
+    border-radius: 20px;
+    padding: 20px;
 }

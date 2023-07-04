@@ -94,7 +94,7 @@ checkDirConDir ? "<form action=\"" + Conf.TRAIN_SERVLET + "\" onsubmit=\"return 
 </form>
 
 
-<a href="index.jsp">回到主页</a>
+<a class="button" href="index.jsp">回到主页</a>
 </body>
 </html>
 
