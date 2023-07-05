@@ -1,0 +1,8 @@
+
+.running_status {
+    background-color: #00FE44;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    transition: all 2s;
+}

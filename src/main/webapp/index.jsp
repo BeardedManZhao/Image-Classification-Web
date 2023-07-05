@@ -78,8 +78,9 @@
             display: inline-block;
         }
     </style>
+    <script src="js/updateTheme.js" type="text/javascript"></script>
 </head>
-<body>
+<body id="body">
 <div class="logo_title">
     <img id="logo" width="120" height="90" src="image/Logo.svg" alt="Image-Classification-Web">
     <h2 id="web-title"><%=user.isManager() ? "¹ÜÀíÕß " : "ÄãºÃ "%> <%=name%> »¶Ó­Ê¹ÓÃÍ¼Ïñ·ÖÀàÏµÍ³</h2>
@@ -145,6 +146,7 @@ user.isManager() ? "<a class='button' href='" + Conf.WEB_CONFIG_JSP + "'>½øĞĞÍøÕ
             "<a disabled=\"disabled\">ÇëÄúÏÈ½øĞĞÄ£ĞÍµÄÑµÁ·</a>"
     %>
 </form>
+<button id="backColorUpdate" onclick="closeOrOpenBackColor('backColorUpdate');">¹Ø±Õ±³¾°µÆ</button>
 <form class="form_button" action="about.html" target="_blank">
     <button>¹ØÓÚIMW</button>
 </form>

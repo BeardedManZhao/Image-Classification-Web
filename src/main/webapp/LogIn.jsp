@@ -40,6 +40,12 @@
         margin: 0 auto;
         text-align: center;
         color: #3a3838;
+        opacity: 70%;
+        transition: all 0.7s;
+    }
+
+    #b_div:hover {
+        opacity: 100%;
     }
 
     #b_div div {

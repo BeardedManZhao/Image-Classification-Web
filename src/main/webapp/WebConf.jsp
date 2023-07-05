@@ -40,9 +40,10 @@
 <head>
     <link href='image/Logo.svg' rel='SHORTCUT ICON'/>
     <link rel="stylesheet" type="text/css" href="css/Theme.css">
+    <link rel="stylesheet" type="text/css" href="css/webStatus.css">
     <title>配置网站</title>
 </head>
-<body>
+<body id="body">
 <div id="title">
     <img id="logo" width="120" height="90" src="image/Logo.svg" alt="Image-Classification-Web">
     <h2 id="web-title">你好 <%=user.name()%> 在这里进行WEB页面的配置</h2>
@@ -85,16 +86,20 @@
         </label>
         <br>
         <label>
-            网站状态：
+            网站运行状态
+            <span id="running_status" class="running_status" style="font-family: 'icomoon', serif"></span>
+            ：
             running<input name="web_status" type="radio" value="running" checked>
             closed <input name="web_status" type="radio" value="closed">
         </label>
         <br>
         <button type="button" onclick="window.history.back()">退出配置页面</button>
-        <button type="submit">保存配置信息</button>
+        <button type="submit" onclick="checkRunningStatus('web_status', 'running_status')">保存配置信息</button>
     </form>
     <hr>
     <p>配置信息将会被系统进行热加载，保存配置信息之后立刻生效。</p>
 </div>
 </body>
 </html>
+
+<script src="js/checkStatic.js" type="text/javascript"></script>
