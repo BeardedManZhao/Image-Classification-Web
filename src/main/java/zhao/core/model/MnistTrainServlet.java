@@ -28,6 +28,7 @@ public class MnistTrainServlet extends TrainServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         final User user = intiCheck(request, response);
         if (user.equals(OrdinaryUser.DEFAULT_USER)) return;
+
         final PrintWriter writer = response.getWriter();
         final String train_epochs = StrUtils.ifNull(request.getParameter("train_epochs"), "1");
         {

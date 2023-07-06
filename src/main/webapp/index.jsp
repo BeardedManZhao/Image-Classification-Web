@@ -4,7 +4,8 @@
 <%@ page import="zhao.utils.FSUtils" %>
 <%@ page import="zhao.core.user.User" %>
 <%@ page import="zhao.core.user.OrdinaryUser" %>
-<%@ page import="zhao.task.ToLogin" %><%--
+<%@ page import="zhao.task.ToLogin" %>
+<%@ page import="java.io.PrintWriter" %><%--
   Created by IntelliJ IDEA.
   User: zhao
   Date: 2023/5/2
@@ -14,8 +15,15 @@
 <%@ page contentType="text/html;charset=GBK" %>
 
 <%
-    if (!Conf.modelIsOk) {
-        response.getWriter().println("神经网络系统模块未覆写，请调用脚本覆写然后重启服务器。");
+    if (Conf.checkNeural_network_statusIsClose()) {
+        final PrintWriter writer = response.getWriter();
+        writer.println("神经网络系统模块未覆写或被关闭，请调用脚本覆写（若已覆写可跳过此步骤），然后请<a href='");
+        writer.write(Conf.LOGIN);
+        writer.println("'>登录</a>至");
+        writer.write("管理者用户前往<a href='");
+        writer.println(Conf.WEB_CONFIG_JSP);
+        writer.println("'");
+        writer.println(">系统配置页面</a>打开神经网络系统，使得其处于running状态。");
         return;
     }
     // 首先获取到当前用户的信息，如果没有登录就直接跳转到登录页面

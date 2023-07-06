@@ -4,6 +4,7 @@ import zhao.Conf;
 import zhao.core.user.OrdinaryUser;
 import zhao.core.user.User;
 import zhao.utils.ExeUtils;
+import zhao.utils.HttpUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,6 +28,7 @@ public class C10TrainServlet extends TrainServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         final User user = intiCheck(request, response);
         if (user.equals(OrdinaryUser.DEFAULT_USER)) return;
+        HttpUtils.checkCanTrain(response);
         final PrintWriter writer = response.getWriter();
         String train_epochs;
         {

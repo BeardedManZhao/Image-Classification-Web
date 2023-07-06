@@ -7,6 +7,7 @@ import zhao.task.ToLogin;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 
@@ -59,6 +60,16 @@ public final class HttpUtils {
         printWriter.println("alert('" + alertStr + "');");
         printWriter.println("window.history.back()");
         printWriter.println("</script>");
+    }
+
+    /**
+     * 检查神经网络系统当前是否正常运行，如果不正常就返回一句话。
+     */
+    public static void checkCanTrain(HttpServletResponse response) throws IOException {
+        // 检查神经网络的状态 如果不正常就直接返回一句话
+        if (!Conf.checkNeural_network_status()) {
+            HttpUtils.alertBack(response.getWriter(), "神经网络系统当前不可用，系统编码：" + Conf.Neural_network_status);
+        }
     }
 
 }

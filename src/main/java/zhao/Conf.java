@@ -30,7 +30,7 @@ public final class Conf {
     /**
      * 服务器的软件路径 TODO 配置的时候需要修改
      */
-    public final static String TOMCAT_PATH = "D:\\Runtime\\TomCat_Server\\Apache-tomcat-9.0.56\\bin";
+    public final static String TOMCAT_PATH = "E:\\RunTime\\Apache-tomcat-9.0.56\\bin";
 
     /**
      * 神经网络程序存储目录 TODO 配置的时候需要修改
@@ -40,7 +40,7 @@ public final class Conf {
     /**
      * 网站核心运行目录，该目录将会作为系统重的运行核心数据存储目录 TODO 配置的时候需要修改
      */
-    public final static String WORK_DIR = "D:\\IMC-Z";
+    public final static String WORK_DIR = "F:";
 
     /**
      * python训练脚本文件的路径
@@ -87,18 +87,30 @@ public final class Conf {
      * 网站系统使用的日志打印器。
      */
     public final static Logger LOGGER = Logger.getLogger("IMC-Z");
+
     /**
      * web中需要的神经网络模型构建是否成功
      */
-    public final static boolean modelIsOk;
+    public final static boolean NEURAL_NETWORK_READY;
+
+    /**
+     * 神经网络系统当前的状态
+     * -1 = 神经网络系统功能不完善或崩溃。
+     * 0 = 神经网络系统功能正常运行。
+     * 1 = 神经网络系统功能被禁用。
+     */
+    public static byte Neural_network_status;
+
     /**
      * 初始化或进入个人空间的资源名称
      */
     public static String LOGIN = "LogIn.jsp";
+
     /**
      * 网站运行时系统类型。
      */
     public static String SYSTEM_TYPE = "WIN";
+
     /**
      * 最大用户同时在线数量 可变网站设置参数
      */
@@ -111,11 +123,50 @@ public final class Conf {
         // 检查神经网络系统是否覆写完毕
         File file = new File(NN_PATH);
         File[] files = file.listFiles();
-        modelIsOk = file.exists() && file.isDirectory() && files != null && files.length > 0;
-        if (modelIsOk) {
+        NEURAL_NETWORK_READY = file.exists() && file.isDirectory() && files != null && files.length > 0;
+        if (NEURAL_NETWORK_READY) {
             LOGGER.info("读取到神经网络系统文件，并装载到WEB服务。");
+            Neural_network_status = 0;
         } else {
             LOGGER.warning("神经网络系统文件不存在，需要覆写，请调用网站自带脚本文件进行覆写系统。");
+            Neural_network_status = -1;
         }
+    }
+
+    /**
+     * 更新神经网络系统的状态
+     *
+     * @param newStatus 新的神经网络系统的状态字符串。
+     */
+    public static void updateNeural_network_status(String newStatus) {
+        switch (newStatus) {
+            case "running":
+                Neural_network_status = 0;
+                break;
+            case "disable":
+                Neural_network_status = 1;
+                break;
+            default:
+                Neural_network_status = -1;
+                break;
+        }
+    }
+
+    /**
+     * 检查神经网络系统运行状态是否良好，如果不良好就返回false。
+     *
+     * @return 布尔数值，true 代表神经网络正常。
+     */
+    public static boolean checkNeural_network_status() {
+        return Neural_network_status == 0;
+    }
+
+    /**
+     * 检查神经网络系统运行状态是否良好。
+     *
+     * @return 布尔数值，true 代表神经网络崩溃。
+     */
+    public static boolean checkNeural_network_statusIsClose() {
+        return Neural_network_status == -1;
     }
 }

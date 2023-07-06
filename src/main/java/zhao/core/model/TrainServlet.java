@@ -36,6 +36,7 @@ public class TrainServlet extends HttpServlet {
             // 若是 def 代表当前用户没有登录 直接结束
             return;
         }
+        HttpUtils.checkCanTrain(response);
         // 将临时的类别文件保存到新文件中
         final PrintWriter writer = response.getWriter();
         trainReturn(user, writer,
