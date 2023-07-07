@@ -38,7 +38,9 @@ public class UseModelServlet extends HttpServlet {
             // 若是 def 代表当前用户没有登录 直接结束
             return;
         }
-        HttpUtils.checkCanTrain(response);
+        if (!HttpUtils.checkCanTrain(response)) {
+            return;
+        }
         final Part image = request.getPart("image");
         // 获取到指定的文件存储目录
         final String name = user.name();

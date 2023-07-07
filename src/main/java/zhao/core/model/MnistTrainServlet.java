@@ -4,6 +4,7 @@ import zhao.Conf;
 import zhao.core.user.OrdinaryUser;
 import zhao.core.user.User;
 import zhao.utils.ExeUtils;
+import zhao.utils.HttpUtils;
 import zhao.utils.StrUtils;
 
 import javax.servlet.ServletException;
@@ -28,6 +29,9 @@ public class MnistTrainServlet extends TrainServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         final User user = intiCheck(request, response);
         if (user.equals(OrdinaryUser.DEFAULT_USER)) return;
+        if (!HttpUtils.checkCanTrain(response)) {
+            return;
+        }
 
         final PrintWriter writer = response.getWriter();
         final String train_epochs = StrUtils.ifNull(request.getParameter("train_epochs"), "1");

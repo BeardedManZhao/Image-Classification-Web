@@ -65,11 +65,13 @@ public final class HttpUtils {
     /**
      * 检查神经网络系统当前是否正常运行，如果不正常就返回一句话。
      */
-    public static void checkCanTrain(HttpServletResponse response) throws IOException {
+    public static boolean checkCanTrain(HttpServletResponse response) throws IOException {
         // 检查神经网络的状态 如果不正常就直接返回一句话
         if (!Conf.checkNeural_network_status()) {
             HttpUtils.alertBack(response.getWriter(), "神经网络系统当前不可用，系统编码：" + Conf.Neural_network_status);
+            return false;
         }
+        return true;
     }
 
 }

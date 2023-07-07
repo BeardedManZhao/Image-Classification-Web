@@ -89,7 +89,7 @@ public final class FSUtils {
         final File[] files = new File(dir).listFiles();
         if (files != null) {
             int index = 0;
-            printWriter.println("<table>");
+            printWriter.println("<table border='1'>");
             for (File file : files) {
                 HTMLUtils.appRowToTable(
                                 printWriter, "[" + ++index + "]", "name: " + file.getName(), "size: " + file.length() + " byte"

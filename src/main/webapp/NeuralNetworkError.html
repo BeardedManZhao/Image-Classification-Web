@@ -6,6 +6,7 @@
     <link href="css/Theme.css" rel="stylesheet">
     <link href="css/terminal.css" rel="stylesheet">
     <style>
+
         body {
             width: 100%;
             height: 100%;
@@ -19,10 +20,24 @@
             padding: 30px;
             border: 2px solid #00FE44;
         }
+
+        input {
+            width: 80%;
+        }
+
+        a {
+            color: #72c6cb;
+            text-decoration: none;
+        }
+
+        p {
+            text-indent: 20px;
+        }
     </style>
 </head>
 <body>
 <div class="terminal w_h">
+    <h3>哎呀呀！！！！(> _ <)</h3>
     神经网络系统模块未覆写或被关闭，请调用脚本覆写（若已覆写可跳过此步骤），然后请
     <a href='LogIn.jsp'>登录</a>
     至 管理者用户前往
@@ -33,15 +48,63 @@
 <div class="terminal w_h">
     当然，管理者也可以手动指定神经网络覆写脚本的路径，在这里输入覆写脚本（compileNNPy.bat/compileNNPy.sh）的路径然后点击执行，将会主动的执行神经网络。
     <hr>
-    <form action="NNOverServlet" method="post">
+    <form action="NNOverServlet" method="post" onsubmit="return checkPathName()">
         <label>
-            编译脚本的路径：<input name="runPath" placeholder="xxx/xxx/compileNNPy.*" required type="text">
+            编译脚本的路径：<input id="runPath" name="runPath" placeholder="xxx/xxx/compileNNPy.*" required type="text">
         </label>
+        <br>
         <label>
-            装载程序的路径：<input name="runJar" placeholder="xxx/xxx/ModelInit.jar" required type="text">
+            装载程序的路径：<input id="runJar" name="runJar" placeholder="xxx/xxx/ModelInit.jar" required type="text">
         </label>
+        <br>
         <button type="submit">提交并开始覆写</button>
     </form>
 </div>
+
+<div class="terminal w_h">
+    <h2>发生了什么</h2>
+    <hr>
+    <h3>神经网络系统可能被管理员关闭了</h3>
+    <p>如果是这种情况就需要管理员前往WEB配置页面进行神经网络系统的打开，当然，管理员必须确保神经网络系统正常，否则开启神经网络功能未必是一个明确的选择。</p>
+    <br>
+    <h3>神经网络系统未编译或丢失</h3>
+    <p>神经网络系统是此项目的核心，如果神经网络模块丢失，会导致此网站无法正常运行，
+        在这种情况下为了避免发生更多难以理解与预测的错误，神经网络功能将会处于closed状态，
+        您必须要通过
+        <label for="runPath">
+            <a>上面讲述的两种操作</a>
+        </label>
+        实现神经网络的编译与覆写，如果神经网络模块丢失，
+        那么您必须要前往
+        <a href="https://github.com/BeardedManZhao/Image-Classification-Web.git">此项目的开源地址</a>
+        下载源码并提取其中的神经网络模块或者直接下载神经网络模块的包。</p>
+    <br>
+</div>
 </body>
+
+<script>
+    // 准备编译脚本的正则表达式对象
+    const re1 = new RegExp(".*?compileNNPy\.[sh|bat]")
+    // 准备装载程序的正则表达式对象
+    const re2 = new RegExp(".*?\.jar")
+    // 获取到两个需要被判断的内容数据
+    const i1 = document.getElementById("runPath")
+    const i2 = document.getElementById("runJar")
+
+    /**
+     * 检查路径名称是否满足格式的函数
+     */
+    function checkPathName() {
+        if (!re1.test(i1.value)) {
+            alert("您的编译脚本路径不符合预期，其应该是处于网站自带的源码中包含的 compileNNPy.bat 或 compileNNPy.sh 文件。")
+            return false;
+        }
+        if (!re2.test(i2.value)) {
+            alert("您的装载程序路径不符合预期，其应该是处于网站自带的源码中包含的一个 jar 为后缀的Java程序文件。")
+            return false;
+        }
+        return true;
+    }
+</script>
+
 </html>
