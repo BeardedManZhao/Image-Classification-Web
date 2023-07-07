@@ -26,6 +26,8 @@ public final class Conf {
     public final static String TRAIN_JSP = "Train.jsp";
     public final static String USE_MODEL_SERVLET = "UseModelServlet";
     public final static String USE_MODEL_HTML = "useModel.html";
+    public final static String NN_OVER_SERVLET = "NNOverServlet";
+    public final static String NN_ERROR_HTML = "NeuralNetworkError.html";
 
     /**
      * 服务器的软件路径 TODO 配置的时候需要修改
@@ -45,19 +47,19 @@ public final class Conf {
     /**
      * python训练脚本文件的路径
      */
-    public final static String TRAIN_PYTHON_PATH = NN_PATH + "\\train.pyc";
+    public final static String TRAIN_PYTHON_PATH = NN_PATH + "/train.pyc";
     /**
      * python cifar10_train.py 训练脚本文件的路径
      */
-    public final static String C10_TRAIN_PYTHON_PATH = NN_PATH + "\\cifar10_train.pyc";
+    public final static String C10_TRAIN_PYTHON_PATH = NN_PATH + "/cifar10_train.pyc";
     /**
      * python mnist_train.py 训练脚本文件的路径
      */
-    public final static String MNIST_PYTHON_PATH = NN_PATH + "\\mnist_train.pyc";
+    public final static String MNIST_PYTHON_PATH = NN_PATH + "/mnist_train.pyc";
     /**
      * python使用脚本文件的路径
      */
-    public final static String USING_PYTHON_PATH = NN_PATH + "\\use.pyc";
+    public final static String USING_PYTHON_PATH = NN_PATH + "/use.pyc";
     /**
      * 训练数据集存储目录
      */

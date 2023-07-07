@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="GBK">
+    <title>神经网络系统异常</title>
+    <link href="css/Theme.css" rel="stylesheet">
+    <link href="css/terminal.css" rel="stylesheet">
+    <style>
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        div {
+            width: 30%;
+            height: 50%;
+            margin: 10%;
+            background-color: rgba(29, 211, 225, 0.5);
+            padding: 30px;
+            border: 2px solid #00FE44;
+        }
+    </style>
+</head>
+<body>
+<div class="terminal w_h">
+    神经网络系统模块未覆写或被关闭，请调用脚本覆写（若已覆写可跳过此步骤），然后请
+    <a href='LogIn.jsp'>登录</a>
+    至 管理者用户前往
+    <a href='WebConf.jsp'>系统配置页面</a>
+    打开神经网络系统，使得其处于running状态。
+</div>
+
+<div class="terminal w_h">
+    当然，管理者也可以手动指定神经网络覆写脚本的路径，在这里输入覆写脚本（compileNNPy.bat/compileNNPy.sh）的路径然后点击执行，将会主动的执行神经网络。
+    <hr>
+    <form action="NNOverServlet" method="post">
+        <label>
+            编译脚本的路径：<input name="runPath" placeholder="xxx/xxx/compileNNPy.*" required type="text">
+        </label>
+        <label>
+            装载程序的路径：<input name="runJar" placeholder="xxx/xxx/ModelInit.jar" required type="text">
+        </label>
+        <button type="submit">提交并开始覆写</button>
+    </form>
+</div>
+</body>
+</html>

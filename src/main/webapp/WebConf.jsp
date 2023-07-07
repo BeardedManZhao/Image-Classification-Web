@@ -42,7 +42,6 @@
     <link rel="stylesheet" type="text/css" href="css/Theme.css">
     <link rel="stylesheet" type="text/css" href="css/webStatus.css">
     <style>
-
         #running_status2 {
         <%=
         Conf.checkNeural_network_status() ? "background-color: #20ecbc;" :
