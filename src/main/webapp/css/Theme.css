@@ -9,7 +9,7 @@ body {
 /* 版心 宽度为 70% 且水平居中 圆角边缘 */
 .w_h {
     width: 70%;
-    margin: 10px auto;
+    margin: 10px 15%;
     border-radius: 20px;
 }
 
