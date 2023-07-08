@@ -108,7 +108,7 @@ public class TrainServlet extends HttpServlet {
             writer.write("</pre>");
             writer.write("<hr>\n");
             writer.println("<p>模型训练结果如上所示，如果训练完成，模型已经保存至您的个人目录中，您可以随时进行模型的使用。</p>");
-            writer.println("<a href = " + Conf.USE_MODEL_HTML + "> 点击使用模型 </a><br>");
+            writer.println("<a href = " + Conf.USE_MODEL_SELECT_HTML + "> 点击使用模型 </a><br>");
         } else {
             writer.write("<p>模型训练出现错误!!!!!</p>");
         }

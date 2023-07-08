@@ -69,3 +69,18 @@ td.theme-table,
     background: url("../image/watermark.png");
     background-size: 128px;
 }
+
+.DISPLAY_BOX {
+    width: 30%;
+    display: inline-block;
+    font-family: 'icomoon', serif;
+    background-color: #FFFFFF;
+    border: 1px solid #72c6cb;
+    border-radius: 20px;
+    transition: all 0.5s;
+}
+
+.DISPLAY_BOX:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.6);
+}

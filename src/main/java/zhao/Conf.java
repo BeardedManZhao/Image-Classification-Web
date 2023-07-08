@@ -25,7 +25,8 @@ public final class Conf {
     public final static String TRAIN_UP_HTML = "TrainUp.html";
     public final static String TRAIN_JSP = "Train.jsp";
     public final static String USE_MODEL_SERVLET = "UseModelServlet";
-    public final static String USE_MODEL_HTML = "useModel.html";
+    public final static String USE_MODEL_SELECT_HTML = "useModelSelect.html";
+    public final static String USE_MODEL_BATCH_SERVLET = "UseModelBatchServlet";
     public final static String NN_OVER_SERVLET = "NNOverServlet";
     public final static String NN_ERROR_HTML = "NeuralNetworkError.html";
 
@@ -61,6 +62,10 @@ public final class Conf {
      */
     public final static String USING_PYTHON_PATH = NN_PATH + "/use.pyc";
     /**
+     * python批量使用脚本文件的路径
+     */
+    public final static String USING_BATCH_PYTHON_PATH = NN_PATH + "/useBatch.pyc";
+    /**
      * 训练数据集存储目录
      */
     public final static String TRAIN_DIR = WORK_DIR + "/trainDir";
@@ -68,10 +73,26 @@ public final class Conf {
      * 训练数据模型存储目录
      */
     public final static String MODEL_DIR = WORK_DIR + "/modelDir";
+
     /**
      * 模型使用时的图像暂存文件目录。
      */
     public final static String IMAGE_USE_DIR = WORK_DIR + "/IMW_IMAGE/USE/";
+
+    /**
+     * 模型使用是的批图像暂存文件目录。
+     */
+    public final static String IMAGE_USE_BATCH_DIR = WORK_DIR + "/IMW_IMAGE/batchUse/";
+
+    /**
+     * 模型使用时的图像暂存文件目录。
+     */
+    public final static String IMAGE_USE_DIR_PATH = "/IMW/IMW_IMAGE/use/";
+
+    /**
+     * 模型使用是的批图像暂存文件目录。
+     */
+    public final static String IMAGE_USE_BATCH_DIR_PATH = "/IMW/IMW_IMAGE/batchUse/";
 
     /**
      * 模型训练时的个人空间目录路径地址

@@ -65,6 +65,23 @@ public class TrainUpServlet extends HttpServlet {
                         new FileOutputStream(user.getModelDir() + "/tempClassList.txt"), "GBK"
                 )
         );
+        extractedFiles(user, hashMap, writer, bufferedWriter);
+        bufferedWriter.flush();
+        bufferedWriter.close();
+        response.setStatus(response.SC_MOVED_TEMPORARILY);
+        response.sendRedirect(Conf.TRAIN_JSP);
+    }
+
+    /**
+     * 将文件从 Part 中提取出来并输出到指定的类别目录中。
+     *
+     * @param user           当前用户名称。
+     * @param hashMap        包含存储 Part 对象的Hash集合
+     * @param writer         浏览器回复对象
+     * @param bufferedWriter 数据输出流
+     * @throws IOException 输出数据时发生的异常
+     */
+    private void extractedFiles(User user, HashMap<String, ArrayList<Part>> hashMap, PrintWriter writer, BufferedWriter bufferedWriter) throws IOException {
         final int size = hashMap.size();
         int index1 = 0;
         for (Map.Entry<String, ArrayList<Part>> entry : hashMap.entrySet()) {
@@ -91,9 +108,5 @@ public class TrainUpServlet extends HttpServlet {
                 bufferedOutputStream.close();
             }
         }
-        bufferedWriter.flush();
-        bufferedWriter.close();
-        response.setStatus(response.SC_MOVED_TEMPORARILY);
-        response.sendRedirect(Conf.TRAIN_JSP);
     }
 }

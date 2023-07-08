@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang='zh'>
+
+<style>
+    form {
+        background-color: rgba(250, 235, 215, 0.14);
+    }
+</style>
+
+<head>
+    <link href='image/Logo.svg' rel='SHORTCUT ICON'/>
+    <link href="css/Theme.css" rel="stylesheet" type="text/css">
+    <link href="css/terminal.css" rel="stylesheet" type="text/css">
+    <meta charset='UTF-8'>
+    <title>使用模型</title>
+</head>
+<body>
+<div>
+    <img alt="Image-Classification-Web" id="logo" src="image/Logo.svg">
+    <h3 id="web-title">使用训练好的模型</h3>
+    <form action='UseModelBatchServlet' enctype='multipart/form-data' method='post'
+          onsubmit='return checkNumber() && check("图像识别开始。", "请稍等，正在识别中......")'>
+        模型支持的图像宽度：<input id='w' name='w' title='输入模型支持图像宽度' type='number'>
+        <br>
+        模型支持的图像高度：<input id='h' name='h' title='输入模型支持图像高度' type='number'>
+        <br>
+        模型支持的通道数量：<input id='c' name='c' title='输入模型支持的图像颜色通道数量' type='number'>
+        <br>
+        要被识别的所有图像：<input accept='image/*' content-type="multipart/form-data;boundary=${bound}" id='i' multiple
+                         name='image' title='上传需要被识别的图像'
+                         type='file'>
+        <br>
+        <button>开始识别</button>
+    </form>
+</div>
+<hr>
+<a class="button" href="index.jsp">返回主页</a>
+</body>
+</html>
+
+<script src="js/checkStatic.js" type="text/javascript"></script>
+<script>
+
+    function checkNumber() {
+        if (document.getElementById('w').value > 0 && document.getElementById('h').value > 0 && document.getElementById('c').value > 0) {
+            if (document.getElementById('i').value != null) {
+                return true;
+            } else {
+                alert('请上传需要被处理的图像数据。')
+            }
+        } else {
+            alert('图像的宽高以及颜色通道数值必须要大于 0 ')
+        }
+        return false;
+    }
+</script>

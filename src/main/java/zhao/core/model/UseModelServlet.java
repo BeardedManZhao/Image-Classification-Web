@@ -62,7 +62,7 @@ public class UseModelServlet extends HttpServlet {
         writer.println("    <link href=\"css/terminal.css\" rel=\"stylesheet\" type=\"text/css\">");
         writer.write(" </head>");
         writer.write("<h2>被识别的图像</h2><hr>");
-        writer.write("<img src='" + "/IMW/IMW_IMAGE/use/" + name + "' alt=\"被识别的图像\">");
+        writer.write("<img src='" + Conf.IMAGE_USE_DIR_PATH + name + "' alt=\"被识别的图像\">");
         writer.write("<hr><h2>识别结果展示</h2>\n");
         writer.write("<hr>\n");
         writer.write("<pre class='terminal'>");

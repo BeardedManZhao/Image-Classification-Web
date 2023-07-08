@@ -141,7 +141,7 @@ user.isManager() ? "<a class='button' href='" + Conf.WEB_CONFIG_JSP + "'>½øĞĞÍøÕ
 <form class="form_button" action="<%=Conf.TRAIN_JSP%>" target="_blank">
     <button>¿ªÊ¼ÑµÁ·Ä£ĞÍ</button>
 </form>
-<form class="form_button" action="<%=Conf.USE_MODEL_HTML%>" target="_blank">
+<form class="form_button" action="<%=Conf.USE_MODEL_SELECT_HTML%>" target="_blank">
     <%=
     isHaveModel ? "<button>Ê¹ÓÃÑµÁ·ºÃµÄÄ£ĞÍ</button>" :
             "<a disabled=\"disabled\">ÇëÄúÏÈ½øĞĞÄ£ĞÍµÄÑµÁ·</a>"
