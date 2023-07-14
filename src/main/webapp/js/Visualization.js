@@ -1,4 +1,4 @@
-// æ•°æ®å¯è§†åŒ– JS è„šæœ¬ éœ€è¦ åœ¨HTMLä¸­å¼•å…¥ä¸‹é¢æ‰€æœ‰æ–‡ä»¶
+// Êı¾İ¿ÉÊÓ»¯ JS ½Å±¾ ĞèÒª ÔÚHTMLÖĞÒıÈëÏÂÃæËùÓĞÎÄ¼ş
 /*
     <script type="text/javascript" src="js/utils.js"></script>
     <script type="text/javascript" src="js/Visualization.js"></script>
@@ -6,18 +6,18 @@
  */
 
 /**
- * å°† json æ•°æ®æˆ–å­—å…¸æ•°æ®è¿›è¡ŒæŸ±çŠ¶å›¾å¯è§†åŒ–çš„å‡½æ•°
- * @param doc éœ€è¦ä½œä¸ºå›¾å±•ç¤ºæ¡†çš„ç›’å­ã€‚
- * @param titleName è¡¨çš„æ ‡é¢˜
- * @param json_data json æ•°æ®
+ * ½« json Êı¾İ»ò×ÖµäÊı¾İ½øĞĞÖù×´Í¼¿ÉÊÓ»¯µÄº¯Êı
+ * @param doc ĞèÒª×÷ÎªÍ¼Õ¹Ê¾¿òµÄºĞ×Ó¡£
+ * @param titleName ±íµÄ±êÌâ
+ * @param json_data json Êı¾İ
  */
 function lossAccBar(doc, titleName, json_data) {
-    // è·å–åˆ° æŸå¤± ç²¾åº¦ çš„list
+    // »ñÈ¡µ½ ËğÊ§ ¾«¶È µÄlist
     const lossList = json_data['loss']
     const accList = json_data['accuracy']
-    // åˆå§‹åŒ– Echarts
+    // ³õÊ¼»¯ Echarts
     const cs = echarts.init(d)
-    // åˆå§‹åŒ–æ ‡è®°ç‚¹
+    // ³õÊ¼»¯±ê¼Çµã
     const p = {
         data: [
             {
@@ -33,7 +33,7 @@ function lossAccBar(doc, titleName, json_data) {
             formatter:'{b}'
         }
     }
-    // å¼€å§‹ç»˜åˆ¶å›¾
+    // ¿ªÊ¼»æÖÆÍ¼
     const option = {
         title: {
             show: true,
@@ -54,6 +54,31 @@ function lossAccBar(doc, titleName, json_data) {
         legend: {
             show: true
         },
+        // ÉèÖÃ¹¤¾ßÏä
+        toolbox: {
+            show: true,
+            feature: {
+                saveAsImage: {
+                    // ÉèÖÃ±£´æµÄÍ¼¸ñÊ½
+                    type: 'jpg',
+                    // ÉèÖÃ°´Å¥µÄÏÔÊ¾ÎÄ×Ö
+                    title: 'saveAsImage',
+                    // ÉèÖÃ±£´æµÄÍ¼ÏñÎÄ¼şµÄÃû³Æ
+                    name: 'myImage'
+                },
+                // ÉèÖÃµÚ¶ş¸ö¹¤¾ß Êı¾İÊÓÍ¼
+                dataView: {
+                    // ÏÔÊ¾´Ë¹¤¾ß
+                    show:true,
+                    // ÉèÖÃ´Ë¹¤¾ßµÄÏÔÊ¾ÎÄ×Ö
+                    title:'open dataView',
+                    // ÉèÖÃ´ËÊı¾İÊÓÍ¼ÊÇ·ñÖ»¶Á£ºÕâÀïÉèÖÃµÄÊÇ¿ÉĞ´¿É¶Á
+                    readOnly:true,
+                    // ÉèÖÃ´ËÊı¾İÊÓÍ¼ÖĞµÄÈı¸öÏÔÊ¾µÄÎÄ×Ö
+                    lang: ['Data View', 'close', 'refresh']
+                }
+            }
+        },
         series: [
             {
                 type: 'bar',
@@ -72,6 +97,6 @@ function lossAccBar(doc, titleName, json_data) {
             },
         ]
     }
-    // è£…è½½
+    // ×°ÔØ
     cs.setOption(option)
 }

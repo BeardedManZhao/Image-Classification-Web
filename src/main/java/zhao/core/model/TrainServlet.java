@@ -98,8 +98,8 @@ public class TrainServlet extends HttpServlet {
         writer.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"css/terminal.css\">");
         writer.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"css/Theme.css\">");
         writer.println("    <script type='text/javascript' src='js/utils.js'></script>");
-        writer.println("    <script type='text/javascript' src='js/Visualization.js'></script>");
-        writer.println("    <script type='text/javascript' src='js/echarts.min.js'></script>");
+        writer.println("    <script type='text/javascript' src='js/Visualization.js' charset='GBK'></script>");
+        writer.println("    <script type='text/javascript' src='js/echarts.min.js' charset='utf-8'></script>");
         writer.write(" </head>");
         writer.write("<h2>训练日志展示</h2>\n");
         writer.write("<hr>\n");

@@ -30,6 +30,7 @@ public class NNOverServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("GBK");
         resp.setCharacterEncoding("GBK");
         final PrintWriter writer = resp.getWriter();
         String path1 = req.getParameter("runPath");
