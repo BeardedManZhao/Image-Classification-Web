@@ -30,7 +30,7 @@ function lossAccBar(doc, titleName, json_data) {
             }
         ],
         label: {
-            formatter:'{b}'
+            formatter: '{b}'
         }
     }
     // 开始绘制图
@@ -69,13 +69,19 @@ function lossAccBar(doc, titleName, json_data) {
                 // 设置第二个工具 数据视图
                 dataView: {
                     // 显示此工具
-                    show:true,
+                    show: true,
                     // 设置此工具的显示文字
-                    title:'open dataView',
+                    title: 'open dataView',
                     // 设置此数据视图是否只读：这里设置的是可写可读
-                    readOnly:true,
+                    readOnly: true,
                     // 设置此数据视图中的三个显示的文字
                     lang: ['Data View', 'close', 'refresh']
+                },
+                // 设置缩放
+                dataZoom: {},
+                // 设置图表类型切换
+                magicType: {
+                    type: ['bar', 'line']
                 }
             }
         },
