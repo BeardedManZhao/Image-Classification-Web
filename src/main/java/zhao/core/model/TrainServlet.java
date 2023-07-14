@@ -14,9 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.PrintWriter;
+import java.io.*;
 
 /**
  * 训练服务类，在数据上传成功之后将会跳转到该类对应的门户页面
@@ -73,7 +71,8 @@ public class TrainServlet extends HttpServlet {
                                                         " True " : " False "
                                         ) +
                                         convolutional_count + ' ' +
-                                        filters + ' ' + filtersB
+                                        filters + ' ' + filtersB + ' ' +
+                                        s1 + "/outputJson.json"
                         );
                     } catch (IOException e) {
                         return null;
@@ -97,6 +96,10 @@ public class TrainServlet extends HttpServlet {
         writer.write(" <meta charset=\"GBK\">");
         writer.write(" <title>训练结果</title>\n");
         writer.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"css/terminal.css\">");
+        writer.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"css/Theme.css\">");
+        writer.println("    <script type='text/javascript' src='js/utils.js'></script>");
+        writer.println("    <script type='text/javascript' src='js/Visualization.js'></script>");
+        writer.println("    <script type='text/javascript' src='js/echarts.min.js'></script>");
         writer.write(" </head>");
         writer.write("<h2>训练日志展示</h2>\n");
         writer.write("<hr>\n");
@@ -105,7 +108,21 @@ public class TrainServlet extends HttpServlet {
         InputStream inputStream = transformation.function(user);
         if (inputStream != null) {
             IOUtils.copy(inputStream, writer, "GBK");
-            writer.write("</pre>");
+            writer.println("</pre>");
+            // 构建图表 首先获取到文件对象 如果文件存在 再继续构建
+            final File file = new File(user.getModelDir() + "/outputJson.json");
+            if (file.exists()) {
+                // 文件存在 开始构建图表盒子以及数据流
+                writer.println("<div style=\"width: 100%; height: 500px\" id=\"vis\"></div>");
+                final BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(file));
+                writer.println("<script>");
+                writer.println("const d = document.getElementById('vis')");
+                writer.write("lossAccBar(d, '训练数据', ");
+                IOUtils.copy(bufferedInputStream, writer);
+                writer.println(')');
+                writer.println("</script>");
+                bufferedInputStream.close();
+            }
             writer.write("<hr>\n");
             writer.println("<p>模型训练结果如上所示，如果训练完成，模型已经保存至您的个人目录中，您可以随时进行模型的使用。</p>");
             writer.println("<a href = " + Conf.USE_MODEL_SELECT_HTML + "> 点击使用模型 </a><br>");

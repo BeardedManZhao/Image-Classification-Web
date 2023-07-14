@@ -7,8 +7,10 @@
 import json
 import os
 import sys
+from datetime import datetime
 
 import cv2
+import numpy as np
 import tensorflow as tf
 
 
@@ -34,7 +36,7 @@ def get_phone(path_photo, image_w, image_h, color_channel):
                 (image_w, image_h)
             ))
     # 返回 张量 以及 图像文件的名称
-    return tf.convert_to_tensor(res_list), files_list
+    return np.array(res_list), files_list
 
 
 def fun(model_path, data_path, image_w, image_h, color_channel):
@@ -60,21 +62,23 @@ def fun(model_path, data_path, image_w, image_h, color_channel):
     print(res)
     # 准备结果数据集
     dict_data = {
-
+        '//': f'{datetime.now()}: 第一层代表类别索引；第二层代表每个类别中的图像名称；第三层代表每个图像的图像矩阵，您可以使用程序或任何您希望的方式将json解析出来。'
     }
     # 找到结果向量中最大得分的索引
     index = 0
     for r in res:
         # 获取到所属类别
         c_num = str(tf.argmax(r).numpy())
-        # 将此类别做为字典的 key
+        # 将此类别做为字典的 key 将{名称：图矩阵}作为value
         if c_num in dict_data:
-            dict_data[c_num].append(image_name[index])
+            dict_data[c_num][image_name[index]] = image[index].tolist()
         else:
-            dict_data[c_num] = [image_name[index]]
+            dict_data[c_num] = {
+                image_name[index]: image[index].tolist()
+            }
+        print(f"《{image_name[index]}》\t'图像属于类别索引 = {c_num}")
         index += 1
     # 使用索引获取到结果类别
-    print(dict_data)
     res_json = open(data_path + '/classificationResults.json', 'wt')
     json.dump(dict_data, fp=res_json)
     res_json.close()

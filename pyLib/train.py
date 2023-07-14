@@ -4,6 +4,7 @@
 # @Email : liming7887@qq.com
 # @File : train.py
 # @Project : main2.py
+import json
 import sys
 
 from keras.integration_test.preprocessing_test_utils import BATCH_SIZE
@@ -21,7 +22,8 @@ def fun(train_dir,
         image_w=100, image_h=100,
         use_performance=True,
         convolutional_count=2,
-        init_filters=32, filters_b=2):
+        init_filters=32, filters_b=2,
+        out_json_path='./outJson.json'):
     print(f"train_dir = {train_dir}")
     print(f"save_path = {save_path}")
     print(f"class_temp_str = {class_temp_str}")
@@ -33,6 +35,7 @@ def fun(train_dir,
     print(f"convolutional_count = {convolutional_count}")
     print(f"init_filters = {init_filters}")
     print(f"filters_b = {filters_b}")
+    print(f"out_json_path = {out_json_path}")
     print("Prepare for the IMW-ZLY image recognition task.")
     # 获取到list
     class_list = []
@@ -86,14 +89,25 @@ def fun(train_dir,
             cc=1, loss='categorical_crossentropy'
         )
     # 开始训练 传递 x y 以及训练次数
-    model.fit(x=x1, validation_data=y1.all(), epochs=train_epochs, verbose=2)
+    his = model.fit(x=x1, validation_data=y1.all(), epochs=train_epochs, verbose=2)
+    # 保存模型
     model.save(save_path)
+    # 保存训练日志数据
+    out_json_file = open(out_json_path, 'wt')
+    json.dump(
+        {
+            'loss': his.history['loss'],
+            'accuracy': his.history['accuracy']
+        },
+        out_json_file
+    )
+    out_json_file.close()
     print(class_list)
     return True
 
 
 if __name__ == '__main__':
-    if len(sys.argv) < 11:
+    if len(sys.argv) < 12:
         print(f"""
         请按照下面的顺序输入参数：
             1  =  被训练文件所在目录，需要保证其二级目录是类别目录。
@@ -107,6 +121,7 @@ if __name__ == '__main__':
             9  =  模型在训练的时候需要使用的卷积层数。
             10 =  初始卷积层对应的卷积核的数量。
             11 =  从初始卷积层开始，每一层卷积核数量的公比数值。
+            12 =  训练任务中的数据记录日志json文件存储路径。
         """)
         exit()
     fun(
@@ -119,5 +134,6 @@ if __name__ == '__main__':
         sys.argv[8] == 'True',
         int(sys.argv[9]),
         int(sys.argv[10]),
-        int(sys.argv[11])
+        int(sys.argv[11]),
+        sys.argv[12]
     )
