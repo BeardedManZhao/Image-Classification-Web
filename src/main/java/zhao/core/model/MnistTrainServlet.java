@@ -54,7 +54,8 @@ public class MnistTrainServlet extends TrainServlet {
                         Conf.MNIST_PYTHON_PATH,
                         train_epochs + ' ' +
                                 savePath + ' ' +
-                                classPath + ' '
+                                classPath + ' ' +
+                                user1.getModelDir() + "/outputJson.json"
                 );
             } catch (IOException e) {
                 e.printStackTrace();

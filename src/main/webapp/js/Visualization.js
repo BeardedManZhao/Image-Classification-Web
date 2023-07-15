@@ -9,14 +9,15 @@
  * 将 json 数据或字典数据进行柱状图可视化的函数
  * @param doc 需要作为图展示框的盒子。
  * @param titleName 表的标题
- * @param json_data json 数据
+ * @param json_data json 数据 其中可以接收 4 个key 分别是 loss accuracy test_loss test_acc
  */
 function lossAccBar(doc, titleName, json_data) {
     // 获取到 损失 精度 的list
     const lossList = json_data['loss']
     const accList = json_data['accuracy']
-    // 初始化 Echarts
-    const cs = echarts.init(d)
+    // 获取测试的损失与精度的list
+    const testLossList = json_data['test_loss']
+    const testAccList = json_data['test_acc']
     // 初始化标记点
     const p = {
         data: [
@@ -33,6 +34,44 @@ function lossAccBar(doc, titleName, json_data) {
             formatter: '{b}'
         }
     }
+    // 准备数据容器
+    const seriesData = [
+        {
+            type: 'bar',
+            name: 'loss',
+            data: lossList,
+            markPoint: p
+        },
+        {
+            type: 'bar',
+            name: 'acc',
+            data: accList,
+            markPoint: p
+        },
+    ]
+    if (testLossList != null) {
+        seriesData.push(
+            {
+                type: 'bar',
+                name: 'test_loss',
+                data: testLossList,
+                markPoint: p
+            }
+        )
+    }
+    if (testAccList != null) {
+        seriesData.push(
+            {
+                type: 'bar',
+                name: 'test_acc',
+                data: testAccList,
+                markPoint: p
+            }
+        )
+    }
+
+    // 初始化 Echarts
+    const cs = echarts.init(d)
     // 开始绘制图
     const option = {
         title: {
@@ -85,23 +124,7 @@ function lossAccBar(doc, titleName, json_data) {
                 }
             }
         },
-        series: [
-            {
-                type: 'bar',
-                name: 'loss',
-                data: lossList,
-                markPoint: p
-            },
-            {
-                type: 'bar',
-                name: 'acc',
-                data: accList,
-                itemStyle: {
-                    color: '#9f2222'
-                },
-                markPoint: p
-            },
-        ]
+        series: seriesData
     }
     // 装载
     cs.setOption(option)

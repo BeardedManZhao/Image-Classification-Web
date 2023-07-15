@@ -3026,7 +3026,7 @@
             this._roots = [];
             this._displayList = [];
             this._displayListLen = 0;
-            return;
+
         };
         Storage.prototype.getRoots = function () {
             return this._roots;
@@ -4013,7 +4013,7 @@
             }
         }
         setRgba(rgbaArr, 0, 0, 0, 1);
-        return;
+
     }
 
     function hsla2rgba(hsla, rgba) {
@@ -19983,7 +19983,7 @@
                 var item = data[i];
 
                 if (item == null) {
-                    continue;
+
                 } else if (isArray(item)) {
                     sourceFormat = SOURCE_FORMAT_ARRAY_ROWS;
                     break;
@@ -20254,7 +20254,7 @@
             };
 
             DefaultDataProvider.prototype.getItem = function (idx, out) {
-                return;
+
             };
 
             DefaultDataProvider.prototype.appendData = function (newData) {
@@ -20669,7 +20669,7 @@
 
             DataFormatMixin.prototype.formatTooltip = function (dataIndex, multipleSeries, dataType) {
                 // Empty function
-                return;
+
             };
 
             return DataFormatMixin;
@@ -21092,7 +21092,7 @@
             };
 
             ExternalSource.prototype.cloneRawData = function () {
-                return;
+
             };
             /**
              * @return If dimension not found, return null/undefined.
@@ -21100,7 +21100,7 @@
 
 
             ExternalSource.prototype.getDimensionInfo = function (dim) {
-                return;
+
             };
             /**
              * dimensions defined if and only if either:
@@ -21114,11 +21114,11 @@
 
 
             ExternalSource.prototype.cloneAllDimensionInfo = function () {
-                return;
+
             };
 
             ExternalSource.prototype.count = function () {
-                return;
+
             };
             /**
              * Only support by dimension index.
@@ -21128,11 +21128,11 @@
 
 
             ExternalSource.prototype.retrieveValue = function (dataIndex, dimIndex) {
-                return;
+
             };
 
             ExternalSource.prototype.retrieveValueFromItem = function (dataItem, dimIndex) {
-                return;
+
             };
 
             ExternalSource.prototype.convertValue = function (rawVal, dimInfo) {
@@ -23360,7 +23360,7 @@
 
 
             SeriesModel.prototype.getInitialData = function (option, ecModel) {
-                return;
+
             };
             /**
              * Append data to list
@@ -32707,7 +32707,7 @@
 
             OrdinalScale.prototype.getMinorTicks = function (splitNumber) {
                 // Not support.
-                return;
+
             };
             /**
              * @see `Ordinal['_ordinalNumbersByTick']`
@@ -34861,7 +34861,7 @@
 
 
             AxisModelCommonMixin.prototype.getCoordSysModel = function () {
-                return;
+
             };
 
             return AxisModelCommonMixin;
@@ -35889,7 +35889,7 @@
 
             Axis.prototype.pointToData = function (point, clamp) {
                 // Should be implemented in derived class if necessary.
-                return;
+
             };
             /**
              * Different from `zrUtil.map(axis.getTicks(), axis.dataToCoord, axis)`,
@@ -45732,7 +45732,7 @@
 
             if (seriesCnt < 1) {
                 // No series, no aria label
-                return;
+
             } else {
                 var title = getTitle();
 

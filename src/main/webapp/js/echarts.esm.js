@@ -74828,7 +74828,7 @@ function processTxInfo(elOption, state, attachedTxInfo) {
     var txConOpt = !txConOptNormal ? null : !state ? txConOptNormal : retrieveStateOption(txConOptNormal, state);
 
     if (styleOpt && ( // Because emphasis style has little info to detect legacy,
-                      // if normal is legacy, emphasis is trade as legacy.
+        // if normal is legacy, emphasis is trade as legacy.
         attachedTxInfo.isLegacy || isEC4CompatibleStyle(styleOpt, elType, !!txCfg, !!txConOpt))) {
         attachedTxInfo.isLegacy = true;
         var convertResult = convertFromEC4CompatibleStyle(styleOpt, elType, !state); // Explicitly specified `textConfig` and `textContent` has higher priority than
@@ -84173,7 +84173,7 @@ var TooltipView =
         };
 
         TooltipView.prototype._showTooltipContent = function ( // Use Model<TooltipOption> insteadof TooltipModel because this model may be from series or other options.
-                                                               // Instead of top level tooltip.
+            // Instead of top level tooltip.
             tooltipModel, defaultHtml, params, asyncTicket, x, y, positionExpr, el, markupStyleCreator) {
             // Reset ticket
             this._ticket = '';

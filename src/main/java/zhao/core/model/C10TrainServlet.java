@@ -54,7 +54,8 @@ public class C10TrainServlet extends TrainServlet {
                         Conf.C10_TRAIN_PYTHON_PATH,
                         train_epochs + ' ' +
                                 savePath + ' ' +
-                                classPath + ' '
+                                classPath + ' ' +
+                                user1.getModelDir() + "/outputJson.json"
                 );
             } catch (IOException e) {
                 e.printStackTrace();

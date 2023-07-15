@@ -14,7 +14,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
 
 /**
  * 训练服务类，在数据上传成功之后将会跳转到该类对应的门户页面
@@ -109,20 +111,7 @@ public class TrainServlet extends HttpServlet {
         if (inputStream != null) {
             IOUtils.copy(inputStream, writer, "GBK");
             writer.println("</pre>");
-            // 构建图表 首先获取到文件对象 如果文件存在 再继续构建
-            final File file = new File(user.getModelDir() + "/outputJson.json");
-            if (file.exists()) {
-                // 文件存在 开始构建图表盒子以及数据流
-                writer.println("<div style=\"width: 100%; height: 500px\" id=\"vis\"></div>");
-                final BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(file));
-                writer.println("<script>");
-                writer.println("const d = document.getElementById('vis')");
-                writer.write("lossAccBar(d, '训练数据', ");
-                IOUtils.copy(bufferedInputStream, writer);
-                writer.println(')');
-                writer.println("</script>");
-                bufferedInputStream.close();
-            }
+            HttpUtils.makeLossAccBar(user, writer);
             writer.write("<hr>\n");
             writer.println("<p>模型训练结果如上所示，如果训练完成，模型已经保存至您的个人目录中，您可以随时进行模型的使用。</p>");
             writer.println("<a href = " + Conf.USE_MODEL_SELECT_HTML + "> 点击使用模型 </a><br>");

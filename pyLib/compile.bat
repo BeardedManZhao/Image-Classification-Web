@@ -7,6 +7,7 @@ python -m compileall .\mnist_train.py
 python -m compileall .\train.py
 python -m compileall .\use.py
 python -m compileall .\useBatch.py
+python -m compileall .\utils.py
 
 ::begin
 

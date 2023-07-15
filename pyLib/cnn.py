@@ -161,6 +161,6 @@ def precise_cnn(cn, convolutional_count, init_filters=32, filters_b=2, image_w=1
     model.summary()
     model.compile(optimizer='adam',
                   loss=loss,
-                  metrics=['acc']
+                  metrics=['accuracy']
                   )
     return model
