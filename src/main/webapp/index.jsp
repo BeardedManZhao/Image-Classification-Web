@@ -79,7 +79,7 @@
             display: inline-block;
         }
     </style>
-    <script src="js/updateTheme.js" type="text/javascript"></script>
+    <script src="js/updateTheme.js" type="text/javascript" charset="GBK"></script>
     <script src="js/navigation.js"></script>
 </head>
 <body id="body">
@@ -147,7 +147,6 @@ user.isManager() ? "<a class='button' href='" + Conf.WEB_CONFIG_JSP + "'>½øĞĞÍøÕ
             "<a disabled=\"disabled\">ÇëÄúÏÈ½øĞĞÄ£ĞÍµÄÑµÁ·</a>"
     %>
 </form>
-<button id="backColorUpdate" onclick="closeOrOpenBackColor('backColorUpdate');">¹Ø±Õ±³¾°µÆ</button>
 <form class="form_button" action="about.html" target="_blank">
     <button>¹ØÓÚIMW</button>
 </form>

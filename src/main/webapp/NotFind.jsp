@@ -18,10 +18,11 @@
 <head>
     <link href='image/Logo.svg' rel='SHORTCUT ICON'/>
     <link rel="stylesheet" type="text/css" href="css/Theme.css">
+    <script src="js/updateTheme.js" type="text/javascript" charset="GBK"></script>
     <script src="js/navigation.js"></script>
     <title>没有资源</title>
 </head>
-<body>
+<body id="body">
 <div>
     <!-- 引入导航栏 -->
     <script>

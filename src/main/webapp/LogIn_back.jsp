@@ -116,7 +116,7 @@
     </style>
 </head>
 
-<body>
+<body id="body">
 <div id="login">
     <h1>Image Classification</h1>
     <form method="post" action="<%=Conf.LOGIN_SERVLET%>" onsubmit="return checkData()">

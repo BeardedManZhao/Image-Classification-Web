@@ -35,11 +35,12 @@
 <head>
     <link href='image/Logo.svg' rel='SHORTCUT ICON'/>
     <link rel="stylesheet" type="text/css" href="css/Theme.css">
+    <script src="js/updateTheme.js" type="text/javascript" charset="GBK"></script>
     <script src="js/navigation.js"></script>
     <meta charset="GBK">
     <title>开始训练</title>
 </head>
-<body>
+<body id="body">
 <!-- 引入导航栏 -->
 <script>
     makeNavigation("开始进行神经网络的训练")

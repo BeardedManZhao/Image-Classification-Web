@@ -66,7 +66,7 @@
     </style>
     <title>初始化或进入您的空间</title>
 </head>
-<body>
+<body id="body">
 <div id="b_div" class="terminal">
     <div>
         <img id="logo" width="120" height="90" src="image/Logo.svg" alt="Image-Classification-Web">

@@ -5,10 +5,11 @@
     <link href='image/Logo.svg' rel='SHORTCUT ICON'/>
     <link href="css/Theme.css" rel="stylesheet" type="text/css">
     <link href="css/terminal.css" rel="stylesheet" type="text/css">
-    <script type="text/javascript" src="js/utils.js"></script>
-    <script type="text/javascript" src="js/Visualization.js"></script>
-    <script type="text/javascript" src="js/echarts.min.js"></script>
-    <script src="js/navigation.js"></script>
+    <script src="js/utils.js" type="text/javascript"></script>
+    <script src="js/Visualization.js" type="text/javascript"></script>
+    <script src="js/echarts.min.js" type="text/javascript"></script>
+    <script charset="GBK" src="js/updateTheme.js" type="text/javascript"></script>
+    <script charset="GBK" src="js/navigation.js"></script>
     <meta charset='UTF-8'>
     <title>使用模型</title>
     <style>
@@ -31,17 +32,24 @@
         }
     </style>
 </head>
-<body>
+<body id="body">
 
 <!-- 引入导航栏 -->
 <script>
-    makeNavigation("使用训练好的模型")
+    makeNavigation("使用训练好的模型-图像分类-单图像识别")
 </script>
 
 <div class="w_h">
     <div class="two_pages">
         <div class="left vis">
-            图表
+            <h4>注意事项</h4>
+            <hr>
+            <ul>
+                <li>图像宽度与高度以及通道数量的设置确保与当前模型一致。</li>
+                <li>点击开始识别之后，识别任务就会开始，这需要一点时间。</li>
+                <li>识别之后，图表识别日志以及图像识别结果将会呈现给您。</li>
+                <li>识别的时候请不要退出页面，否则看不到导致识别结果啦。</li>
+            </ul>
         </div>
 
         <div class="right">

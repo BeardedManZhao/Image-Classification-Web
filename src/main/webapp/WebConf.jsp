@@ -50,6 +50,7 @@
         %>
         }
     </style>
+    <script src="js/updateTheme.js" type="text/javascript" charset="GBK"></script>
     <script src="js/navigation.js" charset="GBK"></script>
     <title>配置网站</title>
 </head>
