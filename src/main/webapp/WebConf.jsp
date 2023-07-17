@@ -50,13 +50,14 @@
         %>
         }
     </style>
+    <script src="js/navigation.js" charset="GBK"></script>
     <title>配置网站</title>
 </head>
 <body id="body">
-<div id="title">
-    <img id="logo" width="120" height="90" src="image/Logo.svg" alt="Image-Classification-Web">
-    <h2 id="web-title">你好 <%=user.name()%> 在这里进行WEB页面的配置</h2>
-</div>
+<!-- 引入导航栏 -->
+<script>
+    makeNavigation("你好" + "<%=user.name()%>" + "在这里进行WEB页面的配置");
+</script>
 <br>
 <div id="user_space_id">
     <h3>当前正在使用的用户空间</h3>

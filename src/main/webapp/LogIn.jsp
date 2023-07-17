@@ -68,7 +68,7 @@
 </head>
 <body>
 <div id="b_div" class="terminal">
-    <div class="logo_title">
+    <div>
         <img id="logo" width="120" height="90" src="image/Logo.svg" alt="Image-Classification-Web">
         <h2 id="web-title">进入您的空间</h2>
     </div>

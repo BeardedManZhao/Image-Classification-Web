@@ -80,12 +80,12 @@
         }
     </style>
     <script src="js/updateTheme.js" type="text/javascript"></script>
+    <script src="js/navigation.js"></script>
 </head>
 <body id="body">
-<div class="logo_title">
-    <img id="logo" width="120" height="90" src="image/Logo.svg" alt="Image-Classification-Web">
-    <h2 id="web-title"><%=user.isManager() ? "管理者 " : "你好 "%> <%=name%> 欢迎使用图像分类系统</h2>
-</div>
+<script>
+    makeNavigation("<%=user.isManager() ? "管理者 " : "你好 "%>" + "<%=name%>" + " 欢迎使用图像分类系统")
+</script>
 <hr>
 <div>
     <h3>您的个人空间目录</h3>

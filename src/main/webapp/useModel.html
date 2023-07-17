@@ -1,38 +1,66 @@
 <!DOCTYPE html>
 <html lang='zh'>
 
-<style>
-    form {
-        background-color: rgba(250, 235, 215, 0.14);
-    }
-</style>
-
 <head>
     <link href='image/Logo.svg' rel='SHORTCUT ICON'/>
     <link href="css/Theme.css" rel="stylesheet" type="text/css">
     <link href="css/terminal.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="js/utils.js"></script>
+    <script type="text/javascript" src="js/Visualization.js"></script>
+    <script type="text/javascript" src="js/echarts.min.js"></script>
+    <script src="js/navigation.js"></script>
     <meta charset='UTF-8'>
     <title>使用模型</title>
+    <style>
+
+        div .two_pages {
+            height: 256px;
+            color: #a3faf2;
+        }
+
+        div .two_pages .left {
+            background-color: rgba(5, 30, 29, 0.64);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        div .two_pages .right {
+            background-color: rgba(5, 30, 29, 0.64);
+            padding: 20px;
+            border-radius: 10px;
+        }
+    </style>
 </head>
 <body>
-<div>
-    <img alt="Image-Classification-Web" id="logo" src="image/Logo.svg">
-    <h3 id="web-title">使用训练好的模型</h3>
-    <form action='UseModelServlet' enctype='multipart/form-data' method='post'
-          onsubmit='return checkNumber() && check("图像识别开始。", "请稍等，正在识别中......")'>
-        模型支持的图像宽度：<input id='w' name='w' title='输入模型支持图像宽度' type='number'>
-        <br>
-        模型支持的图像高度：<input id='h' name='h' title='输入模型支持图像高度' type='number'>
-        <br>
-        模型支持的通道数量：<input id='c' name='c' title='输入模型支持的图像颜色通道数量' type='number'>
-        <br>
-        要被识别的图像文件：<input accept='image/*' id='i' name='image' title='上传需要被识别的图像' type='file'>
-        <br>
-        <button>开始识别</button>
-    </form>
+
+<!-- 引入导航栏 -->
+<script>
+    makeNavigation("使用训练好的模型")
+</script>
+
+<div class="w_h">
+    <div class="two_pages">
+        <div class="left vis">
+            图表
+        </div>
+
+        <div class="right">
+            <form action='UseModelServlet' enctype='multipart/form-data' method='post'
+                  onsubmit='return checkNumber() && check("图像识别开始。", "请稍等，正在识别中......")'>
+                模型支持的图像宽度：<input id='w' name='w' title='输入模型支持图像宽度' type='number'>
+                <br>
+                模型支持的图像高度：<input id='h' name='h' title='输入模型支持图像高度' type='number'>
+                <br>
+                模型支持的通道数量：<input id='c' name='c' title='输入模型支持的图像颜色通道数量' type='number'>
+                <br>
+                要被识别的图像文件：<input accept='image/*' id='i' name='image' title='上传需要被识别的图像' type='file'>
+                <br>
+                <button>开始识别</button>
+                <a class="button" href="index.jsp">返回主页</a>
+            </form>
+        </div>
+    </div>
 </div>
-<hr>
-<a class="button" href="index.jsp">返回主页</a>
 </body>
 </html>
 

@@ -18,12 +18,15 @@
 <head>
     <link href='image/Logo.svg' rel='SHORTCUT ICON'/>
     <link rel="stylesheet" type="text/css" href="css/Theme.css">
+    <script src="js/navigation.js"></script>
     <title>没有资源</title>
 </head>
 <body>
 <div>
-    <img id="logo" width="120" height="90" src="image/Logo.svg" alt="Image-Classification-Web">
-    <h2 id="web-title">哎呀呀!!!!</h2>
+    <!-- 引入导航栏 -->
+    <script>
+        makeNavigation("404~~ 哎呀呀!!!!")
+    </script>
     <hr>
     <p>您好 <%=isLogIn ? user.name() : "图像分类系统的访问者"%>, 此处没有找到相关的资源!!!!!</p>
 </div>

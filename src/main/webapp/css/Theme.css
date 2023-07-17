@@ -6,6 +6,11 @@ body {
     background-size: 100% 100%;
 }
 
+
+body, html{
+    margin: 0;
+}
+
 /* 版心 宽度为 70% 且水平居中 圆角边缘 */
 .w_h {
     width: 70%;
@@ -14,15 +19,72 @@ body {
 }
 
 /* logo图标显示规则 */
-#logo {
+#logo .logo {
     vertical-align: middle;
     margin-bottom: -5px
 }
 
 /* 页面标题显示规则 */
-#web-title {
+#web-title .web-title {
     display: inline-block;
     width: auto;
+}
+
+/* logo+标题+导航栏的设计 */
+.logo_title {
+    margin: 0;
+    padding: 0;
+    border:0;
+    width: 100%;
+    height: 64px;
+    background-color: #0a1e1e;
+}
+
+.logo_title .navigation {
+    line-height: 64px;
+}
+
+.logo_title #logo,
+.logo_title .logo {
+    width: auto;
+    height: 100%;
+    float: left;
+}
+
+.logo_title #web-title,
+.logo_title .web-title {
+    height: 100%;
+    float: left;
+    color: #f1f1f1;
+}
+
+/* 导航栏 按钮区域 规则 */
+.navigation {
+    font-size: 24px;
+    padding-right: 10px;
+}
+
+.navigation ul {
+    list-style-type: none;
+    float: right;
+    margin: 0;
+}
+
+.navigation ul li {
+    display: inline-block;
+    text-align: center;
+}
+
+.navigation ul li a {
+    text-decoration: none;
+    color: #f1f1f1;
+    margin: 0 0 0 20px;
+    width: 100%;
+}
+
+.navigation ul li a:hover {
+    color: #1ed2c3;
+
 }
 
 /* 按钮规则 */
@@ -83,4 +145,21 @@ td.theme-table,
 .DISPLAY_BOX:hover {
     transform: translateY(-10px);
     box-shadow: 0 10px 10px rgba(0, 0, 0, 0.6);
+}
+
+/* 两个盒子分别一左一右 */
+.two_pages .left {
+    display: inline-block;
+    width: 45%;
+    height: 100%;
+    float: left;
+    margin-right: 1%;
+}
+
+.two_pages .right {
+    display: inline-block;
+    width: 45%;
+    height: 100%;
+    float: right;
+    margin-left: 1%;
 }

@@ -14,9 +14,13 @@
             padding: 10px;
         }
     </style>
+    <script src="js/navigation.js"></script>
 </head>
 <body>
-<h2>上传您要训练的数据</h2>
+<!-- 引入导航栏 -->
+<script>
+    makeNavigation("上传您要训练的数据")
+</script>
 <hr>
 <form action="TrainUpServlet" enctype="multipart/form-data" id="sub" method="post" onsubmit="return checkSubmit()">
 
