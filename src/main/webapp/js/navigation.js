@@ -11,7 +11,7 @@ function makeNavigation(name) {
         "\n" +
         "    <div class='right navigation'>\n" +
         "        <ul>\n" +
-        "            <li onclick=\"closeOrOpenBackColor('backColorUpdate');\">\n" +
+        "            <li onclick=\"closeOrOpenBackColor('backColorUpdate'); return false;\">\n" +
         "                <a id='backColorUpdate' href='#'>¹Ø±Õ±³¾°µÆ</a>\n" +
         "            </li>\n" +
         "            <li>\n" +
@@ -40,8 +40,8 @@ function makeNavigation(name) {
 
     <div class='right navigation'>
         <ul>
-            <li>
-                <a id='backColorUpdate' onclick="closeOrOpenBackColor('backColorUpdate');" href='#'>¹Ø±Õ±³¾°µÆ</a>
+            <li onclick="closeOrOpenBackColor('backColorUpdate'); return false;">
+                <a id='backColorUpdate' href='#'>¹Ø±Õ±³¾°µÆ</a>
             </li>
             <li>
                 <a href='index.jsp'>ÏµÍ³Ö÷Ò³</a>

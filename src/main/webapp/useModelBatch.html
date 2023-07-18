@@ -3,30 +3,35 @@
 
 <style>
 
-    div .two_pages {
+    .w_h .two_pages {
         height: 256px;
         color: #a3faf2;
     }
 
-    div .two_pages .left {
+    .w_h .two_pages .left {
         background-color: rgba(5, 30, 29, 0.64);
-        padding: 20px;
         border-radius: 10px;
+        padding: 10px;
+        width: 45%;
     }
 
-    div .two_pages .right {
+    .w_h .two_pages .right {
         background-color: rgba(5, 30, 29, 0.64);
-        padding: 20px;
         border-radius: 10px;
+        padding: 10px;
+        width: 45%;
     }
 </style>
-
 <head>
+    <link href="css/prism.css" rel="stylesheet" type="text/css">
     <link href='image/Logo.svg' rel='SHORTCUT ICON'/>
     <link href="css/Theme.css" rel="stylesheet" type="text/css">
     <link href="css/terminal.css" rel="stylesheet" type="text/css">
+
+    <script charset="GBK" src="js/prism.js" type="text/javascript"></script>
     <script charset="GBK" src="js/updateTheme.js" type="text/javascript"></script>
     <script charset="GBK" src="js/navigation.js"></script>
+
     <meta charset='UTF-8'>
     <title>使用模型</title>
 </head>
@@ -69,6 +74,83 @@
         </div>
     </div>
 </div>
+
+<div class="w_h">
+    <pre class="terminal language-python" style="width: 98%;"><code class="language-python">
+    # 这里是一个示例脚本 您可以使用这里的 python 代码程序将 批分类的json文件 进行解析并展示其中指定类别索引的图像。
+    import json
+    import math
+    import sys
+
+    import numpy as np
+    from matplotlib import pyplot as plt
+
+
+    def show_class(json_data, class_str):
+        if class_str not in json_data:
+            print(f"您提供的json数据中不包含类别：{class_str}")
+            return
+        json_data = json_data[class_str]
+        # 根据包含的图像数量计算最适合的尺寸
+        # 首先计算所有图的数量
+        length = len(json_data)
+        # 然后将数量重新排列
+        col_count = 8
+        row_count = math.ceil(length / col_count)
+        # 根据尺寸构建一个画布
+        plt.figure(figsize=(20 * col_count, 20 * row_count))
+        # 开始进行绘制
+        index = 1
+        for (image_name, image_mat) in json_data.items():
+            plt.subplot(row_count, col_count, index)
+            plt.title(image_name)
+            temp = np.expand_dims(image_mat, axis=2)
+            print(f"绘制《{image_name}》\t维度 = {temp.shape}")
+            plt.imshow(temp, cmap=plt.get_cmap('gray'))
+            index += 1
+
+        # 绘制完毕开始展示
+        plt.show()
+
+
+    if __name__ == '__main__':
+
+        if len(sys.argv) == 5:
+            print(f"{sys.argv[0]}")
+            print(f"{sys.argv[1]}")
+            print(f"{sys.argv[2]}")
+            print(f"{sys.argv[3]}")
+            print(f"{sys.argv[4]}")
+            # 获取到 json 文件对应的字典
+            json_file = open(sys.argv[1], 'rt')
+            # 解析 json 数据
+            data = json.load(json_file)
+            json_file.close()
+            # 绘制 json 数据
+            show_class(data, str(sys.argv[2]))
+        else:
+            print("""
+                请按照下面的方式进行参数的传递
+                    1 = json 文件目录
+                    2 = json 中要查看的类别名称对应的索引
+            """)
+
+    </code></pre>
+
+    <pre class="terminal language-python" style="width: 98%;"><code class="language-python">
+        # 在这里演示的是调用 json解析脚本，通过此操作，可以调用 python 文件。
+        E:>python ./main.py
+
+            请按照下面的方式进行参数的传递
+                1 = json 文件目录
+                2 = json 中要查看的类别名称对应的索引
+
+
+        E:>python ./main.py xx/xx/xx.json 2
+    </code></pre>
+
+</div>
+
 </body>
 </html>
 
