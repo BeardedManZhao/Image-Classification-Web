@@ -46,6 +46,10 @@ public final class Conf {
     public final static String WORK_DIR = "F:";
 
     /**
+     * 网站中产生的json文件存储位置
+     */
+    public final static String JSON_DIR = WORK_DIR + "/jsonDir";
+    /**
      * python训练脚本文件的路径
      */
     public final static String TRAIN_PYTHON_PATH = NN_PATH + "/train.pyc";

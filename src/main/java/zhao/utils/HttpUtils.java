@@ -40,9 +40,9 @@ public final class HttpUtils {
      * @param request  请求对象
      * @param response 回复对象
      * @return 检查到的用户或 default 用户
-     * @throws UnsupportedEncodingException 不支持编码转换错误
+     * @throws IOException 不支持编码转换错误
      */
-    public static User intiCheck(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+    public static User intiCheck(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setCharacterEncoding("GBK");
         request.setCharacterEncoding("GBK");
         return User.checkCookieUser(request, response, ToLogin.TO_LOGIN);
@@ -105,6 +105,6 @@ public final class HttpUtils {
      * @throws IOException IO错误
      */
     public static void makeLossAccBar(User user, PrintWriter writer) throws IOException {
-        makeLossAccBar(writer, new File(user.getModelDir() + "/outputJson.json"));
+        makeLossAccBar(writer, new File(user.getJsonDir() + "/lossAcc.json"));
     }
 }

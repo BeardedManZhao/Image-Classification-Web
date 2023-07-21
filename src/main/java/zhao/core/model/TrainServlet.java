@@ -6,6 +6,7 @@ import zhao.algorithmMagic.utils.transformation.Transformation;
 import zhao.core.user.OrdinaryUser;
 import zhao.core.user.User;
 import zhao.utils.ExeUtils;
+import zhao.utils.FSUtils;
 import zhao.utils.HttpUtils;
 import zhao.utils.StrUtils;
 
@@ -14,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -37,6 +39,11 @@ public class TrainServlet extends HttpServlet {
             return;
         }
         if (!HttpUtils.checkCanTrain(response)) {
+            return;
+        }
+        // 检查用户模型空间 and json 空间
+        if ((!FSUtils.checkOrMkdirs(response, new File(user.getModelDir()))) ||
+                (!FSUtils.checkOrMkdirs(response, new File(user.getJsonDir())))) {
             return;
         }
         // 将临时的类别文件保存到新文件中
@@ -74,7 +81,7 @@ public class TrainServlet extends HttpServlet {
                                         ) +
                                         convolutional_count + ' ' +
                                         filters + ' ' + filtersB + ' ' +
-                                        s1 + "/outputJson.json"
+                                        user1.getJsonDir() + "/lossAcc.json"
                         );
                     } catch (IOException e) {
                         return null;

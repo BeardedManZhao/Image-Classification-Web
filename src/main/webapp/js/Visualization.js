@@ -7,11 +7,11 @@
 
 /**
  * 将 json 数据或字典数据进行柱状图可视化的函数
- * @param doc 需要作为图展示框的盒子。
+ * @param d 需要作为图展示框的盒子。
  * @param titleName 表的标题
  * @param json_data json 数据 其中可以接收 4 个key 分别是 loss accuracy test_loss test_acc
  */
-function lossAccBar(doc, titleName, json_data) {
+function lossAccBar(d, titleName, json_data) {
     // 获取到 损失 精度 的list
     const lossList = json_data['loss']
     const accList = json_data['accuracy']
@@ -128,4 +128,28 @@ function lossAccBar(doc, titleName, json_data) {
     }
     // 装载
     cs.setOption(option)
+}
+
+
+/**
+ * 从服务器中获取到当前用户的模型的训练日志json数据，并展示成为图表
+ * @param doc 需要被作为图表承载元素的文档对象
+ */
+function getLossAcc(doc) {
+    const parseUrl1 = parseUrl();
+    // 使用 axios 访问服务器获取数据
+    axios(
+        {
+            url: parseUrl1.url[0] + "//" + parseUrl1.url[1] + '/' + parseUrl1.url[2] + '/JsonServlet',
+            // 设置 axios 的请求参数
+            params: {
+                jsonName: 'lossAcc.json'
+            }
+        }
+    ).then(
+        (args) => {
+            console.log(args)
+            lossAccBar(doc, "模型训练日志图表", args.data)
+        }
+    )
 }

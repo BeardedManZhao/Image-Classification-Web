@@ -4,6 +4,7 @@ import zhao.Conf;
 import zhao.core.user.OrdinaryUser;
 import zhao.core.user.User;
 import zhao.utils.ExeUtils;
+import zhao.utils.FSUtils;
 import zhao.utils.HttpUtils;
 
 import javax.servlet.ServletException;
@@ -34,11 +35,10 @@ public class C10TrainServlet extends TrainServlet {
         final PrintWriter writer = response.getWriter();
         String train_epochs;
         {
-            final File file = new File(user.getModelDir());
-            if (!file.exists()) {
-                if (!file.mkdirs()) {
-                    response.getWriter().write("<script>alert('您的个人模型空间损坏，请更换个人空间尝试继续。')</script>");
-                }
+            // 检查用户模型空间 and json 空间
+            if ((!FSUtils.checkOrMkdirs(response, new File(user.getModelDir()))) ||
+                    (!FSUtils.checkOrMkdirs(response, new File(user.getJsonDir())))) {
+                return;
             }
             final String train_epochs1 = request.getParameter("train_epochs");
             train_epochs = train_epochs1 != null ? train_epochs1 : "1";
@@ -55,7 +55,7 @@ public class C10TrainServlet extends TrainServlet {
                         train_epochs + ' ' +
                                 savePath + ' ' +
                                 classPath + ' ' +
-                                user1.getModelDir() + "/outputJson.json"
+                                user1.getJsonDir() + "/lossAcc.json"
                 );
             } catch (IOException e) {
                 e.printStackTrace();

@@ -4,6 +4,7 @@ import zhao.Conf;
 import zhao.core.user.OrdinaryUser;
 import zhao.core.user.User;
 import zhao.utils.ExeUtils;
+import zhao.utils.FSUtils;
 import zhao.utils.HttpUtils;
 import zhao.utils.StrUtils;
 
@@ -35,13 +36,10 @@ public class MnistTrainServlet extends TrainServlet {
 
         final PrintWriter writer = response.getWriter();
         final String train_epochs = StrUtils.ifNull(request.getParameter("train_epochs"), "1");
-        {
-            final File file = new File(user.getModelDir());
-            if (!file.exists()) {
-                if (!file.mkdirs()) {
-                    response.getWriter().write("<script>alert('您的个人模型空间损坏，请更换个人空间尝试继续。')</script>");
-                }
-            }
+        // 检查用户模型空间 and json 空间
+        if ((!FSUtils.checkOrMkdirs(response, new File(user.getModelDir()))) ||
+                (!FSUtils.checkOrMkdirs(response, new File(user.getJsonDir())))) {
+            return;
         }
         trainReturn(user, writer, user1 -> {
             // 获取到用户的模型存储目录
@@ -55,7 +53,7 @@ public class MnistTrainServlet extends TrainServlet {
                         train_epochs + ' ' +
                                 savePath + ' ' +
                                 classPath + ' ' +
-                                user1.getModelDir() + "/outputJson.json"
+                                user1.getJsonDir() + "/lossAcc.json"
                 );
             } catch (IOException e) {
                 e.printStackTrace();
@@ -63,5 +61,6 @@ public class MnistTrainServlet extends TrainServlet {
             }
         });
     }
+
 
 }
