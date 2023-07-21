@@ -165,3 +165,7 @@ td.theme-table,
     height: 100%;
     float: right;
 }
+
+.two_pages .navigation {
+    height: 64px;
+}
