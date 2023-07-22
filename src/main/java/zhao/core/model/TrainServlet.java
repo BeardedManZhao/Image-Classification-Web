@@ -6,6 +6,7 @@ import zhao.algorithmMagic.utils.transformation.Transformation;
 import zhao.core.user.OrdinaryUser;
 import zhao.core.user.User;
 import zhao.utils.ExeUtils;
+import zhao.utils.FSUtils;
 import zhao.utils.HttpUtils;
 import zhao.utils.StrUtils;
 
@@ -14,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
@@ -34,6 +36,14 @@ public class TrainServlet extends HttpServlet {
         final User user = HttpUtils.intiCheck(request, response);
         if (user.equals(OrdinaryUser.DEFAULT_USER)) {
             // 若是 def 代表当前用户没有登录 直接结束
+            return;
+        }
+        if (!HttpUtils.checkCanTrain(response)) {
+            return;
+        }
+        // 检查用户模型空间 and json 空间
+        if ((!FSUtils.checkOrMkdirs(response, new File(user.getModelDir()))) ||
+                (!FSUtils.checkOrMkdirs(response, new File(user.getJsonDir())))) {
             return;
         }
         // 将临时的类别文件保存到新文件中
@@ -70,7 +80,8 @@ public class TrainServlet extends HttpServlet {
                                                         " True " : " False "
                                         ) +
                                         convolutional_count + ' ' +
-                                        filters + ' ' + filtersB
+                                        filters + ' ' + filtersB + ' ' +
+                                        user1.getJsonDir() + "/lossAcc.json"
                         );
                     } catch (IOException e) {
                         return null;
@@ -94,6 +105,10 @@ public class TrainServlet extends HttpServlet {
         writer.write(" <meta charset=\"GBK\">");
         writer.write(" <title>训练结果</title>\n");
         writer.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"css/terminal.css\">");
+        writer.println("<link rel=\"stylesheet\" type=\"text/css\" href=\"css/Theme.css\">");
+        writer.println("    <script type='text/javascript' src='js/utils.js'></script>");
+        writer.println("    <script type='text/javascript' src='js/Visualization.js' charset='GBK'></script>");
+        writer.println("    <script type='text/javascript' src='js/echarts.min.js' charset='utf-8'></script>");
         writer.write(" </head>");
         writer.write("<h2>训练日志展示</h2>\n");
         writer.write("<hr>\n");
@@ -102,10 +117,11 @@ public class TrainServlet extends HttpServlet {
         InputStream inputStream = transformation.function(user);
         if (inputStream != null) {
             IOUtils.copy(inputStream, writer, "GBK");
-            writer.write("</pre>");
+            writer.println("</pre>");
+            HttpUtils.makeLossAccBar(user, writer);
             writer.write("<hr>\n");
             writer.println("<p>模型训练结果如上所示，如果训练完成，模型已经保存至您的个人目录中，您可以随时进行模型的使用。</p>");
-            writer.println("<a href = " + Conf.USE_MODEL_HTML + "> 点击使用模型 </a><br>");
+            writer.println("<a href = " + Conf.USE_MODEL_SELECT_HTML + "> 点击使用模型 </a><br>");
         } else {
             writer.write("<p>模型训练出现错误!!!!!</p>");
         }

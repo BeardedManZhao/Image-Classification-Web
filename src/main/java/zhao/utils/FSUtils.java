@@ -1,10 +1,8 @@
 package zhao.utils;
 
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 
 /**
  * 文件系统操作数据集类
@@ -78,5 +76,47 @@ public final class FSUtils {
             }
             bufferedReader.close();
         }
+    }
+
+    /**
+     * 将一个目录中的数据信息，并将tableHTML表直接返回到指定的数据流中
+     *
+     * @param dir         需要被解析的目录
+     * @param printWriter 解析结果要输出的目标数据流
+     * @param splitStr    每个文件之间的分分隔符
+     * @return 检索完毕返回 true 检索中断返回 false
+     */
+    public static boolean seeDirGetHtmlTable(String dir, PrintWriter printWriter, String splitStr) {
+        final File[] files = new File(dir).listFiles();
+        if (files != null) {
+            int index = 0;
+            printWriter.println("<table border='1'>");
+            for (File file : files) {
+                HTMLUtils.appRowToTable(
+                                printWriter, "[" + ++index + "]", "name: " + file.getName(), "size: " + file.length() + " byte"
+                        )
+                        .println(splitStr);
+            }
+            printWriter.println("</table>");
+            return index != 0;
+        }
+        return false;
+    }
+
+    /**
+     * 检查一个用于的目录是否存在，如果不存在就直接进行创建
+     *
+     * @param response 回复对象
+     * @param file     模型对象
+     * @throws IOException 操作异常
+     */
+    public static boolean checkOrMkdirs(HttpServletResponse response, File file) throws IOException {
+        if (!file.exists()) {
+            if (!file.mkdirs()) {
+                response.getWriter().write("<script>alert('您的个人空间损坏，操作无法继续，请更换个人空间尝试继续。')</script>");
+                return false;
+            }
+        }
+        return true;
     }
 }

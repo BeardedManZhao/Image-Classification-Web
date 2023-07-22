@@ -6,22 +6,72 @@
     <link href="css/Theme.css" rel="stylesheet" type="text/css">
     <meta charset="GBK">
     <title>训练数据上传</title>
+    <style>
+        .CategoryBox {
+            background-color: rgba(106, 145, 140, 0.56);
+            text-align: center;
+            border: #2D2D3F 2px solid;
+            padding: 10px;
+        }
+
+        .label {
+            text-align: center;
+        }
+
+        .label form {
+            text-align: center;
+        }
+
+        .CategoryBox .MF {
+            width: auto;
+        }
+
+        .CategoryBox input {
+            display: block;
+            margin: auto;
+            text-align: center;
+        }
+
+        .label label {
+            margin: 0 auto;
+            width: 30%;
+            text-align: center;
+        }
+
+        .label label input {
+            width: 50%;
+            text-align: center;
+            border-radius: 10px;
+        }
+    </style>
+    <script charset="GBK" src="js/updateTheme.js" type="text/javascript"></script>
+    <script src="js/navigation.js"></script>
 </head>
-<body>
-<form action="TrainUpServlet" enctype="multipart/form-data" id="sub" method="post" onsubmit="return checkSubmit()">
+<body id="body">
+<!-- 引入导航栏 -->
+<script>
+    makeNavigation("上传您要训练的数据")
+</script>
+<hr>
+<div class="label">
+    <form action="TrainUpServlet" enctype="multipart/form-data" id="sub" method="post" onsubmit="return checkSubmit()">
 
-    <button type="submit">点击提交训练数据集</button>
-</form>
+        <button type="submit">点击提交训练数据集</button>
+    </form>
+</div>
 
-<label>
-    <input id="addCBButton" title="点击添加类别" type="text" value="">
-    <button onclick="{
+<div class="label">
+    <label>
+        <input id="addCBButton" placeholder="在这里输入您要添加的类别名称" title="点击添加类别" type="text" value="">
+        <br>
+        <button onclick="{
         const elementById = document.getElementById('addCBButton');
         addCB(elementById.value)
         elementById.value = ''
     }">点击添加类别图像输入框
-    </button>
-</label>
+        </button>
+    </label>
+</div>
 </body>
 </html>
 
@@ -43,22 +93,30 @@
         if (document.getElementById(typeName) == null) {
             // 创建出一个 input
             const divOBJ = document.createElement('input')
-            // 设置class与类别
-            divOBJ.setAttribute("class", 'CategoryBox')
+            // 设置类别
             divOBJ.setAttribute('id', typeName)
             // 设置其它参数
+            divOBJ.setAttribute("class", "MF")
             divOBJ.setAttribute('multiple', 'multiple')
             divOBJ.setAttribute('type', 'file')
             divOBJ.setAttribute('name', typeName)
             divOBJ.setAttribute('title', "请上传类别：" + typeName)
             divOBJ.setAttribute('Content-Type', 'multipart/form-data;boundary=${bound}')
             divOBJ.setAttribute('alt', '上传需要被训练的图像数据。类别 = ' + typeName)
+            const p = document.createElement('p')
+            p.setAttribute('value', typeName)
+            p.innerText = typeName
+            // 为 div 设置 类别
+            const div = document.createElement('div')
+            div.setAttribute("class", 'CategoryBox w_h')
+            const label = document.createElement('label')
+            label.appendChild(p)
+            label.appendChild(divOBJ)
+            div.appendChild(label)
             // 添加到表单
             submit.appendChild(document.createElement('hr'))
-            submit.appendChild(divOBJ)
-            const p = document.createElement('p')
-            $(p).text(typeName)
-            submit.appendChild(p)
+            // submit.appendChild(divOBJ)
+            submit.appendChild(div)
         } else {
             alert("类别已经存在，您无法重复添加。")
         }

@@ -4,7 +4,8 @@
 <%@ page import="zhao.utils.FSUtils" %>
 <%@ page import="zhao.core.user.User" %>
 <%@ page import="zhao.core.user.OrdinaryUser" %>
-<%@ page import="zhao.task.ToLogin" %><%--
+<%@ page import="zhao.task.ToLogin" %>
+<%--
   Created by IntelliJ IDEA.
   User: zhao
   Date: 2023/5/2
@@ -14,8 +15,8 @@
 <%@ page contentType="text/html;charset=GBK" %>
 
 <%
-    if (!Conf.modelIsOk) {
-        response.getWriter().println("神经网络系统模块未覆写，请调用脚本覆写然后重启服务器。");
+    if (Conf.checkNeural_network_statusIsClose()) {
+        request.getRequestDispatcher(Conf.NN_ERROR_HTML).forward(request, response);
         return;
     }
     // 首先获取到当前用户的信息，如果没有登录就直接跳转到登录页面
@@ -36,7 +37,7 @@
         final File[] files = file.listFiles();
         if (files != null && files.length != 0) {
             // 如果文件存在就开始将文件下的所有的数据写出表格
-            stringBuilder.append("<table id='dir_table'>");
+            stringBuilder.append("<table id='dir_table' class='theme-table'>");
             HTMLUtils.appRowToTable(stringBuilder, "Name", "type", "size");
             for (File file1 : files) {
                 HTMLUtils.appRowToTable(stringBuilder, file1.getName(), file1.isDirectory() ? "dir" : "file", file1.length() + " Byte");
@@ -68,30 +69,23 @@
     tempClassStr.append(']');
 %>
 
-<style>
-
-    table {
-        text-align: center;
-        background-color: chocolate;
-        align-items: center;
-    }
-
-    td {
-        background-color: #eedcc5;
-    }
-</style>
-
 <html>
 <head>
     <link href='image/Logo.svg' rel='SHORTCUT ICON'/>
     <link rel="stylesheet" type="text/css" href="css/Theme.css">
     <title>图像分类系统</title>
+    <style>
+        .form_button {
+            display: inline-block;
+        }
+    </style>
+    <script src="js/updateTheme.js" type="text/javascript" charset="GBK"></script>
+    <script src="js/navigation.js"></script>
 </head>
-<body>
-<div class="logo_title">
-    <img id="logo" width="120" height="90" src="image/Logo.svg" alt="Image-Classification-Web">
-    <h2 id="web-title"><%=user.isManager() ? "管理者 " : "你好 "%> <%=name%> 欢迎使用图像分类系统</h2>
-</div>
+<body id="body">
+<script>
+    makeNavigation("<%=user.isManager() ? "管理者 " : "你好 "%>" + "<%=name%>" + " 欢迎使用图像分类系统")
+</script>
 <hr>
 <div>
     <h3>您的个人空间目录</h3>
@@ -102,7 +96,7 @@
     <br>
 
     <div>
-        <table id="model">
+        <table id="model" class="theme-table">
             <tr>
                 <td>
                     模型路径
@@ -135,22 +129,26 @@
     </div>
 </div>
 <hr>
-<a href="<%=Conf.TRAIN_UP_HTML%>" target='_blank'>上传训练数据集</a>
+<a class='button' href="<%=Conf.TRAIN_UP_HTML%>" target='_blank'>上传训练数据集</a>
 <%=
-isHaveFile ? "<a href='" + Conf.TRAIN_RM_SERVLET + "'>清理个人数据集</a>\n" +
-        "<a href='" + Conf.IMAGE_TRAIN_DIR + '/' + name + "'>前往个人空间目录</a>" : '\n'
+isHaveFile ? "<a class='button' href='" + Conf.TRAIN_RM_SERVLET + "'>清理个人数据集</a>\n" +
+        "<a class='button' href='" + Conf.IMAGE_TRAIN_DIR + '/' + name + "'>前往个人空间目录</a>" : '\n'
 %>
 <%=
-user.isManager() ? "<a href='" + Conf.WEB_CONFIG_JSP + "'>进行网站系统配置</a>" : '\n'
+user.isManager() ? "<a class='button' href='" + Conf.WEB_CONFIG_JSP + "'>进行网站系统配置</a>" : '\n'
 %>
-<form action="<%=Conf.TRAIN_JSP%>" target="_blank">
+<br>
+<form class="form_button" action="<%=Conf.TRAIN_JSP%>" target="_blank">
     <button>开始训练模型</button>
 </form>
-<form action="<%=Conf.USE_MODEL_HTML%>" target="_blank">
+<form class="form_button" action="<%=Conf.USE_MODEL_SELECT_HTML%>" target="_blank">
     <%=
     isHaveModel ? "<button>使用训练好的模型</button>" :
             "<a disabled=\"disabled\">请您先进行模型的训练</a>"
     %>
+</form>
+<form class="form_button" action="about.html" target="_blank">
+    <button>关于IMW</button>
 </form>
 </body>
 </html>

@@ -21,7 +21,7 @@ import java.io.IOException;
 public class ConfUpdateServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        response.setStatus(HttpServletResponse.SC_NOT_FOUND);
     }
 
     @Override
@@ -34,21 +34,32 @@ public class ConfUpdateServlet extends HttpServlet {
             ToFZF.TO_FZF.run(request, response);
             return;
         }
+        // 获取到最大空间数量
         final String maxSpaceNum = request.getParameter("maxSpaceNum");
+        // 获取到网站指定的新状态
         final String web_status = request.getParameter("web_status");
+        // 获取到网站的登录资源名称
         final String loginJsp = request.getParameter("loginJsp");
+        // 获取到网站中神经网络系统的新状态
+        final String neural_network = request.getParameter("neural_network");
         // 将当前管理者用户的更新操作写到日志中
         Conf.LOGGER.info(user.name() + " 管理者：更新了网站中的配置信息，配置情况如下所示: =======");
         Conf.LOGGER.info("USER_MAX_COUNT: " + Conf.USER_MAX_COUNT + " -> " + maxSpaceNum);
+
         Conf.USER_MAX_COUNT = Integer.parseInt(maxSpaceNum);
 
         Conf.LOGGER.info("LOGIN: " + Conf.LOGIN + " -> " + loginJsp);
         Conf.LOGIN = loginJsp;
+
         if ("closed".equals(web_status)) {
             // 管理员手动关闭网站
             Conf.LOGGER.info("web_status: running -> " + web_status);
             ExeUtils.closeWeb("linux".equalsIgnoreCase(Conf.SYSTEM_TYPE));
         }
+
+        Conf.LOGGER.info("Neural_network_status: " + Conf.Neural_network_status + " -> " + neural_network);
+        Conf.updateNeural_network_status(neural_network);
+
         HttpUtils.alertBack(response.getWriter(), "配置更新完成!!!");
     }
 }

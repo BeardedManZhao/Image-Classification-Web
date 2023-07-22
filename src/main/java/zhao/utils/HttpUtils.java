@@ -1,5 +1,6 @@
 package zhao.utils;
 
+import org.apache.commons.io.IOUtils;
 import zhao.Conf;
 import zhao.core.user.User;
 import zhao.task.ToLogin;
@@ -7,8 +8,7 @@ import zhao.task.ToLogin;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 
 /**
  * Http 协议处理工具类
@@ -40,9 +40,9 @@ public final class HttpUtils {
      * @param request  请求对象
      * @param response 回复对象
      * @return 检查到的用户或 default 用户
-     * @throws UnsupportedEncodingException 不支持编码转换错误
+     * @throws IOException 不支持编码转换错误
      */
-    public static User intiCheck(HttpServletRequest request, HttpServletResponse response) throws UnsupportedEncodingException {
+    public static User intiCheck(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setCharacterEncoding("GBK");
         request.setCharacterEncoding("GBK");
         return User.checkCookieUser(request, response, ToLogin.TO_LOGIN);
@@ -61,4 +61,50 @@ public final class HttpUtils {
         printWriter.println("</script>");
     }
 
+    /**
+     * 检查神经网络系统当前是否正常运行，如果不正常就返回一句话。
+     */
+    public static boolean checkCanTrain(HttpServletResponse response) throws IOException {
+        // 检查神经网络的状态 如果不正常就直接返回一句话
+        if (!Conf.checkNeural_network_status()) {
+            HttpUtils.alertBack(response.getWriter(), "神经网络系统当前不可用，系统编码：" + Conf.Neural_network_status);
+            return false;
+        }
+        return true;
+    }
+
+
+    /**
+     * 使用指定的路径对应的json文件，在页面中构建一个损失函数与精度数值对应的图表。
+     *
+     * @param writer 页面数据流
+     * @param file   包含记录数据的json文件
+     * @throws IOException IO错误
+     */
+    public static void makeLossAccBar(PrintWriter writer, File file) throws IOException {
+        // 构建图表 首先获取到文件对象 如果文件存在 再继续构建
+        if (file.exists()) {
+            // 文件存在 开始构建图表盒子以及数据流
+            writer.println("<div style=\"width: 100%; height: 500px\" id=\"vis\"></div>");
+            final BufferedInputStream bufferedInputStream = new BufferedInputStream(new FileInputStream(file));
+            writer.println("<script>");
+            writer.println("const d = document.getElementById('vis')");
+            writer.write("lossAccBar(d, '训练数据', ");
+            IOUtils.copy(bufferedInputStream, writer);
+            writer.println(')');
+            writer.println("</script>");
+            bufferedInputStream.close();
+        }
+    }
+
+    /**
+     * 使用用户空间中存储的json文件，在页面中构建一个损失函数与精度数值对应的图表。
+     *
+     * @param user   指定的用户对象
+     * @param writer 页面数据流
+     * @throws IOException IO错误
+     */
+    public static void makeLossAccBar(User user, PrintWriter writer) throws IOException {
+        makeLossAccBar(writer, new File(user.getJsonDir() + "/lossAcc.json"));
+    }
 }

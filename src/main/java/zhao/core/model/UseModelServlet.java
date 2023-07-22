@@ -6,6 +6,7 @@ import zhao.core.user.OrdinaryUser;
 import zhao.core.user.User;
 import zhao.task.ToLogin;
 import zhao.utils.ExeUtils;
+import zhao.utils.HttpUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -37,6 +38,9 @@ public class UseModelServlet extends HttpServlet {
             // 若是 def 代表当前用户没有登录 直接结束
             return;
         }
+        if (!HttpUtils.checkCanTrain(response)) {
+            return;
+        }
         final Part image = request.getPart("image");
         // 获取到指定的文件存储目录
         final String name = user.name();
@@ -58,7 +62,7 @@ public class UseModelServlet extends HttpServlet {
         writer.println("    <link href=\"css/terminal.css\" rel=\"stylesheet\" type=\"text/css\">");
         writer.write(" </head>");
         writer.write("<h2>被识别的图像</h2><hr>");
-        writer.write("<img src='" + "/IMW/IMW_IMAGE/use/" + name + "' alt=\"被识别的图像\">");
+        writer.write("<img src='" + Conf.IMAGE_USE_DIR_PATH + name + "' alt=\"被识别的图像\">");
         writer.write("<hr><h2>识别结果展示</h2>\n");
         writer.write("<hr>\n");
         writer.write("<pre class='terminal'>");
