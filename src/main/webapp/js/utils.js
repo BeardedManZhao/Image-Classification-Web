@@ -53,3 +53,17 @@ function setUrlServlet(servlet_str, prams) {
     }
     return res;
 }
+
+/**
+ * 判断一个对象是否可以进行迭代
+ * @param obj 需要被判断的对象
+ * @returns {boolean} 如果可迭代则返回 true
+ */
+function isIterable(obj) {
+    return typeof obj === 'object' && obj !== null && !Array.isArray(obj) && typeof obj[Symbol.iterator] === 'function';
+}
+
+function isJson(obj) {
+    return obj !== null && obj instanceof Object && typeof obj === 'object';
+}
+

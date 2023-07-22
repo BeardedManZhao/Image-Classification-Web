@@ -34,12 +34,12 @@ public final class Conf {
     /**
      * 服务器的软件路径 TODO 配置的时候需要修改
      */
-    public final static String TOMCAT_PATH = "E:\\RunTime\\Apache-tomcat-9.0.56\\bin";
+    public final static String TOMCAT_PATH = "E:/RunTime/Apache-tomcat-9.0.56/bin";
 
     /**
      * 神经网络程序存储目录 TODO 配置的时候需要修改
      */
-    public final static String NN_PATH = "D:\\MyGithub\\Image-Classification-Web\\pyLib\\exe";
+    public final static String NN_PATH = "D:/MyGithub/Image-Classification-Web/pyLib/exe";
 
     /**
      * 网站核心运行目录，该目录将会作为系统重的运行核心数据存储目录 TODO 配置的时候需要修改
@@ -167,36 +167,36 @@ public final class Conf {
         }
         // 初始化 配置项 的 json 字符串
         CONF_JSON = '{' +
-                "'WEN_COOKIE' : " + WEN_COOKIE + "'," +
-                "'HOME' : '" + HOME + "'," +
-                "'LOGIN_SERVLET' : '" + LOGIN_SERVLET + "'," +
-                "'TRAIN_SERVLET' : '" + TRAIN_SERVLET + "'," +
-                "'C10_TRAIN_SERVLET' : '" + C10_TRAIN_SERVLET + "'," +
-                "'MNIST_TRAIN_SERVLET' : '" + MNIST_TRAIN_SERVLET + "'," +
-                "'TRAIN_UP_SERVLET' : '" + TRAIN_UP_SERVLET + "'," +
-                "'TRAIN_RM_SERVLET' : '" + TRAIN_RM_SERVLET + "'," +
-                "'TRAIN_UP_HTML' : '" + TRAIN_UP_HTML + "'," +
-                "'TRAIN_JSP' : '" + TRAIN_JSP + "'," +
-                "'USE_MODEL_SERVLET' : '" + USE_MODEL_SERVLET + "'," +
-                "'USE_MODEL_SELECT_HTML' : '" + USE_MODEL_SELECT_HTML + "'," +
-                "'USE_MODEL_BATCH_SERVLET' : '" + USE_MODEL_BATCH_SERVLET + "'," +
-                "'NN_OVER_SERVLET' : '"  + NN_OVER_SERVLET + "'," +
-                "'NN_ERROR_HTML' : '" + NN_ERROR_HTML + "'," +
-                "'JSON_SERVLET' : '" + JSON_SERVLET + "'," +
-                "'TOMCAT_PATH' : '" + TOMCAT_PATH + "'," +
-                "'NN_PATH' : '" + NN_PATH + "'," +
-                "'WORK_DIR' : '" + WORK_DIR + "'," +
-                "'JSON_DIR : '" + JSON_DIR + "'," +
-                "'TRAIN_PYTHON_PATH' : '" + TRAIN_PYTHON_PATH + "'," + 
-                "'C10_TRAIN_PYTHON_PATH' : '" + C10_TRAIN_PYTHON_PATH + "'," +
-                "'MNIST_PYTHON_PATH' : '" + MNIST_PYTHON_PATH + "'," +
-                "'USING_PYTHON_PATH' : '" + USING_PYTHON_PATH + "'," +
-                "'TRAIN_DIR' : '" + TRAIN_DIR + "'," + 
-                "'MODEL_DIR' : '" + MODEL_DIR + "'," +
-                "'IMAGE_USE_DIR' : '" + IMAGE_USE_DIR + "'," +
-                "'WEB_CONFIG_JSP' : '" + WEB_CONFIG_JSP + "'," +
-                "'CONF_UPDATE_SERVLET' : '" + CONF_UPDATE_SERVLET + "'," +
-                "'NEURAL_NETWORK_READY' : " + NEURAL_NETWORK_READY + ",";
+                "\"WEN_COOKIE\" : \"" + WEN_COOKIE + "\"," +
+                "\"HOME\" : \"" + HOME + "\"," +
+                "\"LOGIN_SERVLET\" : \"" + LOGIN_SERVLET + "\"," +
+                "\"TRAIN_SERVLET\" : \"" + TRAIN_SERVLET + "\"," +
+                "\"C10_TRAIN_SERVLET\" : \"" + C10_TRAIN_SERVLET + "\"," +
+                "\"MNIST_TRAIN_SERVLET\" : \"" + MNIST_TRAIN_SERVLET + "\"," +
+                "\"TRAIN_UP_SERVLET\" : \"" + TRAIN_UP_SERVLET + "\"," +
+                "\"TRAIN_RM_SERVLET\" : \"" + TRAIN_RM_SERVLET + "\"," +
+                "\"TRAIN_UP_HTML\" : \"" + TRAIN_UP_HTML + "\"," +
+                "\"TRAIN_JSP\" : \"" + TRAIN_JSP + "\"," +
+                "\"USE_MODEL_SERVLET\" : \"" + USE_MODEL_SERVLET + "\"," +
+                "\"USE_MODEL_SELECT_HTML\" : \"" + USE_MODEL_SELECT_HTML + "\"," +
+                "\"USE_MODEL_BATCH_SERVLET\" : \"" + USE_MODEL_BATCH_SERVLET + "\"," +
+                "\"NN_OVER_SERVLET\" : \""  + NN_OVER_SERVLET + "\"," +
+                "\"NN_ERROR_HTML\" : \"" + NN_ERROR_HTML + "\"," +
+                "\"JSON_SERVLET\" : \"" + JSON_SERVLET + "\"," +
+                "\"TOMCAT_PATH\" : \"" + TOMCAT_PATH + "\"," +
+                "\"NN_PATH\" : \"" + NN_PATH + "\"," +
+                "\"WORK_DIR\" : \"" + WORK_DIR + "\"," +
+                "\"JSON_DIR\" : \"" + JSON_DIR + "\"," +
+                "\"TRAIN_PYTHON_PATH\" : \"" + TRAIN_PYTHON_PATH + "\"," + 
+                "\"C10_TRAIN_PYTHON_PATH\" : \"" + C10_TRAIN_PYTHON_PATH + "\"," +
+                "\"MNIST_PYTHON_PATH\" : \"" + MNIST_PYTHON_PATH + "\"," +
+                "\"USING_PYTHON_PATH\" : \"" + USING_PYTHON_PATH + "\"," +
+                "\"TRAIN_DIR\" : \"" + TRAIN_DIR + "\"," + 
+                "\"MODEL_DIR\" : \"" + MODEL_DIR + "\"," +
+                "\"IMAGE_USE_DIR\" : \"" + IMAGE_USE_DIR + "\"," +
+                "\"WEB_CONFIG_JSP\" : \"" + WEB_CONFIG_JSP + "\"," +
+                "\"CONF_UPDATE_SERVLET\" : \"" + CONF_UPDATE_SERVLET + "\"," +
+                "\"NEURAL_NETWORK_READY\" : " + NEURAL_NETWORK_READY + ",";
     }
 
     /**
@@ -242,10 +242,10 @@ public final class Conf {
      */
     public static String getConfJson(){
         return CONF_JSON +
-                "'Neural_network_status' : " + Neural_network_status + "," +
-                "'LOGIN' : '" + LOGIN + "'," +
-                "'SYSTEM_TYPE' : '" + SYSTEM_TYPE + "'," +
-                "'USER_MAX_COUNT' : '" + USER_MAX_COUNT +
+                "\"Neural_network_status\" : " + Neural_network_status + "," +
+                "\"LOGIN\" : \"" + LOGIN + "\"," +
+                "\"SYSTEM_TYPE\" : \"" + SYSTEM_TYPE + "\"," +
+                "\"USER_MAX_COUNT\" : " + USER_MAX_COUNT +
                 '}';
     }
 
