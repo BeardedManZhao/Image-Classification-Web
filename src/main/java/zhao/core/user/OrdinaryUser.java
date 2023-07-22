@@ -123,10 +123,10 @@ public class OrdinaryUser implements User {
     @Override
     public String toJson() {
         return "{" +
-                "name:'" + name + '\'' +
-                ", trainDir:'" + trainDir + '\'' +
-                ", modelDir:'" + modelDir + '\'' +
-                ", jsonDir:'" + jsonDir + '\'' +
+                "\"name\":\"" + name + '\"' +
+                ", \"trainDir\":\"" + trainDir + '\"' +
+                ", \"modelDir\":\"" + modelDir + '\"' +
+                ", \"jsonDir\":\"" + jsonDir + '\"' +
                 '}';
     }
 

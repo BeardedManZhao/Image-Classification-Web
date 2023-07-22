@@ -29,6 +29,7 @@ public final class Conf {
     public final static String USE_MODEL_BATCH_SERVLET = "UseModelBatchServlet";
     public final static String NN_OVER_SERVLET = "NNOverServlet";
     public final static String NN_ERROR_HTML = "NeuralNetworkError.html";
+    public final static String JSON_SERVLET = "JsonServlet";
 
     /**
      * 服务器的软件路径 TODO 配置的时候需要修改
@@ -121,6 +122,12 @@ public final class Conf {
     public final static boolean NEURAL_NETWORK_READY;
 
     /**
+     * web中所有的配置项目被封装成的一个json数据的通用部分 这部分在程序启动的时候就会初始化完毕。
+     * 必须要通过函数 getConfJson 获取到这部分数据！！！
+     */
+    private final static String CONF_JSON;
+
+    /**
      * 神经网络系统当前的状态
      * -1 = 神经网络系统功能不完善或崩溃。
      * 0 = 神经网络系统功能正常运行。
@@ -158,6 +165,38 @@ public final class Conf {
             LOGGER.warning("神经网络系统文件不存在，需要覆写，请调用网站自带脚本文件进行覆写系统。");
             Neural_network_status = -1;
         }
+        // 初始化 配置项 的 json 字符串
+        CONF_JSON = '{' +
+                "'WEN_COOKIE' : " + WEN_COOKIE + "'," +
+                "'HOME' : '" + HOME + "'," +
+                "'LOGIN_SERVLET' : '" + LOGIN_SERVLET + "'," +
+                "'TRAIN_SERVLET' : '" + TRAIN_SERVLET + "'," +
+                "'C10_TRAIN_SERVLET' : '" + C10_TRAIN_SERVLET + "'," +
+                "'MNIST_TRAIN_SERVLET' : '" + MNIST_TRAIN_SERVLET + "'," +
+                "'TRAIN_UP_SERVLET' : '" + TRAIN_UP_SERVLET + "'," +
+                "'TRAIN_RM_SERVLET' : '" + TRAIN_RM_SERVLET + "'," +
+                "'TRAIN_UP_HTML' : '" + TRAIN_UP_HTML + "'," +
+                "'TRAIN_JSP' : '" + TRAIN_JSP + "'," +
+                "'USE_MODEL_SERVLET' : '" + USE_MODEL_SERVLET + "'," +
+                "'USE_MODEL_SELECT_HTML' : '" + USE_MODEL_SELECT_HTML + "'," +
+                "'USE_MODEL_BATCH_SERVLET' : '" + USE_MODEL_BATCH_SERVLET + "'," +
+                "'NN_OVER_SERVLET' : '"  + NN_OVER_SERVLET + "'," +
+                "'NN_ERROR_HTML' : '" + NN_ERROR_HTML + "'," +
+                "'JSON_SERVLET' : '" + JSON_SERVLET + "'," +
+                "'TOMCAT_PATH' : '" + TOMCAT_PATH + "'," +
+                "'NN_PATH' : '" + NN_PATH + "'," +
+                "'WORK_DIR' : '" + WORK_DIR + "'," +
+                "'JSON_DIR : '" + JSON_DIR + "'," +
+                "'TRAIN_PYTHON_PATH' : '" + TRAIN_PYTHON_PATH + "'," + 
+                "'C10_TRAIN_PYTHON_PATH' : '" + C10_TRAIN_PYTHON_PATH + "'," +
+                "'MNIST_PYTHON_PATH' : '" + MNIST_PYTHON_PATH + "'," +
+                "'USING_PYTHON_PATH' : '" + USING_PYTHON_PATH + "'," +
+                "'TRAIN_DIR' : '" + TRAIN_DIR + "'," + 
+                "'MODEL_DIR' : '" + MODEL_DIR + "'," +
+                "'IMAGE_USE_DIR' : '" + IMAGE_USE_DIR + "'," +
+                "'WEB_CONFIG_JSP' : '" + WEB_CONFIG_JSP + "'," +
+                "'CONF_UPDATE_SERVLET' : '" + CONF_UPDATE_SERVLET + "'," +
+                "'NEURAL_NETWORK_READY' : " + NEURAL_NETWORK_READY + ",";
     }
 
     /**
@@ -196,4 +235,18 @@ public final class Conf {
     public static boolean checkNeural_network_statusIsClose() {
         return Neural_network_status == -1;
     }
+
+    /**
+     *
+     * @return 完整的 web配置项
+     */
+    public static String getConfJson(){
+        return CONF_JSON +
+                "'Neural_network_status' : " + Neural_network_status + "," +
+                "'LOGIN' : '" + LOGIN + "'," +
+                "'SYSTEM_TYPE' : '" + SYSTEM_TYPE + "'," +
+                "'USER_MAX_COUNT' : '" + USER_MAX_COUNT +
+                '}';
+    }
+
 }

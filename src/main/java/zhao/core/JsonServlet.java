@@ -1,6 +1,7 @@
 package zhao.core;
 
 import org.apache.commons.io.IOUtils;
+import zhao.Conf;
 import zhao.core.user.User;
 import zhao.task.TaskConsumer;
 import zhao.task.VoidTask;
@@ -25,8 +26,8 @@ public class JsonServlet extends HttpServlet {
         hash.put("notFind", (request, response) -> {
             final PrintWriter writer = response.getWriter();
             writer.println('{');
-            writer.append("'serverTime' : ").println(System.currentTimeMillis());
-            writer.append(',').println("'message':'没有找到您需要的json信息。'");
+            writer.append("\"serverTime\" : ").append(String.valueOf(System.currentTimeMillis())).println(',');
+            writer.println("\"message\":\"没有找到您需要的json信息。\"");
             writer.println('}');
         });
 
@@ -34,10 +35,15 @@ public class JsonServlet extends HttpServlet {
             final User user = User.checkCookieUser(request, response, VoidTask.VOID_TASK);
             final PrintWriter writer = response.getWriter();
             writer.println('{');
-            writer.append("'user' : ").println(user.toJson());
-            writer.append(",'serverTime' : ").println(System.currentTimeMillis());
-            writer.println(",'message':'ok'");
+            writer.append("\"user\" : ").append(user.toJson()).println(',');
+            writer.append("\"serverTime\" : ").append(String.valueOf(System.currentTimeMillis())).println(',');
+            writer.println("\"message\":\"ok\"");
             writer.println('}');
+        });
+
+        hash.put("confJson", (request, response) -> {
+            final PrintWriter writer = response.getWriter();
+            writer.write(Conf.getConfJson());
         });
     }
 
