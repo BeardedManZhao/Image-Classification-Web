@@ -212,6 +212,10 @@ public final class Conf {
                 "\"TRAIN_DIR\" : \"" + TRAIN_DIR + "\"," + 
                 "\"MODEL_DIR\" : \"" + MODEL_DIR + "\"," +
                 "\"IMAGE_USE_DIR\" : \"" + IMAGE_USE_DIR + "\"," +
+                "\"IMAGE_USE_BATCH_DIR\" : \"" + IMAGE_USE_BATCH_DIR + "\"," +
+                "\"IMAGE_USE_DIR_PATH\" : \"" + IMAGE_USE_DIR_PATH + "\"," +
+                "\"IMAGE_USE_BATCH_DIR_PATH\" : \"" + IMAGE_USE_BATCH_DIR_PATH + "\"," +
+                "\"IMAGE_TRAIN_DIR\" : \"" + IMAGE_TRAIN_DIR + "\"," +
                 "\"WEB_CONFIG_JSP\" : \"" + WEB_CONFIG_JSP + "\"," +
                 "\"CONF_UPDATE_SERVLET\" : \"" + CONF_UPDATE_SERVLET + "\"," +
                 "\"NEURAL_NETWORK_READY\" : " + NEURAL_NETWORK_READY + ",";
