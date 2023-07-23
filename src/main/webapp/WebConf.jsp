@@ -133,7 +133,8 @@
         </pre>
         <form onsubmit="exeJsonName(); return false;">
             <label>
-                <input style="width: 100%; height: 5%" id="input_jsonName" type="text" alt="命令输入框" placeholder="see [jsonName] [key1, key2, key3,....]">
+                <input style="width: 100%; height: 5%" id="input_jsonName" type="text" alt="命令输入框"
+                       placeholder="see [jsonName] [key1, key2, key3,....]">
                 <button type="submit">提交执行命令</button>
             </label>
         </form>
@@ -173,7 +174,8 @@
 
     const parseUrl1 = parseUrl();
     const reg = new RegExp("\\s+")
-    function exeJsonName(){
+
+    function exeJsonName() {
         const command = input_jsonName.value.trim();
         terminal.innerText = "input >>> " + command
         terminal.append("\n")
@@ -192,7 +194,7 @@
             (args) => {
                 // 获取到数据内容
                 let data = args;
-                for (let index = 2; index < split.length; index ++) {
+                for (let index = 2; index < split.length; index++) {
                     data = data[split[index]]
                 }
                 // 判断数据是否为 json

@@ -47,6 +47,21 @@ public final class Conf {
     public final static String WORK_DIR = "F:";
 
     /**
+     * 当前网站的版本
+     */
+    public final static String VERSION = "0.15";
+
+    /**
+     * 当前网站的更新日期
+     */
+    public final static String UPDATE_DATE = "2023-07-23";
+
+    /**
+     * 当前网站的更新日期
+     */
+    public final static String CREATE_DATE = "2023-05-03";
+
+    /**
      * 网站中产生的json文件存储位置
      */
     public final static String JSON_DIR = WORK_DIR + "/jsonDir";
@@ -167,6 +182,9 @@ public final class Conf {
         }
         // 初始化 配置项 的 json 字符串
         CONF_JSON = '{' +
+                "\"VERSION\" : \"" + VERSION + "\"," +
+                "\"UPDATE_DATE\" : \"" + UPDATE_DATE + "\"," +
+                "\"CREATE_DATE\" : \"" + CREATE_DATE + "\"," +
                 "\"WEN_COOKIE\" : \"" + WEN_COOKIE + "\"," +
                 "\"HOME\" : \"" + HOME + "\"," +
                 "\"LOGIN_SERVLET\" : \"" + LOGIN_SERVLET + "\"," +
