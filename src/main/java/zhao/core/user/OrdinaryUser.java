@@ -22,13 +22,19 @@ public class OrdinaryUser implements User {
      */
     public final static HashMap<String, User> USER_HASH_MAP = new HashMap<>();
     private final String name, password, trainDir, modelDir, jsonDir;
+    protected final boolean isManager;
 
     protected OrdinaryUser(String name, String password) {
+        this(name, password, false);
+    }
+
+    protected OrdinaryUser(String name, String password, boolean isManager) {
         this.name = name;
         this.password = password;
         this.trainDir = Conf.TRAIN_DIR + '/' + name;
         this.modelDir = Conf.MODEL_DIR + '/' + name;
         this.jsonDir = Conf.JSON_DIR + '/' + name;
+        this.isManager = isManager;
     }
 
     /**
@@ -77,7 +83,7 @@ public class OrdinaryUser implements User {
      */
     @Override
     public boolean isManager() {
-        return false;
+        return this.isManager;
     }
 
     /**
@@ -124,6 +130,7 @@ public class OrdinaryUser implements User {
     public String toJson() {
         return "{" +
                 "\"name\":\"" + name + '\"' +
+                ", \"isManager\":" + isManager() +
                 ", \"trainDir\":\"" + trainDir + '\"' +
                 ", \"modelDir\":\"" + modelDir + '\"' +
                 ", \"jsonDir\":\"" + jsonDir + '\"' +

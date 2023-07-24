@@ -178,7 +178,8 @@
     function exeJsonName() {
         const command = input_jsonName.value.trim();
         terminal.innerText = "input >>> " + command
-        terminal.append("\n")
+        terminal.append("\n* >>> 执行时间：")
+        terminal.append(new Date() + "\n")
         // 获取到命令
         const split = command.split(reg);
         // 使用 axios 访问服务器获取数据

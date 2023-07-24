@@ -2,6 +2,7 @@ package zhao.core;
 
 import org.apache.commons.io.IOUtils;
 import zhao.Conf;
+import zhao.core.user.ManagerUser;
 import zhao.core.user.User;
 import zhao.task.TaskConsumer;
 import zhao.task.VoidTask;
@@ -44,6 +45,17 @@ public class JsonServlet extends HttpServlet {
         hash.put("confJson", (request, response) -> {
             final PrintWriter writer = response.getWriter();
             writer.write(Conf.getConfJson());
+        });
+
+        hash.put("allUsers", (request, response) -> {
+            // 检查当前用户是否为管理者 如果不是管理者就直接回复 无法找到
+            final User user = User.checkCookieUser(request, response, VoidTask.VOID_TASK);
+            if (!user.isManager()) {
+                hash.get("notFind").run(request, response);
+                return;
+            }
+            // 检查之后发现是管理者 就直接进行所有用户数据的回复
+            ManagerUser.writeUsersJson(response.getWriter());
         });
     }
 

@@ -198,18 +198,18 @@ public final class Conf {
                 "\"USE_MODEL_SERVLET\" : \"" + USE_MODEL_SERVLET + "\"," +
                 "\"USE_MODEL_SELECT_HTML\" : \"" + USE_MODEL_SELECT_HTML + "\"," +
                 "\"USE_MODEL_BATCH_SERVLET\" : \"" + USE_MODEL_BATCH_SERVLET + "\"," +
-                "\"NN_OVER_SERVLET\" : \""  + NN_OVER_SERVLET + "\"," +
+                "\"NN_OVER_SERVLET\" : \"" + NN_OVER_SERVLET + "\"," +
                 "\"NN_ERROR_HTML\" : \"" + NN_ERROR_HTML + "\"," +
                 "\"JSON_SERVLET\" : \"" + JSON_SERVLET + "\"," +
                 "\"TOMCAT_PATH\" : \"" + TOMCAT_PATH + "\"," +
                 "\"NN_PATH\" : \"" + NN_PATH + "\"," +
                 "\"WORK_DIR\" : \"" + WORK_DIR + "\"," +
                 "\"JSON_DIR\" : \"" + JSON_DIR + "\"," +
-                "\"TRAIN_PYTHON_PATH\" : \"" + TRAIN_PYTHON_PATH + "\"," + 
+                "\"TRAIN_PYTHON_PATH\" : \"" + TRAIN_PYTHON_PATH + "\"," +
                 "\"C10_TRAIN_PYTHON_PATH\" : \"" + C10_TRAIN_PYTHON_PATH + "\"," +
                 "\"MNIST_PYTHON_PATH\" : \"" + MNIST_PYTHON_PATH + "\"," +
                 "\"USING_PYTHON_PATH\" : \"" + USING_PYTHON_PATH + "\"," +
-                "\"TRAIN_DIR\" : \"" + TRAIN_DIR + "\"," + 
+                "\"TRAIN_DIR\" : \"" + TRAIN_DIR + "\"," +
                 "\"MODEL_DIR\" : \"" + MODEL_DIR + "\"," +
                 "\"IMAGE_USE_DIR\" : \"" + IMAGE_USE_DIR + "\"," +
                 "\"IMAGE_USE_BATCH_DIR\" : \"" + IMAGE_USE_BATCH_DIR + "\"," +
@@ -259,10 +259,9 @@ public final class Conf {
     }
 
     /**
-     *
      * @return 完整的 web配置项
      */
-    public static String getConfJson(){
+    public static String getConfJson() {
         return CONF_JSON +
                 "\"Neural_network_status\" : " + Neural_network_status + "," +
                 "\"LOGIN\" : \"" + LOGIN + "\"," +
