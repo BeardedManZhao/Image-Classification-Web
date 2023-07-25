@@ -67,3 +67,18 @@ function isJson(obj) {
     return obj !== null && obj instanceof Object && typeof obj === 'object';
 }
 
+/**
+ * 将一个 json 字符串中的数据按照指定的 keys 获取
+ * @param jsonStr json字符串
+ * @param showKeys 需要被提取的值对应的路径
+ * @returns {any}
+ */
+function jsonShow(jsonStr, showKeys) {
+    // 首先将字符串转换为 json 然后获取 key 对应的value
+    let res = JSON.parse(jsonStr);
+    for (let name in showKeys) {
+        res = res[name]
+    }
+    return res;
+}
+

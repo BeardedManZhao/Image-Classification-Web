@@ -21,8 +21,8 @@ public class OrdinaryUser implements User {
      * 用户信息映射表
      */
     public final static HashMap<String, User> USER_HASH_MAP = new HashMap<>();
-    private final String name, password, trainDir, modelDir, jsonDir;
     protected final boolean isManager;
+    private final String name, password, trainDir, modelDir, jsonDir;
 
     protected OrdinaryUser(String name, String password) {
         this(name, password, false);

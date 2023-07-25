@@ -124,6 +124,7 @@
                               value="closed" <%=Conf.Neural_network_status == -1 ? "checked" : ""%>>
             </label>
         </div>
+        <a class="button" href="ServerTerminal.html">前往机器终端</a>
         <button type="button" onclick="window.history.back()">退出配置页面</button>
         <button type="submit" onclick="updateNNS();checkRunningStatus('web_status', 'running_status1');">保存配置信息</button>
     </form>
@@ -175,37 +176,46 @@
     const parseUrl1 = parseUrl();
     const reg = new RegExp("\\s+")
 
+    function getOnfulfilled(split) {
+        return (args) => {
+            // 获取到数据内容
+            let data = args;
+            for (let index = 2; index < split.length; index++) {
+                data = data[split[index]]
+            }
+            // 判断数据是否为 json
+            if (isJson(data)) {
+                // 如果是 json 就直接按照 json 打印
+                terminal.append("* >>> " + JSON.stringify(data))
+                terminal.append('\n')
+            }
+            terminal.append("* >>> " + data)
+        };
+    }
+
     function exeJsonName() {
         const command = input_jsonName.value.trim();
         terminal.innerText = "input >>> " + command
-        terminal.append("\n* >>> 执行时间：")
-        terminal.append(new Date() + "\n")
-        // 获取到命令
-        const split = command.split(reg);
-        // 使用 axios 访问服务器获取数据
-        axios(
-            {
-                url: parseUrl1.url[0] + "//" + parseUrl1.url[1] + '/' + parseUrl1.url[2] + '/JsonServlet',
-                // 设置 axios 的请求参数
-                params: {
-                    jsonName: split[1]
+        if (command.length !== 0) {
+            terminal.append("\n* >>> 执行时间：")
+            terminal.append(new Date() + "\n")
+            // 获取到命令
+            const split = command.split(reg);
+            // 使用 axios 访问服务器获取数据
+            axios(
+                {
+                    url: parseUrl1.url[0] + "//" + parseUrl1.url[1] + '/' + parseUrl1.url[2] + '/JsonServlet',
+                    // 设置 axios 的请求参数
+                    params: {
+                        jsonName: split[1],
+
+                    }
                 }
-            }
-        ).then(
-            (args) => {
-                // 获取到数据内容
-                let data = args;
-                for (let index = 2; index < split.length; index++) {
-                    data = data[split[index]]
-                }
-                // 判断数据是否为 json
-                if (isJson(data)) {
-                    // 如果是 json 就直接按照 json 打印
-                    terminal.append("* >>> " + JSON.stringify(data))
-                    terminal.append('\n')
-                }
-                terminal.append("* >>> " + data)
-            }
-        )
+            ).then(
+                getOnfulfilled(split)
+            ).catch(
+                getOnfulfilled(split)
+            )
+        }
     }
 </script>

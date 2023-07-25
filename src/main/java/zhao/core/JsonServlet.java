@@ -5,7 +5,9 @@ import zhao.Conf;
 import zhao.core.user.ManagerUser;
 import zhao.core.user.User;
 import zhao.task.TaskConsumer;
+import zhao.task.ToLogin;
 import zhao.task.VoidTask;
+import zhao.utils.RunUtils;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,6 +31,15 @@ public class JsonServlet extends HttpServlet {
             writer.println('{');
             writer.append("\"serverTime\" : ").append(String.valueOf(System.currentTimeMillis())).println(',');
             writer.println("\"message\":\"没有找到您需要的json信息。\"");
+            writer.println('}');
+            response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
+        });
+
+        hash.put("haveNoRight", (request, response) -> {
+            final PrintWriter writer = response.getWriter();
+            writer.println('{');
+            writer.append("\"serverTime\" : ").append(String.valueOf(System.currentTimeMillis())).println(',');
+            writer.println("\"message\":\"您的权限不足够执行此操作!!!!\"");
             writer.println('}');
         });
 
@@ -57,6 +68,24 @@ public class JsonServlet extends HttpServlet {
             // 检查之后发现是管理者 就直接进行所有用户数据的回复
             ManagerUser.writeUsersJson(response.getWriter());
         });
+
+        hash.put("runCommand", (request, response) -> {
+            // 检查当前用户是否为管理者 如果不是管理者就直接回复 没有权限
+            final User user = User.checkCookieUser(request, response, VoidTask.VOID_TASK);
+            if (!user.isManager()) {
+                hash.get("haveNoRight").run(request, response);
+                return;
+            }
+            // 如果是管理者就进行命令执行与数据回复
+            final PrintWriter writer = response.getWriter();
+            // 输出数据
+            writer.println('{');
+            writer.append("\"serverTime\" : ").append(String.valueOf(System.currentTimeMillis())).println(',');
+            writer.append("\"message\":\"");
+            // 执行命令
+            RunUtils.runCommand(request.getParameter("command"), writer);
+            writer.append("\"\n").println('}');
+        });
     }
 
     @Override
@@ -81,7 +110,7 @@ public class JsonServlet extends HttpServlet {
             }
         }
         // 如果不属于就检查当前用户是否已经登录
-        final User user = User.checkCookieUser(request, response, VoidTask.VOID_TASK);
+        final User user = User.checkCookieUser(request, response, ToLogin.TO_LOGIN);
         // 开始进行逻辑的执行 首先获取到用户对应的 json 文件目录存储空间 以及需要的文件数据
         final File file = new File(user.getJsonDir() + '/' + jsonName);
         if (file.exists()) {

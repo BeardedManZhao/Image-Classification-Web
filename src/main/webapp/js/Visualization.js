@@ -148,8 +148,17 @@ function getLossAcc(doc) {
         }
     ).then(
         (args) => {
-            console.log(args)
             lossAccBar(doc, "模型训练日志图表", args.data)
+        }
+    ).catch(
+        (args) => {
+            console.log(args)
+            if (args.code === 'ERR_BAD_REQUEST') {
+                alert("Please train a neural network model first!!!")
+            } else {
+                alert("Unknown error, unable to use neural network model!!!!")
+            }
+            window.history.go(-1)
         }
     )
 }
