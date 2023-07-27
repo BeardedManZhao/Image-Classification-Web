@@ -27,6 +27,12 @@
 %>
 
 <style>
+
+    button,
+    .button {
+        font-family: 'icomoon', serif;
+    }
+
     #user_space_table {
         background-color: rgba(13, 54, 53, 0.51);
     }
@@ -39,6 +45,7 @@
 <html>
 <head>
     <link href='image/Logo.svg' rel='SHORTCUT ICON'/>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/Theme.css">
     <link rel="stylesheet" type="text/css" href="css/webStatus.css">
     <link rel="stylesheet" type="text/css" href="css/terminal.css">
@@ -124,9 +131,10 @@
                               value="closed" <%=Conf.Neural_network_status == -1 ? "checked" : ""%>>
             </label>
         </div>
-        <a class="button" href="ServerTerminal.html">前往机器终端</a>
-        <button type="button" onclick="window.history.back()">退出配置页面</button>
-        <button type="submit" onclick="updateNNS();checkRunningStatus('web_status', 'running_status1');">保存配置信息</button>
+        <a class="button" href="ServerTerminal.html"> 前往机器终端</a>
+        <button type="button" onclick="window.history.back()"> 退出配置页面</button>
+        <button type="submit" onclick="updateNNS();checkRunningStatus('web_status', 'running_status1');"> 保存配置信息
+        </button>
     </form>
     <div class="w_h">
         <pre style="height: 30%" id="terminal" class="terminal">
@@ -136,7 +144,7 @@
             <label>
                 <input style="width: 100%; height: 5%" id="input_jsonName" type="text" alt="命令输入框"
                        placeholder="see [jsonName] [key1, key2, key3,....]">
-                <button type="submit">提交执行命令</button>
+                <button type="submit"> 提交执行命令</button>
             </label>
         </form>
     </div>
