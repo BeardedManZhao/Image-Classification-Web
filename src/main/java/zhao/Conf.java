@@ -158,7 +158,7 @@ public final class Conf {
     /**
      * 网站运行时系统类型。
      */
-    public static String SYSTEM_TYPE = "WIN";
+    public static String SYSTEM_TYPE;
 
     /**
      * 最大用户同时在线数量 可变网站设置参数
@@ -166,6 +166,13 @@ public final class Conf {
     public static int USER_MAX_COUNT = 5;
 
     static {
+        // 检查web系统类型
+        String os = System.getProperty("os.name");
+        if (os != null && os.toLowerCase().startsWith("win")) {
+            SYSTEM_TYPE = "WIN";
+        } else {
+            SYSTEM_TYPE = "LINUX";
+        }
         // 初始化管理者
         OrdinaryUser.USER_HASH_MAP.put("root", new ManagerUser("root", "zhao-123123123"));
         LOGGER.info("管理者初始化成功 = " + OrdinaryUser.USER_HASH_MAP.get("root"));

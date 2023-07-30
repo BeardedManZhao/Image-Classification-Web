@@ -18,7 +18,7 @@ import java.io.*;
 import java.util.HashMap;
 
 /**
- * 网站设置更新服务，当网站配置页面被访问修改以及提交之后，本服务类将会启动
+ * 网站 json 数据获取服务，在此服务中可以获取到前端页面需要展示的json数据。
  */
 @WebServlet(name = "JsonServlet", value = "/JsonServlet")
 public class JsonServlet extends HttpServlet {

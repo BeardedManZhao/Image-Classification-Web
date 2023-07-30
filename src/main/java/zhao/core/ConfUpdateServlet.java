@@ -40,6 +40,8 @@ public class ConfUpdateServlet extends HttpServlet {
         final String web_status = request.getParameter("web_status");
         // 获取到网站的登录资源名称
         final String loginJsp = request.getParameter("loginJsp");
+        // 获取 当前web运行操作系统环境
+        final String systemType = request.getParameter("systemType");
         // 获取到网站中神经网络系统的新状态
         final String neural_network = request.getParameter("neural_network");
         // 将当前管理者用户的更新操作写到日志中
@@ -50,6 +52,9 @@ public class ConfUpdateServlet extends HttpServlet {
 
         Conf.LOGGER.info("LOGIN: " + Conf.LOGIN + " -> " + loginJsp);
         Conf.LOGIN = loginJsp;
+
+        Conf.LOGGER.info("SYSTEM_TYPE: " + Conf.SYSTEM_TYPE + " -> " + systemType);
+        Conf.SYSTEM_TYPE = systemType;
 
         if ("closed".equals(web_status)) {
             // 管理员手动关闭网站

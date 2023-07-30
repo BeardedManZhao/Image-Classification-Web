@@ -111,6 +111,12 @@
         </label>
         <br>
         <label>
+            使用的操作系统类型：
+            <input type="text" value="<%=Conf.SYSTEM_TYPE%>" name="systemType" alt="当前web运行操作系统环境"
+                   placeholder="您可以修改web运行操作系统环境">
+        </label>
+        <br>
+        <label>
             网站运行状态
             <span id="running_status1" class="running_status" style="font-family: 'icomoon', serif"></span>
             ：
