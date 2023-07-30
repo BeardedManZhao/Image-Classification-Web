@@ -168,11 +168,7 @@ public final class Conf {
     static {
         // 检查web系统类型
         String os = System.getProperty("os.name");
-        if (os != null && os.toLowerCase().startsWith("win")) {
-            SYSTEM_TYPE = "WIN";
-        } else {
-            SYSTEM_TYPE = "LINUX";
-        }
+        SYSTEM_TYPE = os;
         // 初始化管理者
         OrdinaryUser.USER_HASH_MAP.put("root", new ManagerUser("root", "zhao-123123123"));
         LOGGER.info("管理者初始化成功 = " + OrdinaryUser.USER_HASH_MAP.get("root"));
@@ -275,6 +271,13 @@ public final class Conf {
                 "\"SYSTEM_TYPE\" : \"" + SYSTEM_TYPE + "\"," +
                 "\"USER_MAX_COUNT\" : " + USER_MAX_COUNT +
                 '}';
+    }
+
+    /**
+     * @return 如果当前操作系统类型是 Windows 那么直接返回 true 如果不是旧返回 false
+     */
+    public static boolean isWin() {
+        return SYSTEM_TYPE != null && SYSTEM_TYPE.toLowerCase().startsWith("win");
     }
 
 }

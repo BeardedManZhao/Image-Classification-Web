@@ -59,7 +59,7 @@ public class ConfUpdateServlet extends HttpServlet {
         if ("closed".equals(web_status)) {
             // 管理员手动关闭网站
             Conf.LOGGER.info("web_status: running -> " + web_status);
-            ExeUtils.closeWeb("linux".equalsIgnoreCase(Conf.SYSTEM_TYPE));
+            ExeUtils.closeWeb(!Conf.isWin());
         }
 
         Conf.LOGGER.info("Neural_network_status: " + Conf.Neural_network_status + " -> " + neural_network);
