@@ -32,6 +32,7 @@ public class MAIN {
         } else {
             outPath = args[1];
             inPath = args[0];
+            System.out.println("NN_PATH: " + outPath);
         }
         {
             final File file1 = new File(outPath);
