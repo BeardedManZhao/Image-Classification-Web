@@ -67,7 +67,7 @@ public class NNOverServlet extends HttpServlet {
                 path2 = "java -jar " + path2 + ' ' + path + "/__pycache__" + ' ' + Conf.NN_PATH;
                 writer.println("run >>> " + path2);
                 // 由于这里使用的是 compileNNPy 因此需要手动的调用 ModelInit 程序
-                RunUtils.runCommand(path2, null);
+                RunUtils.runCommand(path2, writer);
                 writer.println("<br>");
                 writer.println("ok!!!<br>");
                 try {
@@ -88,7 +88,6 @@ public class NNOverServlet extends HttpServlet {
                     writer.println("<br>");
                     writer.println("!!!('_')!!!");
                 }
-
             }
         } else {
             writer.println("error >>> 文件不存在，您提供的路径有问题，我们无法找到您提供的文件!!!!!");
