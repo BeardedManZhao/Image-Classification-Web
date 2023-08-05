@@ -44,7 +44,7 @@
     <dependency>
         <groupId>io.github.BeardedManZhao</groupId>
         <artifactId>algorithmStar</artifactId>
-        <version>1.19</version>
+        <version>1.22</version>
     </dependency>
     <dependency>
         <groupId>javax.servlet</groupId>

@@ -82,3 +82,23 @@ function jsonShow(jsonStr, showKeys) {
     return res;
 }
 
+function getWebConf(){
+    let res = null;
+    // 首先获取到配置数据
+    const parseUrl1 = parseUrl();
+    // 使用 axios 访问服务器获取数据
+    axios(
+        {
+            url: parseUrl1.url[0] + "//" + parseUrl1.url[1] + '/' + parseUrl1.url[2] + '/JsonServlet',
+            // 设置 axios 的请求参数
+            params: {
+                jsonName: 'confJson'
+            }
+        }
+    ).then(
+        (args) => {
+            res = args['data']
+        }
+    )
+    return res;
+}
