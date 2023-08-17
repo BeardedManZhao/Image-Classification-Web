@@ -5,6 +5,9 @@ import zhao.algorithmMagic.operands.matrix.ColorMatrix;
 import zhao.algorithmMagic.operands.matrix.ImageMatrix;
 import zhao.algorithmMagic.utils.dataContainer.KeyValue;
 import zhao.algorithmMagic.utils.transformation.Transformation;
+import zhao.core.user.OrdinaryUser;
+import zhao.core.user.User;
+import zhao.task.ToLogin;
 import zhao.utils.HttpUtils;
 
 import javax.imageio.ImageIO;
@@ -44,6 +47,13 @@ public class ImageToolServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("GBK");
+        resp.setCharacterEncoding("GBK");
+        final User user = User.checkCookieUser(req, resp, ToLogin.TO_LOGIN);
+        if (user.equals(OrdinaryUser.DEFAULT_USER) && (!HttpUtils.checkCanTrain(response))) {
+            // 若是 def 代表当前用户没有登录 直接结束
+            return;
+        }
         // 获取到 框架名称::函数
         final String s = req.getParameter("useFrameWork") + "::" + req.getParameter("function");
         // 获取到其对应的处理类并进行处理
@@ -58,6 +68,6 @@ public class ImageToolServlet extends HttpServlet {
         // 然后开始进行处理 并将处理结果输出到 /IMW/IMW_IMAGE/use/ImageTool 虚拟路径对应的文件路径
         transformation.function(
                 new KeyValue<>(image, split.split(req.getParameter("args")))
-        ).save(Conf.IMAGE_USE_DIR + "ImageTool");
+        ).save(Conf.IMAGE_USE_DIR + user.name() + "/ImageTool");
     }
 }
