@@ -50,7 +50,7 @@ public class ImageToolServlet extends HttpServlet {
         req.setCharacterEncoding("GBK");
         resp.setCharacterEncoding("GBK");
         final User user = User.checkCookieUser(req, resp, ToLogin.TO_LOGIN);
-        if (user.equals(OrdinaryUser.DEFAULT_USER) && (!HttpUtils.checkCanTrain(response))) {
+        if (user.equals(OrdinaryUser.DEFAULT_USER) && (!HttpUtils.checkCanTrain(resp))) {
             // 若是 def 代表当前用户没有登录 直接结束
             return;
         }
