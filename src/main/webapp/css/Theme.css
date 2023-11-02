@@ -7,6 +7,7 @@ body {
 }
 
 
+
 body, html {
     margin: 0;
 }
@@ -170,3 +171,13 @@ td.theme-table,
 .two_pages .navigation {
     height: 64px;
 }
+
+/*#secli{*/
+/*    width: 400px;*/
+/*    position: absolute;*/
+/*    margin-left: 170px;*/
+/*}*/
+
+/*#about-div{*/
+/*    position: relative;*/
+/*}*/

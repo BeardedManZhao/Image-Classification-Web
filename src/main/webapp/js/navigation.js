@@ -3,13 +3,13 @@
  * @param name 导航栏中的标题
  */
 function makeNavigation(name) {
-    document.write("<div class='logo_title two_pages'>\n" +
+    document.write("<div class='logo_title two_pages' id='about-div'>\n" +
         "    <div class='left'>\n" +
         "        <img alt='Image-Classification-Web' id='logo' src='image/Logo.svg'>\n" +
         "        <h3 id='web-title'>" + name + "</h3>\n" +
         "    </div>\n" +
         "\n" +
-        "    <div class='right navigation'>\n" +
+        "    <div class='right navigation' id='secli'>\n" +
         "        <ul>\n" +
         "            <li onclick=\"closeOrOpenBackColor('backColorUpdate'); return false;\">\n" +
         "                <a id='backColorUpdate' href='#'>关闭背景灯</a>\n" +
@@ -33,6 +33,8 @@ function makeNavigation(name) {
         "    </div>\n" +
         "</div>")
 }
+
+
 
 
 /* 导航栏代码
