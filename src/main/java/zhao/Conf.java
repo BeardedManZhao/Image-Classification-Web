@@ -39,12 +39,12 @@ public final class Conf {
     /**
      * 神经网络程序存储目录 TODO 配置的时候需要修改
      */
-    public final static String NN_PATH = "D:/MyGithub/Image-Classification-Web/pyLib/exe";
+    public final static String NN_PATH = "G:\\projectLib\\IMC-Z\\pyLib\\exe";
 
     /**
      * 网站核心运行目录，该目录将会作为系统重的运行核心数据存储目录 TODO 配置的时候需要修改
      */
-    public final static String WORK_DIR = "F:";
+    public final static String WORK_DIR = "G:\\projectLib\\IMC-Z";
 
     /**
      * 当前网站的版本
@@ -167,8 +167,7 @@ public final class Conf {
 
     static {
         // 检查web系统类型
-        String os = System.getProperty("os.name");
-        SYSTEM_TYPE = os;
+        SYSTEM_TYPE = System.getProperty("os.name");
         // 初始化管理者
         OrdinaryUser.USER_HASH_MAP.put("root", new ManagerUser("root", "zhao-123123123"));
         LOGGER.info("管理者初始化成功 = " + OrdinaryUser.USER_HASH_MAP.get("root"));
