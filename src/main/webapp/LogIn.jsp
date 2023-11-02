@@ -92,16 +92,16 @@
 </html>
 
 <script>
-    const re = new RegExp(".+?:.+");
+    const re = new RegExp(".+?[:<>/].+");
 
     function checkData() {
         let un = document.getElementById("username").value
         let pa = document.getElementById("password").value
         if (un.length >= 4 && pa.length >= 4) {
-            if ((!un.match(re)) || (!pa.match(re))) {
+            if (!(un.match(re) || pa.match(re))) {
                 return true;
             } else {
-                alert("您的用户名和密码不能包含字符[:].")
+                alert("您的用户名和密码不能包含字符[:<>/].")
                 return false;
             }
         } else {

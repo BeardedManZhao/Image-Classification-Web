@@ -60,7 +60,6 @@ public interface User {
     String getJsonDir();
 
     /**
-     *
      * @return 当前用户对象数据 对应的 json 字符串
      */
     String toJson();

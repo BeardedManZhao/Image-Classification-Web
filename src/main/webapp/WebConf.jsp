@@ -27,6 +27,12 @@
 %>
 
 <style>
+
+    button,
+    .button {
+        font-family: 'icomoon', serif;
+    }
+
     #user_space_table {
         background-color: rgba(13, 54, 53, 0.51);
     }
@@ -39,8 +45,10 @@
 <html>
 <head>
     <link href='image/Logo.svg' rel='SHORTCUT ICON'/>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/Theme.css">
     <link rel="stylesheet" type="text/css" href="css/webStatus.css">
+    <link rel="stylesheet" type="text/css" href="css/terminal.css">
     <style>
         #running_status2 {
         <%=
@@ -50,8 +58,14 @@
         %>
         }
     </style>
+    <script src="js/utils.js" type="text/javascript" charset="UTF-8"></script>
     <script src="js/updateTheme.js" type="text/javascript" charset="GBK"></script>
     <script src="js/navigation.js" charset="GBK"></script>
+    <!-- 引入 js 文件 在这里我们直接使用云上的链接，省了下载的功夫 -->
+    <script
+            charset="UTF-8"
+            src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" type="text/javascript">
+    </script>
     <title>配置网站</title>
 </head>
 <body id="body">
@@ -97,6 +111,12 @@
         </label>
         <br>
         <label>
+            使用的操作系统类型：
+            <input type="text" value="<%=Conf.SYSTEM_TYPE%>" name="systemType" alt="当前web运行操作系统环境"
+                   placeholder="您可以修改web运行操作系统环境">
+        </label>
+        <br>
+        <label>
             网站运行状态
             <span id="running_status1" class="running_status" style="font-family: 'icomoon', serif"></span>
             ：
@@ -117,9 +137,23 @@
                               value="closed" <%=Conf.Neural_network_status == -1 ? "checked" : ""%>>
             </label>
         </div>
-        <button type="button" onclick="window.history.back()">退出配置页面</button>
-        <button type="submit" onclick="updateNNS();checkRunningStatus('web_status', 'running_status1');">保存配置信息</button>
+        <a class="button" href="ServerTerminal.html"> 前往机器终端</a>
+        <button type="button" onclick="window.history.back()"> 退出配置页面</button>
+        <button type="submit" onclick="updateNNS();checkRunningStatus('web_status', 'running_status1');"> 保存配置信息
+        </button>
     </form>
+    <div class="w_h">
+        <pre style="height: 30%" id="terminal" class="terminal">
+
+        </pre>
+        <form onsubmit="exeJsonName(); return false;">
+            <label>
+                <input style="width: 100%; height: 5%" id="input_jsonName" type="text" alt="命令输入框"
+                       placeholder="see [jsonName] [key1, key2, key3,....]">
+                <button type="submit"> 提交执行命令</button>
+            </label>
+        </form>
+    </div>
     <hr>
     <p>配置信息将会被系统进行热加载，保存配置信息之后立刻生效。</p>
 </div>
@@ -144,6 +178,57 @@
             nns_select.style.backgroundColor = '#20ecbc'
         } else {
             nns_select.style.backgroundColor = '#691d1d';
+        }
+    }
+
+    // 获取到网站json服务命令的输入框对象与执行结果展示框
+    const input_jsonName = document.getElementById("input_jsonName")
+    const terminal = document.getElementById("terminal")
+    // 首先对展示框初始化
+    terminal.innerText = "您好 这里是命令执行结果终端日志展示框！"
+
+    const parseUrl1 = parseUrl();
+    const reg = new RegExp("\\s+")
+
+    function getOnfulfilled(split) {
+        return (args) => {
+            // 获取到数据内容
+            let data = args;
+            for (let index = 2; index < split.length; index++) {
+                data = data[split[index]]
+            }
+            // 判断数据是否为 json
+            if (isJson(data)) {
+                // 如果是 json 就直接按照 json 打印
+                terminal.append("* >>> " + JSON.stringify(data))
+                terminal.append('\n')
+            }
+            terminal.append("* >>> " + data)
+        };
+    }
+
+    function exeJsonName() {
+        const command = input_jsonName.value.trim();
+        terminal.innerText = "input >>> " + command
+        if (command.length !== 0) {
+            terminal.append("\n* >>> 执行时间：")
+            terminal.append(new Date() + "\n")
+            // 获取到命令
+            const split = command.split(reg);
+            // 使用 axios 访问服务器获取数据
+            axios(
+                {
+                    url: parseUrl1.url[0] + "//" + parseUrl1.url[1] + '/' + parseUrl1.url[2] + '/JsonServlet',
+                    // 设置 axios 的请求参数
+                    params: {
+                        jsonName: split[1],
+                    }
+                }
+            ).then(
+                getOnfulfilled(split)
+            ).catch(
+                getOnfulfilled(split)
+            )
         }
     }
 </script>

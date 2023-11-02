@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href='image/Logo.svg' rel='SHORTCUT ICON'/>
+    <link href="css/style.css" rel="stylesheet" type="text/css">
+    <link href="css/Theme.css" rel="stylesheet" type="text/css">
+    <link href="css/webStatus.css" rel="stylesheet" type="text/css">
+    <link href="css/terminal.css" rel="stylesheet" type="text/css">
+
+    <style>
+        body {
+            width: 100%;
+        }
+
+        .terminal {
+            height: 100%;
+        }
+
+        #show {
+            height: 750px;
+            overflow-x: scroll;
+            overflow-y: scroll;
+        }
+
+        #show::-webkit-scrollbar {
+            display: none;
+        }
+
+        pre {
+            white-space: pre-wrap;
+        }
+    </style>
+
+    <script charset="UTF-8" src="js/utils.js" type="text/javascript"></script>
+    <script charset="GBK" src="js/updateTheme.js" type="text/javascript"></script>
+    <script charset="GBK" src="js/navigation.js"></script>
+    <!-- 引入 js 文件 在这里我们直接使用云上的链接，省了下载的功夫 -->
+    <script
+            charset="UTF-8"
+            src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" type="text/javascript">
+    </script>
+    <meta charset="UTF-8">
+    <title>远程操作WEB服务器</title>
+</head>
+<body>
+<!-- 引入导航栏 -->
+<script>
+    makeNavigation(" 远程管理终端");
+</script>
+
+<div class="w_h terminal">
+
+    <pre id="show">
+
+    </pre>
+
+    <form class="command_input" onsubmit="exeCommand(); return false;">
+        <label>
+            <input alt="目录输入" class="command_inputText" id="command_inputText" name="command_inputText_data"
+                   placeholder="在此处输入终端命令"
+                   type="text">
+            <button class="command_submit" type="submit">执行命令</button>
+        </label>
+    </form>
+
+</div>
+</body>
+
+<script>
+    const show = document.getElementById("show")
+    show.innerText = "* >>> " + new Date() + "\n";
+    const command_inputText = document.getElementById("command_inputText")
+    const parseUrl1 = parseUrl();
+    const rn = new RegExp("\\\\r\\\\n|\\\\n", "g")
+
+    function exeCommand() {
+        // 获取到命令
+        const command = command_inputText.value
+        command_inputText.value = ''
+        if (command.length !== 0) {
+            // 追加
+            show.append("\n\t\t+---------------- " + command + " -----------------+\n")
+            show.append("input >>> " + command + '\n')
+            // 执行对应的逻辑
+            // 使用 axios 访问服务器获取数据
+            axios(
+                {
+                    url: parseUrl1.url[0] + "//" + parseUrl1.url[1] + '/' + parseUrl1.url[2] + '/JsonServlet',
+                    // 设置 axios 的请求参数
+                    params: {
+                        jsonName: "runCommand",
+                        command: command
+                    }
+                }
+            ).then(
+                (args) => {
+                    console.log(args)
+                    show.append("* >>> " + isJson(args.data) ? JSON.stringify(args.data).replaceAll(rn, '\n') : args.data.replaceAll(rn, '\n') + '\n')
+                    show.scrollTop = show.scrollHeight
+                }
+            ).catch(
+                (args) => {
+                    show.append("* >>> " + JSON.stringify(args).replaceAll(rn, '\n') + '\n')
+                    show.scrollTop = show.scrollHeight
+                }
+            )
+        } else {
+            show.append("input >>> " + command + '\n')
+            show.scrollTop = show.scrollHeight
+        }
+    }
+</script>
+
+</html>

@@ -44,7 +44,7 @@
     <dependency>
         <groupId>io.github.BeardedManZhao</groupId>
         <artifactId>algorithmStar</artifactId>
-        <version>1.19</version>
+        <version>1.22</version>
     </dependency>
     <dependency>
         <groupId>javax.servlet</groupId>
@@ -57,7 +57,7 @@
 2. 配置JDK 和 开发时的TomCat。
 3. 配置Web资源文件目录 是项目中名称为 webapp 的目录文件夹。
 4. 修改 Conf 类中的基础配置，所有从根目录开始的目录都需要重新配置，按照自己的服务器配置。
-5. 配置服务器图像数据的读取目录，用于读取用户使用模型时上传的文件，便于前端的图像回调。
+5. 配置服务器图像数据的读取目录，用于读取用户使用模型时上传的文件，便于处理数据向前端的回复。
 
 ```xml
 <!-- 在 server.xml 中的 Host 节点添加下面的配置 -->

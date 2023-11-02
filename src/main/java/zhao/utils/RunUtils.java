@@ -1,10 +1,10 @@
 package zhao.utils;
 
-import dialogue.utils.IOUtils;
+import org.apache.commons.io.IOUtils;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.PrintWriter;
+import java.io.SequenceInputStream;
 
 /**
  * 设备运行工具类
@@ -26,15 +26,9 @@ public final class RunUtils {
         try {
             exec = RUNTIME.exec(command);
             if (printWriter != null) {
-                final InputStream errorStream = exec.getErrorStream();
-                org.apache.commons.io.IOUtils.copy(errorStream, printWriter);
-                final String stringByStream = IOUtils.getStringByStream(errorStream);
-                if (stringByStream.length() == 0) {
-                    final InputStream inputStream = exec.getInputStream();
-                    org.apache.commons.io.IOUtils.copy(inputStream, printWriter);
-                    IOUtils.close(inputStream);
-                }
-                IOUtils.close(errorStream);
+                final SequenceInputStream sequenceInputStream = new SequenceInputStream(exec.getErrorStream(), exec.getInputStream());
+                IOUtils.copy(sequenceInputStream, printWriter);
+                IOUtils.closeQuietly(sequenceInputStream);
             }
         } catch (IOException e) {
             printWriter.println(e);

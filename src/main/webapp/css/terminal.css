@@ -2,6 +2,7 @@ body {
     background-color: #6f8185;
 }
 
+/* 终端元素主题 */
 .terminal, #terminal {
     background-color: #3a3838;
     color: #00FE44;
@@ -11,6 +12,34 @@ body {
     padding: 20px;
 }
 
+/* pre 的终端页面需要滑轮 */
 pre.terminal {
     overflow-x: scroll;
 }
+
+/* 终端命令输入元素 */
+.terminal .command_input {
+    background-color: #3a3838;
+    color: #00FE44;
+    line-height: 22px;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+/* 终端命令输入框 */
+.terminal .command_input .command_inputText {
+    background-color: rgba(58, 56, 56, 0);
+    width: 100%;
+    height: 24px;
+    text-align: center;
+    color: #00FE44;
+    line-height: 22px;
+    border-radius: 20px;
+    outline: none;
+}
+
+/* 终端命令提交按钮 */
+.terminal .command_input .command_submit {
+    display: none;
+}
+

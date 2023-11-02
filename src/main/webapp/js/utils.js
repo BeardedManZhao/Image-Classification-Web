@@ -53,3 +53,52 @@ function setUrlServlet(servlet_str, prams) {
     }
     return res;
 }
+
+/**
+ * 判断一个对象是否可以进行迭代
+ * @param obj 需要被判断的对象
+ * @returns {boolean} 如果可迭代则返回 true
+ */
+function isIterable(obj) {
+    return typeof obj === 'object' && obj !== null && !Array.isArray(obj) && typeof obj[Symbol.iterator] === 'function';
+}
+
+function isJson(obj) {
+    return obj !== null && obj instanceof Object && typeof obj === 'object';
+}
+
+/**
+ * 将一个 json 字符串中的数据按照指定的 keys 获取
+ * @param jsonStr json字符串
+ * @param showKeys 需要被提取的值对应的路径
+ * @returns {any}
+ */
+function jsonShow(jsonStr, showKeys) {
+    // 首先将字符串转换为 json 然后获取 key 对应的value
+    let res = JSON.parse(jsonStr);
+    for (let name in showKeys) {
+        res = res[name]
+    }
+    return res;
+}
+
+function getWebConf(){
+    let res = null;
+    // 首先获取到配置数据
+    const parseUrl1 = parseUrl();
+    // 使用 axios 访问服务器获取数据
+    axios(
+        {
+            url: parseUrl1.url[0] + "//" + parseUrl1.url[1] + '/' + parseUrl1.url[2] + '/JsonServlet',
+            // 设置 axios 的请求参数
+            params: {
+                jsonName: 'confJson'
+            }
+        }
+    ).then(
+        (args) => {
+            res = args['data']
+        }
+    )
+    return res;
+}

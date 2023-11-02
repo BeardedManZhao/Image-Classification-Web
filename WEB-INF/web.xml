@@ -3,6 +3,11 @@
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd">
     <error-page>
         <error-code>404</error-code>
-        <location>/NotFind.jsp</location> <!--定义的404页面，必须以“/”开头-->
+        <location>/NotFind.html</location> <!--定义的 404 页面，必须以“/”开头-->
+    </error-page>
+
+    <error-page>
+        <error-code>500</error-code>
+        <location>/SystemMaintenance.html</location> <!--定义的 500 页面，必须以“/”开头-->
     </error-page>
 </web-app>

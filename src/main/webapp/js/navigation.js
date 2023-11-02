@@ -23,6 +23,10 @@ function makeNavigation(name) {
         "            </li>\n" +
         "\n" +
         "            <li>\n" +
+        "                <a href='useModelSelect.html'>使用神经网络模型</a>\n" +
+        "            </li>\n" +
+        "\n" +
+        "            <li>\n" +
         "                <a href='about.html'>关于我们</a>\n" +
         "            </li>\n" +
         "        </ul>\n" +
@@ -51,6 +55,10 @@ function makeNavigation(name) {
 
             <li>
                 <a href='TrainUp.html'>上传训练数据</a>
+            </li>
+
+            <li>
+                <a href='useModelSelect.html'>使用神经网络模型</a>
             </li>
 
             <li>
